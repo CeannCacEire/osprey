@@ -1,0 +1,1090 @@
+/* ==========================================================================
+   OSPREY — styles.css
+   Strict monochrome. Mobile-first. Organized by section.
+
+   1. Fonts
+   2. Tokens
+   3. Reset & base
+   4. Utilities
+   5. Buttons
+   6. Header
+   7. Hero
+   8. Island
+   9. Section titles & reveals
+   10. Premise cards
+   11. About
+   12. Join panel
+   13. Footer
+   14. Easter egg
+   15. Reduced motion
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. FONTS
+   --------------------------------------------------------------------------
+   Cadass Script is used ONLY for the hero wordmark.
+   LICENSE NOTE: Cadass Script is marked "free for personal use" on DaFont
+   (https://www.dafont.com/cadass-script.font). Confirm a commercial/public
+   license with the author before public or commercial deployment.
+   Fallback: if the file is missing, the wordmark falls back to a heavy,
+   wide uppercase sans (see .wordmark) so it still reads as a logotype.
+   ========================================================================== */
+@font-face {
+  font-family: "Cadass Script";
+  src: url("fonts/Cadass%20Script%20Demo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Archivo (SIL OFL) — self-hosted variable font for all other text. */
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ==========================================================================
+   2. TOKENS
+   ========================================================================== */
+:root {
+  /* Monochrome scale */
+  --black: #000;
+  --ink-0: #070707;   /* page */
+  --ink-1: #0d0d0d;   /* raised */
+  --ink-2: #141414;   /* card */
+  --ink-3: #1d1d1d;   /* card hover / inset */
+  --line: #2a2a2a;    /* hairlines */
+  --line-strong: #3d3d3d;
+  --gray-5: #6e6e6e;  /* decorative only */
+  --gray-7: #a3a3a3;  /* muted text (≈8:1 on --ink-0) */
+  --gray-9: #d9d9d9;
+  --white: #f4f4f4;
+
+  /* Accents — drawn from the server screenshot. The base stays monochrome;
+     colour lives in details, glows and gradients. No yellow/gold on text or boxes.
+     Sea: the ocean. Violet: amethyst. Moss: grass and foliage. */
+  --sea: #5cc6d6;
+  --sea-dim: rgb(92 198 214 / 0.35);
+  --violet: #a58bff;
+  --violet-dim: rgb(165 139 255 / 0.35);
+  --moss: #7fd18f;
+  --moss-dim: rgb(127 209 143 / 0.3);
+  --accent-gradient: linear-gradient(90deg, var(--sea), var(--violet));
+
+  /* Type */
+  --font-body: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mark: "Cadass Script", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --text-xs: clamp(0.72rem, 0.7rem + 0.1vw, 0.78rem);
+  --text-sm: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  --text-xl: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem);
+  --text-mark: clamp(5.5rem, 1rem + 24vw, 17rem);
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: clamp(4.5rem, 3rem + 7vw, 9rem);
+
+  /* Shape */
+  --radius-pill: 999px;
+  --radius-card: 28px;
+  --block: 32px;              /* size of the background grid "block" */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur: 320ms;
+  --dur-slow: 900ms;
+
+  --header-h: 64px;
+  --gutter: clamp(1.1rem, 0.6rem + 2.5vw, 2.5rem);
+  --max-w: 1120px;
+}
+
+
+/* ==========================================================================
+   3. RESET & BASE
+   ========================================================================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  background: var(--ink-0);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  color: var(--white);
+  background: var(--ink-0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Page-wide block texture: a restrained 32px grid with a faint "block bevel". */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+  background-size: var(--block) var(--block);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+ul[role="list"], ol { list-style: none; padding: 0; }
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+code { font-family: var(--font-mono); }
+
+/* All headings uppercase, always. */
+h1, h2, h3 { text-transform: uppercase; font-weight: 700; line-height: 1.05; }
+
+::selection { background: var(--violet); color: var(--black); }
+
+:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+  border-radius: var(--radius-pill);
+}
+
+
+/* ==========================================================================
+   4. UTILITIES
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--space-9); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--black);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur) var(--ease-out);
+}
+.skip-link:focus { transform: none; }
+
+.br-sm { display: inline; }
+@media (min-width: 640px) { .br-sm { display: none; } }
+
+
+/* ==========================================================================
+   5. BUTTONS
+   --------------------------------------------------------------------------
+   Pill-shaped. The hard bottom shadow is the "side" of a block:
+   hover lifts the block, press pushes it flush into the ground.
+   ========================================================================== */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--white);
+  --btn-edge: var(--line-strong);
+  --btn-lift: 0px;
+  --btn-depth: 4px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 48px;
+  padding: 0.85em 1.6em;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(calc(var(--btn-lift) * -1));
+  box-shadow: 0 var(--btn-depth) 0 0 var(--btn-edge);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.btn:hover { --btn-lift: 2px; --btn-depth: 6px; }
+.btn:active,
+.btn.is-pressed { --btn-lift: -3px; --btn-depth: 1px; transition-duration: 60ms; }
+
+.btn:focus-visible { outline-offset: 5px; }
+
+.btn--primary {
+  --btn-bg: var(--white);
+  --btn-fg: #050505;
+  --btn-edge: #7f9ea5;
+}
+.btn--primary:hover { --btn-bg: #fff; }
+
+.btn--ghost {
+  --btn-bg: rgb(255 255 255 / 0.02);
+  --btn-edge: #262626;
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover { --btn-bg: rgb(255 255 255 / 0.06); border-color: var(--sea-dim); }
+
+.btn--sm { min-height: 40px; padding: 0.7em 1.15em; font-size: var(--text-xs); --btn-depth: 3px; }
+.btn--sm:hover { --btn-depth: 5px; }
+.btn--lg { min-height: 56px; padding: 1em 1.9em; font-size: var(--text-sm); }
+.btn--block { width: 100%; }
+
+.btn__icon { width: 1.25em; height: 1.25em; flex: none; }
+
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+
+/* ==========================================================================
+   6. HEADER
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  padding-inline: var(--gutter);
+  padding-top: env(safe-area-inset-top);
+  transition: background-color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgb(7 7 7 / 0.78);
+  border-bottom-color: var(--line);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-weight: 800;
+  font-stretch: 125%;
+  font-size: var(--text-sm);
+  letter-spacing: 0.32em;
+  text-decoration: none;
+  padding: var(--space-2) 0;
+}
+
+.site-header__logo { width: 28px; height: auto; image-rendering: pixelated; }
+
+/* Keep the header brand hidden while the hero wordmark is on screen. */
+.site-header__brand { opacity: 0; transition: opacity var(--dur) var(--ease-out); }
+.site-header.is-scrolled .site-header__brand { opacity: 1; }
+.site-header__brand:focus-visible { opacity: 1; }
+
+
+/* ==========================================================================
+   7. HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + var(--space-6)) var(--gutter) var(--space-8);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+/* Blurred server screenshot behind the hero. Pre-blurred and small (≈8 KB webp),
+   then darkened and faded into the page so the wordmark stays the focus. */
+.hero__bg {
+  position: absolute;
+  inset: -4%;
+  z-index: -3;
+  background: url("assets/hero-bg.jpg") center 40% / cover no-repeat;
+  background-image: image-set(url("assets/hero-bg.webp") type("image/webp"), url("assets/hero-bg.jpg") type("image/jpeg"));
+  filter: blur(5px) saturate(1.45) brightness(0.78) contrast(1.05);
+  transform: scale(1.04);
+}
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 46%, rgb(7 7 7 / 0.35), transparent 75%),
+    linear-gradient(to bottom, rgb(7 7 7 / 0.45) 0%, rgb(7 7 7 / 0.05) 35%, rgb(7 7 7 / 0.35) 72%, var(--ink-0) 100%);
+}
+
+/* Brighter grid + glow concentrated behind the wordmark. */
+.hero__texture {
+  position: absolute;
+  inset: -2px;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 46%, rgb(255 255 255 / 0.07), transparent 70%),
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / var(--block) var(--block),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / var(--block) var(--block);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 85%);
+}
+
+/* A thin horizon line near the bottom — foreshadows the ocean below. */
+.hero__horizon {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 18%;
+  z-index: -1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgb(92 198 214 / 0.22) 35%, rgb(92 198 214 / 0.22) 65%, transparent 95%);
+}
+.hero__horizon::after {
+  content: "";
+  position: absolute;
+  inset: 1px 0 auto 0;
+  height: 40vh;
+  background: radial-gradient(ellipse 50% 60% at 50% 0%, rgb(92 198 214 / 0.04), transparent 70%);
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: 100%;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: rgb(7 7 7 / 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-stretch: 115%;
+  letter-spacing: 0.22em;
+  color: var(--gray-9);
+}
+
+.status-chip__dot,
+.badge__dot {
+  width: 8px; height: 8px;
+  flex: none;
+  background: var(--violet);
+  box-shadow: 0 0 10px var(--violet-dim);
+  border-radius: 1px; /* a tiny block, not a circle */
+  animation: blink 2.4s steps(2, jump-none) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.25; } }
+
+/* The wordmark — styled after the supplied "Osprey" lettering:
+   mixed case, tilted slightly upward, lifted off the page by a soft shadow.
+   Clickable for the easter egg, but purely decorative interaction. */
+.wordmark {
+  margin: 0;
+  font-family: var(--font-mark);
+  font-weight: 400;
+  font-size: var(--text-mark);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;       /* exception to the uppercase heading rule */
+  color: var(--white);
+  cursor: default;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0.12em 0.08em 0.04em; /* script swashes overhang the box */
+  margin-bottom: clamp(0.1rem, 0.1rem + 0.8vw, 0.9rem);
+  transform: rotate(-5deg);
+  filter:
+    drop-shadow(0 0.035em 0.03em rgb(0 0 0 / 0.95))
+    drop-shadow(0 0.08em 0.14em rgb(0 0 0 / 0.8))
+    drop-shadow(0 0 0.18em rgb(255 255 255 / 0.16));
+}
+
+/* Fallback appearance when Cadass Script hasn't loaded (class set from JS). */
+.no-markfont .wordmark {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  font-size: clamp(3.6rem, 0.5rem + 14vw, 11rem);
+}
+
+.wordmark__text {
+  display: inline-block;
+  transition: transform 420ms var(--ease-snap);
+}
+.wordmark.is-tapped .wordmark__text { transform: scale(0.97) translateY(2px); transition-duration: 80ms; }
+
+.hero__tagline {
+  font-size: clamp(0.95rem, 0.8rem + 0.9vw, 1.4rem);
+  font-weight: 600;
+  font-stretch: 108%;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  color: var(--gray-9);
+  text-wrap: balance;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.75);
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  width: min(100%, 320px);
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .hero__tagline { font-stretch: 118%; letter-spacing: 0.16em; }
+}
+
+@media (min-width: 560px) {
+  .hero__actions { flex-direction: row; width: auto; gap: var(--space-4); }
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--gray-7);
+}
+.hero__scroll-hint span {
+  width: 6px; height: 6px;
+  background: var(--gray-7);
+  animation: drop 1.8s var(--ease-out) infinite;
+}
+@keyframes drop {
+  0% { transform: translateY(-6px); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+@media (max-height: 640px) { .hero__scroll-hint { display: none; } }
+
+/* Hero load-in */
+.js .hero__inner > * {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise 900ms var(--ease-out) forwards;
+}
+.js .hero__inner > :nth-child(1) { animation-delay: 80ms; }
+.js .hero__inner > :nth-child(2) { animation-delay: 180ms; }
+.js .hero__inner > :nth-child(3) { animation-delay: 320ms; }
+.js .hero__inner > :nth-child(4) { animation-delay: 440ms; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+
+/* ==========================================================================
+   8. ISLAND (scroll-driven)
+   --------------------------------------------------------------------------
+   .island is tall; .island__sticky pins to the viewport while the canvas
+   assembles the island from blocks based on scroll progress (--p, 0→1).
+   ========================================================================== */
+.island {
+  position: relative;
+  height: 320vh;
+  --p: 0;
+}
+
+.island__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.island__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 62%, rgb(255 255 255 / calc(0.03 + var(--p) * 0.05)), transparent 70%),
+    radial-gradient(ellipse 60% 35% at 30% 30%, rgb(165 139 255 / 0.06), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 75% 55%, rgb(92 198 214 / 0.06), transparent 70%),
+    linear-gradient(to bottom, #040406 0%, #0a0a0d 45%, #10141a 62%, #04080a 100%);
+}
+
+.island__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Mist bands (parallax set via --shift from JS). */
+.island__mist {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  pointer-events: none;
+  transform: translate3d(0, var(--shift, 0px), 0);
+  will-change: transform;
+}
+.island__mist--far {
+  top: 38%;
+  height: 22%;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 30% 50% at 25% 50%, rgb(255 255 255 / 0.05), transparent 70%),
+    radial-gradient(ellipse 35% 45% at 70% 60%, rgb(92 198 214 / 0.05), transparent 70%);
+  filter: blur(8px);
+  animation: drift 60s linear infinite alternate;
+}
+.island__mist--near {
+  top: 52%;
+  height: 18%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 25% 40% at 40% 50%, rgb(200 200 200 / 0.05), transparent 70%),
+    radial-gradient(ellipse 30% 50% at 85% 40%, rgb(200 200 200 / 0.04), transparent 70%);
+  filter: blur(10px);
+  animation: drift 42s linear infinite alternate-reverse;
+}
+@keyframes drift { from { margin-left: -4%; } to { margin-left: 4%; } }
+
+.island__copy {
+  position: absolute;
+  top: calc(var(--header-h) + var(--space-6));
+  left: 0; right: 0;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+
+.island__steps {
+  position: relative;
+  display: grid;
+  min-height: 1.6em;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-stretch: 115%;
+  letter-spacing: 0.24em;
+  color: var(--gray-7);
+}
+.island__steps li {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.island__steps li.is-active { opacity: 1; transform: none; }
+.island__steps li:last-child { color: var(--sea); }
+
+/* No-JS: show the whole island text list plainly. */
+html:not(.js) .island { height: auto; }
+html:not(.js) .island__sticky { height: auto; min-height: 70vh; }
+html:not(.js) .island__steps { gap: var(--space-2); }
+html:not(.js) .island__steps li { grid-area: auto; opacity: 1; transform: none; }
+
+
+/* ==========================================================================
+   9. SECTION TITLES & REVEALS
+   ========================================================================== */
+.section-title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: 0.08em;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 2.2em;
+  height: 3px;
+  margin-top: 0.45em;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+}
+.island__copy .section-title::after,
+.about__copy .section-title::after { margin-inline: auto; }
+@media (min-width: 760px) { .about__copy .section-title::after { margin-inline: 0; } }
+.panel__head .section-title::after { display: none; }
+
+.section-title--sm { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); letter-spacing: 0.12em; }
+
+.premise .section-title { margin-bottom: var(--space-7); }
+
+/* Reveal only when JS is present (content is visible by default). */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+
+/* ==========================================================================
+   10. PREMISE CARDS
+   ========================================================================== */
+.cards {
+  display: grid;
+  gap: var(--space-4);
+}
+@media (min-width: 820px) {
+  .cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+}
+
+.card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift: 0px;
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-height: 220px;
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035), transparent 60%),
+    var(--ink-2);
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(calc(var(--lift) * -1));
+  transform-style: preserve-3d;
+  transition: transform 500ms var(--ease-out), border-color var(--dur) var(--ease-out), background-color var(--dur), opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+.card:hover { --lift: 4px; border-color: var(--line-strong); }
+.card:hover .card__index { color: var(--sea); }
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, var(--sea-dim), transparent 40%, transparent 60%, var(--violet-dim));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.card:hover::after { opacity: 1; }
+.js .card.reveal.is-visible {
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(calc(var(--lift) * -1));
+  transition: transform 500ms var(--ease-out), border-color var(--dur) var(--ease-out), opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.card__index {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--gray-5);
+  transition: color var(--dur) var(--ease-out);
+}
+
+.card__title {
+  margin-top: var(--space-6);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  font-stretch: 120%;
+  letter-spacing: 0.08em;
+}
+
+.card__text { color: var(--gray-7); max-width: 26ch; }
+
+/* Tiny block glyphs (pure CSS, 3×3 pixel icons using box-shadows). */
+.card__glyph {
+  --s: 9px;
+  position: relative;
+  display: block;
+  width: calc(var(--s) * 3);
+  height: calc(var(--s) * 3);
+}
+.card__glyph::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--s); height: var(--s);
+  background: var(--white);
+}
+/* finite: a filled row with one missing block */
+.card__glyph--finite::before {
+  box-shadow:
+    var(--s) 0 0 var(--white), calc(var(--s) * 2) 0 0 var(--white),
+    0 var(--s) 0 var(--white), var(--s) var(--s) 0 var(--moss), calc(var(--s) * 2) var(--s) 0 #444,
+    0 calc(var(--s) * 2) 0 var(--sea), var(--s) calc(var(--s) * 2) 0 #444, calc(var(--s) * 2) calc(var(--s) * 2) 0 #444;
+}
+/* choices: a branching path */
+.card__glyph--choice::before {
+  top: calc(var(--s) * 2);
+  left: var(--s);
+  box-shadow:
+    0 calc(var(--s) * -1) 0 var(--white),
+    calc(var(--s) * -1) calc(var(--s) * -2) 0 var(--white),
+    var(--s) calc(var(--s) * -2) 0 var(--violet);
+}
+/* consequences: two blocks meeting */
+.card__glyph--consequence::before {
+  top: var(--s);
+  box-shadow:
+    calc(var(--s) * 2) 0 0 var(--white),
+    var(--s) calc(var(--s) * -1) 0 #666,
+    var(--s) var(--s) 0 var(--sea);
+}
+
+
+/* ==========================================================================
+   11. ABOUT
+   ========================================================================== */
+.about { padding-top: 0; }
+
+.about__inner {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: center;
+  text-align: center;
+  max-width: 880px;
+}
+@media (min-width: 760px) {
+  .about__inner {
+    grid-template-columns: auto 1fr;
+    gap: var(--space-8);
+    justify-items: start;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+.about__logo {
+  width: clamp(120px, 22vw, 200px);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 22px rgb(92 198 214 / 0.22)) drop-shadow(0 0 48px rgb(165 139 255 / 0.14));
+}
+
+.about__copy { display: grid; gap: var(--space-4); justify-items: center; }
+@media (min-width: 760px) { .about__copy { justify-items: start; } }
+
+.about__text {
+  max-width: 38ch;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--gray-9);
+  text-wrap: pretty;
+}
+
+.about__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.about__tags li {
+  padding: 0.45em 0.95em;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-stretch: 115%;
+  letter-spacing: 0.18em;
+  color: var(--gray-7);
+}
+.about__tags li::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin-right: 0.6em;
+  vertical-align: 0.1em;
+  background: var(--sea);
+}
+.about__tags li:nth-child(2)::before { background: var(--moss); }
+.about__tags li:nth-child(3)::before { background: var(--violet); }
+
+
+/* ==========================================================================
+   12. JOIN PANEL
+   ========================================================================== */
+.join { padding-top: 0; }
+
+.panel {
+  max-width: 640px;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(1.4rem, 1rem + 2.5vw, 2.6rem);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-card) + 4px);
+  background:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04), transparent 50%),
+    var(--ink-2);
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(92 198 214 / 0.06);
+  position: relative;
+  overflow: hidden;
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sea), var(--violet), transparent);
+  opacity: 0.8;
+}
+
+.panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 1em;
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--violet-dim);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-stretch: 115%;
+  letter-spacing: 0.2em;
+  color: var(--white);
+}
+
+.server-list { display: grid; gap: var(--space-3); margin: 0; }
+
+.server {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: 20px;
+  background: var(--ink-1);
+  border: 1px solid var(--line);
+}
+@media (min-width: 560px) {
+  .server { grid-template-columns: 1fr auto; align-items: center; border-radius: var(--radius-pill); }
+}
+
+.server__edition {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-stretch: 115%;
+  letter-spacing: 0.18em;
+  color: var(--gray-7);
+}
+
+.server__address {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--gray-9);
+}
+.server__address code { letter-spacing: 0.02em; }
+.server__edition::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin-right: 0.7em;
+  vertical-align: 0.12em;
+  background: var(--moss);
+}
+.server__port {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gray-7);
+}
+.server__port code { color: var(--violet); font-size: var(--text-sm); letter-spacing: 0; }
+
+.panel__notice {
+  font-size: var(--text-sm);
+  color: var(--gray-7);
+  line-height: 1.5;
+}
+.panel__notice strong { color: var(--sea); letter-spacing: 0.1em; font-stretch: 112%; }
+
+
+/* ==========================================================================
+   13. FOOTER
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--sea-dim), var(--violet-dim), transparent) 1;
+  padding-block: var(--space-6) calc(var(--space-6) + env(safe-area-inset-bottom));
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-stretch: 115%;
+}
+.site-footer__brand { letter-spacing: 0.32em; font-stretch: 125%; font-weight: 800; }
+.site-footer__link {
+  text-decoration: none;
+  padding: 0.6em 1.1em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  transition: background-color var(--dur) var(--ease-out), border-color var(--dur);
+}
+.site-footer__link:hover { background: rgb(255 255 255 / 0.06); border-color: var(--sea-dim); }
+.site-footer__copy { color: var(--gray-7); }
+
+
+/* ==========================================================================
+   14. EASTER EGG — block-bird flight
+   ========================================================================== */
+.flight {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flight__bird {
+  position: absolute;
+  left: 0;
+  top: var(--y, 40%);
+  width: calc(var(--px) * 9);
+  height: calc(var(--px) * 5);
+  animation: fly var(--dur-fly, 3.2s) cubic-bezier(0.45, 0.05, 0.4, 0.95) var(--delay, 0s) both;
+}
+
+/* Two frames of a 9×5 pixel bird, flapping. */
+.flight__bird i {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+.flight__bird i b { background: var(--white); }
+.flight__bird i:nth-child(2) { opacity: 0; }
+.flight__bird i:nth-child(1) { animation: flapA 360ms steps(1) infinite; }
+.flight__bird i:nth-child(2) { animation: flapB 360ms steps(1) infinite; }
+@keyframes flapA { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes flapB { 0% { opacity: 0; } 50% { opacity: 1; } }
+
+@keyframes fly {
+  0%   { transform: translate3d(-15vw, 0, 0); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translate3d(50vw, -6vh, 0); }
+  90%  { opacity: 1; }
+  100% { transform: translate3d(115vw, -2vh, 0); opacity: 0; }
+}
+
+
+/* ==========================================================================
+   15. REDUCED MOTION
+   --------------------------------------------------------------------------
+   Disable parallax, sticky scroll-scrub, reveals and decorative loops.
+   The island renders in its final (still unfinished) state instead.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .reveal,
+  .js .hero__inner > * { opacity: 1; transform: none; animation: none; }
+
+  .island { height: auto; }
+  .island__sticky { height: 100vh; height: 100svh; position: relative; }
+  .island__mist { transform: none !important; animation: none; }
+  .island__steps { gap: var(--space-2); }
+  .island__steps li { grid-area: auto; opacity: 1; transform: none; }
+
+  .card, .card:hover { transform: none; }
+  .btn:hover, .btn:active { transform: none; }
+
+  .status-chip__dot, .badge__dot, .hero__scroll-hint span { animation: none; }
+}
