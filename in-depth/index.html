@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ===== SEO ===== -->
+  <title>See Osprey in Depth · Osprey field guide</title>
+  <meta name="description" content="The Osprey field guide: the Crystal, Vigil, Standard, Mate Shield, Lookout, Jukebox Lookout, Warden, Ledger Chest, Ledger Book, Shop Barrel and Feather, as built by Osprey Core.">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://osprey.build/in-depth/">
+
+  <!-- ===== Open Graph / Twitter ===== -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Osprey">
+  <meta property="og:title" content="See Osprey in Depth · Osprey field guide">
+  <meta property="og:description" content="Eleven entries on the custom blocks and items of Osprey Core.">
+  <meta property="og:url" content="https://osprey.build/in-depth/">
+  <meta property="og:image" content="https://osprey.build/assets/brand/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Osprey wordmark and pixel osprey emblem on black.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://osprey.build/assets/brand/og-image.png">
+
+  <!-- ===== Icons ===== -->
+  <link rel="icon" href="../assets/brand/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+
+  <!-- ===== Fonts and styles (paths are relative: this page lives one folder down) ===== -->
+  <link rel="preload" href="../fonts/cadass-script-demo.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/cinzel-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/geist-pixel-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="page-guide">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =====================================================================
+       MASTHEAD
+       ===================================================================== -->
+  <header class="masthead">
+    <div class="masthead__inner">
+      <a class="wordmark wordmark--nav" href="../" aria-label="Osprey home">Osprey</a>
+      <nav class="masthead__nav" aria-label="Main">
+        <ul>
+          <li><a class="back-link" href="../">Back to home</a></li>
+          <li><a href="#contents">Contents</a></li>
+          <li><a href="../#join">Join</a></li>
+          <li><a href="../in-depth/" aria-current="page">In Depth</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--solid btn--sm masthead__cta" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================================================================
+         GUIDE COVER
+         =================================================================== -->
+    <section class="guide-hero" aria-labelledby="guide-title">
+      <div class="guide-hero__inner">
+        <div class="guide-hero__copy">
+          <p class="kicker"><span class="kicker__tag">Field Guide</span> Osprey Core · 11 entries</p>
+          <h1 id="guide-title" class="guide-hero__title">See <span class="wordmark wordmark--inline">Osprey</span> in Depth</h1>
+          <p class="guide-hero__lede">The custom blocks and items of Osprey Core. Everything is built on vanilla gameplay and run from the Crystal, so there are no commands to learn.</p>
+          <p class="status-chip"><span class="status-chip__dot" aria-hidden="true"></span>Pre-launch · details may change before the server opens</p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="../#join">Join Osprey</a>
+            <a class="btn btn--outline" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Join Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <a class="btn btn--ghost-dark" href="../">Back to home</a>
+          </div>
+        </div>
+
+        <nav id="contents" class="toc" aria-labelledby="toc-title">
+          <h2 id="toc-title" class="toc__title">Contents</h2>
+          <ol>
+          <li><a href="#ch-i"><span class="toc__no">I</span><span class="toc__name">Interface and Fuel</span><span class="toc__items">Crystal · Vigil</span></a></li>
+          <li><a href="#ch-ii"><span class="toc__no">II</span><span class="toc__name">Civilisation</span><span class="toc__items">Standard · Mate Shield</span></a></li>
+          <li><a href="#ch-iii"><span class="toc__no">III</span><span class="toc__name">Awareness and Protection</span><span class="toc__items">Lookout · Jukebox Lookout · Warden</span></a></li>
+          <li><a href="#ch-iv"><span class="toc__no">IV</span><span class="toc__name">Transactions and Trade</span><span class="toc__items">Ledger Chest · Ledger Book · Shop Barrel</span></a></li>
+          <li><a href="#ch-v"><span class="toc__no">V</span><span class="toc__name">Banishment</span><span class="toc__items">Feather</span></a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ===== Chapter I · Interface and Fuel ===== -->
+    <section id="ch-i" class="guide-chapter guide-chapter--i" aria-labelledby="ch-i-title">
+      <div class="guide-chapter__inner">
+        <header class="guide-chapter__head">
+          <span class="guide-chapter__no" aria-hidden="true">I</span>
+          <p class="chapter__label">Chapter I</p>
+          <h2 id="ch-i-title" class="guide-chapter__title">Interface and Fuel</h2>
+          <p class="guide-chapter__desc">How you operate Osprey Core, and what powers it.</p>
+        </header>
+        <ol class="entries" start="1">
+          <li id="crystal" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><picture><source srcset="../assets/items/crystal-still.png" media="(prefers-reduced-motion: reduce)"><img src="../assets/items/crystal.webp" alt="Crystal" width="160" height="160" loading="lazy" decoding="async"></picture></div>
+              <figcaption class="plate__cap"><span>Plate 01</span><span>Crystal</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 01</p>
+              <h3 class="entry__title">Crystal</h3>
+              <p class="entry__body">Always on your hotbar, the Crystal is your all-in-one interface for managing Vigil, your home, your mates, and more. Right-click to open it—there are no commands to learn in Osprey.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#vigil">Vigil <span class="entry__see-no">No. 02</span></a> <a href="#jukebox-lookout">Jukebox Lookout <span class="entry__see-no">No. 06</span></a></p>
+            </div>
+          </li>
+          <li id="vigil" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img class="px" src="../assets/items/vigil.png" alt="Vigil" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 02</span><span>Vigil</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 02</p>
+              <h3 class="entry__title">Vigil</h3>
+              <p class="entry__body">Vigil fuels Osprey. It replaces XP and is used to craft and maintain many of the world’s custom blocks and items.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#crystal">Crystal <span class="entry__see-no">No. 01</span></a> <a href="#feather">Feather <span class="entry__see-no">No. 11</span></a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- ===== Chapter II · Civilisation ===== -->
+    <section id="ch-ii" class="guide-chapter guide-chapter--ii" aria-labelledby="ch-ii-title">
+      <div class="guide-chapter__inner">
+        <header class="guide-chapter__head">
+          <span class="guide-chapter__no" aria-hidden="true">II</span>
+          <p class="chapter__label">Chapter II</p>
+          <h2 id="ch-ii-title" class="guide-chapter__title">Civilisation</h2>
+          <p class="guide-chapter__desc">Founding a civilisation and sharing ownership of it.</p>
+        </header>
+        <ol class="entries" start="3">
+          <li id="standard" class="entry">
+            <figure class="plate plate--tall">
+              <div class="plate__frame"><picture><source srcset="../assets/items/standard-still.png" media="(prefers-reduced-motion: reduce)"><img src="../assets/items/standard.webp" alt="Standard" width="180" height="400" loading="lazy" decoding="async"></picture></div>
+              <figcaption class="plate__cap"><span>Plate 03</span><span>Standard</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 03</p>
+              <h3 class="entry__title">Standard</h3>
+              <p class="entry__body">When Osprey Core recognises that you’ve been playing alongside friends, it will prompt you to make a Standard. Place it in their company to establish a civilisation.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#mate-shield">Mate Shield <span class="entry__see-no">No. 04</span></a></p>
+            </div>
+          </li>
+          <li id="mate-shield" class="entry">
+            <figure class="plate plate--missing">
+              <div class="plate__frame"><span class="plate__empty" aria-hidden="true"></span><p class="plate__note">Artwork not yet supplied</p></div>
+              <figcaption class="plate__cap"><span>Plate 04</span><span>Mate Shield</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 04</p>
+              <h3 class="entry__title">Mate Shield</h3>
+              <p class="entry__body">Craft a Mate Shield and drop it to a friend within your civilisation to promote them to Mate—effectively making them a co-owner.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#standard">Standard <span class="entry__see-no">No. 03</span></a> <a href="#warden">Warden <span class="entry__see-no">No. 07</span></a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- ===== Chapter III · Awareness and Protection ===== -->
+    <section id="ch-iii" class="guide-chapter guide-chapter--iii" aria-labelledby="ch-iii-title">
+      <div class="guide-chapter__inner">
+        <header class="guide-chapter__head">
+          <span class="guide-chapter__no" aria-hidden="true">III</span>
+          <p class="chapter__label">Chapter III</p>
+          <h2 id="ch-iii-title" class="guide-chapter__title">Awareness and Protection</h2>
+          <p class="guide-chapter__desc">Watching over your territory and reinforcing it.</p>
+        </header>
+        <ol class="entries" start="5">
+          <li id="lookout" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img src="../assets/items/lookout.png" alt="Lookout" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 05</span><span>Lookout</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 05</p>
+              <h3 class="entry__title">Lookout</h3>
+              <p class="entry__body">Receive chat alerts about nearby players. Use a Lookout to stay informed about loitering and trespassing around your territory.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#jukebox-lookout">Jukebox Lookout <span class="entry__see-no">No. 06</span></a></p>
+            </div>
+          </li>
+          <li id="jukebox-lookout" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img src="../assets/items/jukebox-lookout.png" alt="Jukebox Lookout" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 06</span><span>Jukebox Lookout</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 06</p>
+              <h3 class="entry__title">Jukebox Lookout</h3>
+              <p class="entry__body">Log all nearby player activity and output directional redstone signals. Monitor potential loitering and access the activity log through your Crystal.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#lookout">Lookout <span class="entry__see-no">No. 05</span></a> <a href="#crystal">Crystal <span class="entry__see-no">No. 01</span></a></p>
+            </div>
+          </li>
+          <li id="warden" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img src="../assets/items/warden.png" alt="Warden" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 07</span><span>Warden</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 07</p>
+              <h3 class="entry__title">Warden</h3>
+              <p class="entry__body">Reinforce a 16×16 area around this block. Toggle permissions for placing and breaking blocks, opening chests, using doors, and more. Your mates are exempt from these restrictions, and multiple Wardens can be stacked within the same area.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#mate-shield">Mate Shield <span class="entry__see-no">No. 04</span></a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- ===== Chapter IV · Transactions and Trade ===== -->
+    <section id="ch-iv" class="guide-chapter guide-chapter--iv" aria-labelledby="ch-iv-title">
+      <div class="guide-chapter__inner">
+        <header class="guide-chapter__head">
+          <span class="guide-chapter__no" aria-hidden="true">IV</span>
+          <p class="chapter__label">Chapter IV</p>
+          <h2 id="ch-iv-title" class="guide-chapter__title">Transactions and Trade</h2>
+          <p class="guide-chapter__desc">Records of who took what, and trading without theft.</p>
+        </header>
+        <ol class="entries" start="8">
+          <li id="ledger-chest" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><picture><source srcset="../assets/items/ledger-chest-still.png" media="(prefers-reduced-motion: reduce)"><img src="../assets/items/ledger-chest.webp" alt="Ledger Chest" width="160" height="160" loading="lazy" decoding="async"></picture></div>
+              <figcaption class="plate__cap"><span>Plate 08</span><span>Ledger Chest</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 08</p>
+              <h3 class="entry__title">Ledger Chest</h3>
+              <p class="entry__body">A regular chest with a transaction history. Shift-click to see every transaction, who made it, and when.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#ledger-book">Ledger Book <span class="entry__see-no">No. 09</span></a></p>
+            </div>
+          </li>
+          <li id="ledger-book" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img class="px" src="../assets/items/ledger-book.png" alt="Ledger Book" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 09</span><span>Ledger Book</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 09</p>
+              <h3 class="entry__title">Ledger Book</h3>
+              <p class="entry__body">Breaking a Ledger Chest drops a Ledger Book containing its full transaction history—a lasting record and irrefutable evidence of what took place.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#ledger-chest">Ledger Chest <span class="entry__see-no">No. 08</span></a></p>
+            </div>
+          </li>
+          <li id="shop-barrel" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img src="../assets/items/shop-barrel.png" alt="Shop Barrel" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 10</span><span>Shop Barrel</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 10</p>
+              <h3 class="entry__title">Shop Barrel</h3>
+              <p class="entry__body">Sell, restock, and price items through a dedicated shop interface, allowing safe trading without the risk of theft.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- ===== Chapter V · Banishment ===== -->
+    <section id="ch-v" class="guide-chapter guide-chapter--v" aria-labelledby="ch-v-title">
+      <div class="guide-chapter__inner">
+        <header class="guide-chapter__head">
+          <span class="guide-chapter__no" aria-hidden="true">V</span>
+          <p class="chapter__label">Chapter V</p>
+          <h2 id="ch-v-title" class="guide-chapter__title">Banishment</h2>
+          <p class="guide-chapter__desc">What happens to the players you banish.</p>
+        </header>
+        <ol class="entries" start="11">
+          <li id="feather" class="entry">
+            <figure class="plate">
+              <div class="plate__frame"><img class="px" src="../assets/items/feather.png" alt="Feather" width="160" height="160" loading="lazy" decoding="async"></div>
+              <figcaption class="plate__cap"><span>Plate 11</span><span>Feather</span></figcaption>
+            </figure>
+            <div class="entry__text">
+              <p class="entry__no">Entry No. 11</p>
+              <h3 class="entry__title">Feather</h3>
+              <p class="entry__body">Eliminate a player with the Banishment enchantment to claim their soul—their Feather. This physical item holds them in banishment in the Nether. Spend Vigil to extend their banishment time.</p>
+              <p class="entry__see"><span class="label">See also</span> <a href="#vigil">Vigil <span class="entry__see-no">No. 02</span></a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         CLOSING: back home / join
+         =================================================================== -->
+    <section class="guide-end" aria-labelledby="end-title">
+      <div class="guide-end__inner">
+        <h2 id="end-title" class="guide-end__title">End of field guide</h2>
+        <p>Osprey has not launched yet. Join the Discord for announcements, or head back to the main page for connection details.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Join Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
+          <a class="btn btn--outline" href="../#join">Connection details</a>
+          <a class="btn btn--ghost-dark" href="../">Back to home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a class="wordmark wordmark--footer" href="../" aria-label="Osprey home">Osprey</a>
+      <nav class="footer__nav" aria-label="Footer">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../in-depth/" aria-current="page">See Osprey in Depth</a></li>
+          <li><a href="../#join">Join</a></li>
+          <li><a href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Discord<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+        </ul>
+      </nav>
+      <p class="footer__note">© <span data-year>2026</span> Osprey. A Minecraft server. Not affiliated with Mojang or Microsoft.</p>
+    </div>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

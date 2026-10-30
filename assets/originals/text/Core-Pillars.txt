@@ -1,0 +1,13 @@
+Finite Resources: Osprey is based on a beautiful, custom 5000x5000 island surrounded by nothing but ocean. All biomes and structures are contained within.
+
+Player Choice: Power is in your hands. Want to monopolize a resource? Wage war? Banish bad-actors? Become rich? Live alone? live in kingdoms? Live peacefully? Live violently? On Osprey, You decide how to play. Be warned, though. Its better to make friends than enemies!
+
+No learning curve: : Osprey-core is our server backend and automates many features that, on many other servers, you would require several commands to utilize. On osprey, everything is built natively upon vanilla gameplay. This also ensures NATIVE BEDROCK COMPATIBILITY.
+
+
+
+
+
+
+
+

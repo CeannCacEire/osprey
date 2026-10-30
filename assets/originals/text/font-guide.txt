@@ -1,0 +1,5 @@
+Osprey logo: Cadass Script Demo.ttf - https://www.dafont.com/cadass-script.font
+
+Text: GeistPixel-Regular-VariableFont_ELSH.ttf - https://fonts.google.com/specimen/Geist+Pixel?query=pixe&preview.script=Latn
+
+Headers: Cinzel-VariableFont_wght.ttf - https://fonts.google.com/specimen/Cinzel?query=pixe&preview.script=Latn
