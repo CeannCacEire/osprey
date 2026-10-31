@@ -88,6 +88,7 @@ The originals are kept unchanged in `assets/originals/`. The processed copies in
 | `*-still.png` | First frames, used for `prefers-reduced-motion`. |
 | `lookout`, `jukebox-lookout`, `shop-barrel` | Semi-transparent edge pixels neutralised and warm wood tones nudged slightly redder, so they stay non-yellow when composited on the light plate background. |
 | `vigil`, `feather`, `warden` | Copied unchanged (no gold present). |
+| `mate-shield.png` | The supplied `mate-shield.webp` converted to PNG, otherwise unchanged (no gold present). |
 | `assets/world/island-map-*.webp` | From the supplied `map.png` (original in `assets/originals/world/`). The map viewer's zoom toolbar was cropped off; desert/sand tones were shifted (warm sand → terracotta, pale sand → cool stone, olive → green) and each size was pre-scaled and palette-quantised so no yellow survives. |
 | `assets/brand/osprey-mark-*.png` | The supplied `serverlogo.webp` cropped, with the white background removed (light and dark versions). |
 | `favicon.png`, `apple-touch-icon.png`, `og-image.png` | Generated from the emblem and wordmark. The social card carries the tagline "A player-led civilization". |
@@ -98,11 +99,10 @@ Backgrounds use a fine monochrome grain and soft tonal light rather than graph-p
 
 ## Outstanding questions
 
-1. **Mate Shield artwork is missing.** Entry No. 04 shows an honest "Artwork not yet supplied" plate. Add `assets/items/mate-shield.png` and swap the plate markup in `in-depth/index.html`.
-2. **Cadass Script licence.** The supplied file is "Cadass Script **Demo**", which DaFont lists as free for personal use. Confirm a licence that covers a public website with the font's author before relying on it long-term.
-3. **Cinzel and Geist Pixel** are SIL Open Font License fonts from the official Google Fonts repository. The licence texts are in `fonts/`.
-4. **Minecraft-derived textures.** Several item renders appear to be based on vanilla Minecraft textures. Fine for a fan server, but noted for completeness.
-5. **Copy edits.**
+1. **Cadass Script licence.** The supplied file is "Cadass Script **Demo**", which DaFont lists as free for personal use. Confirm a licence that covers a public website with the font's author before relying on it long-term.
+2. **Cinzel and Geist Pixel** are SIL Open Font License fonts from the official Google Fonts repository. The licence texts are in `fonts/`.
+3. **Minecraft-derived textures.** Several item renders appear to be based on vanilla Minecraft textures. Fine for a fan server, but noted for completeness.
+4. **Copy edits.**
    - Light typo fixes were applied to the supplied text:
      - "infastructure" → "infrastructure"
      - "Ospreys" → "Osprey's"
@@ -111,4 +111,4 @@ Backgrounds use a fine monochrome grain and soft tonal light rather than graph-p
      - "Osprey-core"/"Osprey-Core" → "Osprey Core"
    - British spelling ("civilisation", "monopolise") is used throughout to match `items.txt`.
    - The meaning of every sentence is unchanged.
-6. **Core Pillars.** The supplied `Core-Pillars.txt` has three pillars: Finite Resources, Player Choice and No Learning Curve. All three are used, with only the light edits listed above (for example, "you would require several commands to utilize" became "would require several commands to use"). The 11 field guide entries use the text of `items.txt` exactly.
+5. **Core Pillars.** The supplied `Core-Pillars.txt` has three pillars: Finite Resources, Player Choice and No Learning Curve. All three are used, with only the light edits listed above (for example, "you would require several commands to utilize" became "would require several commands to use"). The 11 field guide entries use the text of `items.txt` exactly.
