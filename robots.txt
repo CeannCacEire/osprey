@@ -1,0 +1,5 @@
+# osprey.build
+User-agent: *
+Allow: /
+
+Sitemap: https://osprey.build/sitemap.xml

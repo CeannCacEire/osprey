@@ -6,7 +6,7 @@
 
   <!-- ===== SEO ===== -->
   <title>OSPREY - An Upcoming Experimental Vanilla Minecraft Server.</title>
-  <meta name="description" content="Osprey is an upcoming cross-compatible Vanilla+ Minecraft server for Java and Bedrock, set on one finite 5000×5000 island and built on Osprey Core. Pre-launch: join the Discord.">
+  <meta name="description" content="Osprey is an upcoming Vanilla+ Minecraft server for Java and Bedrock, set on one finite 5000×5000 island and run by Osprey Core. Pre-launch: join the Discord.">
   <meta name="theme-color" content="#0b0b0c">
   <meta name="color-scheme" content="dark light">
   <link rel="canonical" href="https://osprey.build/">
@@ -14,6 +14,7 @@
   <!-- ===== Open Graph / Twitter ===== -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Osprey">
+  <meta property="og:locale" content="en_IE">
   <meta property="og:title" content="OSPREY - An Upcoming Experimental Vanilla Minecraft Server.">
   <meta property="og:description" content="One finite island. Resources won't last forever. A cross-compatible Vanilla+ server built on Osprey Core. Pre-launch.">
   <meta property="og:url" content="https://osprey.build/">
@@ -23,6 +24,49 @@
   <meta property="og:image:alt" content="The Osprey wordmark and pixel osprey emblem on black, with the line A player-led civilization.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://osprey.build/assets/brand/og-image.png">
+  <meta name="twitter:image:alt" content="The Osprey wordmark and pixel osprey emblem on black, with the line A player-led civilization.">
+  <!-- ===== Structured data (facts only: no ratings, player counts or dates) ===== -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://osprey.build/#website",
+      "name": "Osprey",
+      "url": "https://osprey.build/",
+      "inLanguage": "en-IE",
+      "publisher": {
+        "@id": "https://osprey.build/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://osprey.build/#org",
+      "name": "Osprey",
+      "url": "https://osprey.build/",
+      "logo": "https://osprey.build/assets/brand/osprey-mark-dark.png",
+      "sameAs": [
+        "https://discord.gg/4EnjKHUG4S"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://osprey.build/#webpage",
+      "url": "https://osprey.build/",
+      "name": "Osprey – an upcoming Vanilla+ Minecraft server",
+      "isPartOf": {
+        "@id": "https://osprey.build/#website"
+      },
+      "about": {
+        "@id": "https://osprey.build/#org"
+      },
+      "primaryImageOfPage": "https://osprey.build/assets/brand/og-image.png"
+    }
+  ]
+}
+  </script>
+
 
   <!-- ===== Icons ===== -->
   <link rel="icon" href="assets/brand/favicon.png" type="image/png">

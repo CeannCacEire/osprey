@@ -8,6 +8,8 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 
 ```
 /
+├── 404.html              Not-found page (root-absolute paths)
+├── robots.txt / sitemap.xml
 ├── index.html              Main page (hero, 01–05 chapters, footer)
 ├── in-depth/index.html     "See Osprey in Depth" field guide (11 entries, 5 chapters)
 ├── css/main.css            Shared stylesheet, sectioned 00–17
@@ -96,6 +98,15 @@ The originals are kept unchanged in `assets/originals/`. The processed copies in
 An automated pixel scan finds no yellow or gold pixels in any processed asset or in full-page renders of either page (1×, 2× and 3× pixel density). Item art and the map use `image-rendering: pixelated`, because smooth browser resampling blends neighbouring colours into yellowish in-between tones.
 
 Backgrounds use a fine monochrome grain and soft tonal light rather than graph-paper grids.
+
+## SEO
+
+- `robots.txt` allows all crawlers and points to `sitemap.xml` (home and In Depth; update `<lastmod>` when content changes).
+- Each page has a unique title, description, canonical URL, Open Graph/Twitter tags and `og:locale` `en_IE`.
+- JSON-LD structured data: `WebSite`, `Organization` (with the Discord as `sameAs`) and `WebPage` on the home page; `WebPage` + `BreadcrumbList` on In Depth. Facts only — no ratings, player counts or dates.
+- `404.html` is served by GitHub Pages for any missing path. It uses root-absolute URLs and `noindex`.
+- No analytics, tracking tags or cookies are used, so no consent banner is needed. If a Google tag is added later, EEA visitors require a consent banner with Google consent mode v2.
+- Search Console: `sc-domain:osprey.build` (domain property, DNS-verified).
 
 ## Outstanding questions
 
