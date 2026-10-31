@@ -19,6 +19,7 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 ├── assets/
 │   ├── items/              Processed item art used by the pages
 │   ├── brand/              Emblem (light/dark), favicon, apple-touch-icon, og-image.png
+│   ├── world/              Processed island map (320/480/640/900 px) used in Core Pillars
 │   └── originals/          Untouched supplied assets (items, brand, text). Not referenced by pages.
 ├── CNAME                   Custom domain (osprey.build). Do not remove.
 └── .nojekyll               Serve files as-is on GitHub Pages
@@ -85,11 +86,15 @@ The originals are kept unchanged in `assets/originals/`. The processed copies in
 | `crystal.webp` / `crystal-still.png` | Yellow centre and glow recoloured to a cool white; the lavender is kept. Every 5th frame is kept (1650 → 330 frames, same loop speed) to cut the size from several MB to about 360 KB. |
 | `ledger-chest.webp`, `standard.webp`, `shop-barrel.png`, `ledger-book.png` | Golden oak tones shifted to a darker, redder spruce-like brown. The animations are saved losslessly so compression doesn't reintroduce yellow pixels. The Standard keeps every 2nd frame. |
 | `*-still.png` | First frames, used for `prefers-reduced-motion`. |
-| `vigil`, `feather`, `lookout`, `jukebox-lookout`, `warden` | Copied unchanged (no gold present). |
+| `lookout`, `jukebox-lookout`, `shop-barrel` | Semi-transparent edge pixels neutralised and warm wood tones nudged slightly redder, so they stay non-yellow when composited on the light plate background. |
+| `vigil`, `feather`, `warden` | Copied unchanged (no gold present). |
+| `assets/world/island-map-*.webp` | From the supplied `map.png` (original in `assets/originals/world/`). The map viewer's zoom toolbar was cropped off; desert/sand tones were shifted (warm sand → terracotta, pale sand → cool stone, olive → green) and each size was pre-scaled and palette-quantised so no yellow survives. |
 | `assets/brand/osprey-mark-*.png` | The supplied `serverlogo.webp` cropped, with the white background removed (light and dark versions). |
-| `favicon.png`, `apple-touch-icon.png`, `og-image.png` | Generated from the emblem and wordmark. |
+| `favicon.png`, `apple-touch-icon.png`, `og-image.png` | Generated from the emblem and wordmark. The social card carries the tagline "A player-led civilization". |
 
-An automated pixel scan finds no yellow or gold pixels in any processed asset or in full-page renders of either page.
+An automated pixel scan finds no yellow or gold pixels in any processed asset or in full-page renders of either page (1×, 2× and 3× pixel density). Item art and the map use `image-rendering: pixelated`, because smooth browser resampling blends neighbouring colours into yellowish in-between tones.
+
+Backgrounds use a fine monochrome grain and soft tonal light rather than graph-paper grids.
 
 ## Outstanding questions
 

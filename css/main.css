@@ -55,6 +55,9 @@
 
 /* ===== 01 Tokens ======================================================== */
 :root {
+  /* Fine monochrome grain used instead of graph-paper grids. */
+  --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --ink: #0b0b0c;
   --char: #17181a;
   --char-2: #222326;
@@ -148,6 +151,10 @@ em { font-style: normal; }
 .skip-link:focus { top: 1rem; }
 
 .px { image-rendering: pixelated; image-rendering: crisp-edges; }
+/* Item art and the island map are scaled with nearest-neighbour sampling.
+   Smooth resampling blends neighbouring colours (e.g. dark wood with white,
+   green with red) into yellowish in-between tones, which the palette forbids. */
+.slot img, .plate__frame img, .hero__standard, .island-map img { image-rendering: pixelated; }
 
 /* ===== 03 Wordmark ======================================================
    The wordmark must always read exactly "Osprey". It is typed that way in
@@ -285,8 +292,8 @@ em { font-style: normal; }
 .hero {
   position: relative; overflow: hidden;
   background:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px,
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--grain-light),
+    radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     radial-gradient(120% 90% at 78% 30%, #1d1e21 0%, var(--ink) 62%);
   border-bottom: 3px solid var(--paper);
   padding: clamp(2.5rem, 6vw, 5rem) 0 0;
@@ -389,8 +396,8 @@ em { font-style: normal; }
 .chapter--paper {
   --line: var(--ink);
   background:
-    linear-gradient(rgba(11,11,12,.05) 1px, transparent 1px) 0 0 / 32px 32px,
-    linear-gradient(90deg, rgba(11,11,12,.05) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--grain-dark),
+    radial-gradient(90% 70% at 15% 0%, rgba(255,255,255,.55), transparent 70%),
     var(--paper);
   color: var(--ink);
   --focus: var(--teal-deep);
@@ -398,8 +405,8 @@ em { font-style: normal; }
 .chapter--ink { background: var(--ink); color: var(--paper); }
 .chapter--charcoal {
   background:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px) 0 0 / 24px 24px,
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--grain-light),
+    radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     var(--char);
   color: var(--paper);
 }
@@ -476,7 +483,6 @@ em { font-style: normal; }
   padding: .7rem 1rem .6rem;
   font-size: 1.05rem; letter-spacing: .1em;
 }
-.spec__ref { font-family: var(--f-body); font-weight: 400; font-size: .75rem; letter-spacing: .12em; color: var(--grey-300); }
 .spec__list { margin: 0; padding: .4rem 1rem .8rem; }
 .spec__list div {
   display: grid; grid-template-columns: 6.75rem 1fr; gap: 1rem;
@@ -527,7 +533,7 @@ em { font-style: normal; }
 .pillar p { max-width: 36rem; }
 .pillar--one {
   grid-column: 1 / 9;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(12rem, 16rem);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 19rem);
   gap: 2rem; align-items: center;
 }
 .pillar--two {
@@ -569,33 +575,16 @@ em { font-style: normal; }
 }
 .stamp strong { display: block; font-weight: 900; font-size: 1.35rem; color: var(--lav); }
 
-/* Island diagram: a plain square in the ocean, labelled with supplied facts only */
-.island-diagram { margin: 0; }
-.island-diagram__sea {
-  aspect-ratio: 1;
-  background:
-    repeating-linear-gradient(135deg, rgba(43,208,207,.22) 0 2px, transparent 2px 12px),
-    #0e2a30;
-  border: 2px solid var(--teal);
-  display: grid; place-items: center;
-  position: relative;
-}
-.island-diagram__land {
-  width: 62%; aspect-ratio: 1;
-  background:
-    linear-gradient(rgba(0,0,0,.18) 1px, transparent 1px) 0 0 / 12.5% 12.5%,
-    linear-gradient(90deg, rgba(0,0,0,.18) 1px, transparent 1px) 0 0 / 12.5% 12.5%,
-    #4f7552;
+/* Island map (supplied map.png, processed copy without yellow tones) */
+.island-map { margin: 0; }
+.island-map img {
+  display: block; width: 100%; height: auto; aspect-ratio: 1;
   border: 3px solid var(--paper);
-  display: grid; place-items: center;
+  box-shadow: 8px 8px 0 #050506;
 }
-.island-diagram__land span {
-  font-size: .75rem; text-transform: uppercase; letter-spacing: .14em;
-  background: var(--ink); padding: .15rem .4rem;
-}
-.island-diagram figcaption {
-  display: flex; justify-content: space-between; gap: .5rem; margin-top: .6rem;
-  font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--grey-300);
+.island-map figcaption {
+  margin-top: .7rem;
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--grey-300);
 }
 
 /* ===== 10 Live World bay ================================================
@@ -621,8 +610,7 @@ em { font-style: normal; }
   overflow: hidden;
   background:
     radial-gradient(70% 70% at 50% 50%, rgba(167,163,255,.07), transparent 70%),
-    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--grain-light),
     #0f1012;
 }
 .bay__corner { position: absolute; width: 2.25rem; height: 2.25rem; border: 0 solid var(--teal); }
@@ -636,7 +624,7 @@ em { font-style: normal; }
   text-align: center; padding: 3.5rem 2rem;
 }
 .bay__placeholder[hidden] { display: none; }
-.bay__emblem { width: clamp(4rem, 9vw, 7rem); opacity: .5; image-rendering: pixelated; margin-bottom: 1.25rem; }
+.bay__emblem { flex: none; width: clamp(4rem, 9vw, 7rem); height: auto; aspect-ratio: 389 / 381; object-fit: contain; opacity: .5; image-rendering: pixelated; margin-bottom: 1.25rem; }
 .bay__title {
   font-family: var(--f-head); font-weight: 900; text-transform: uppercase;
   font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1; letter-spacing: .28em; margin-bottom: 1rem;
@@ -809,8 +797,8 @@ em { font-style: normal; }
 /* ===== 14 Field guide page ============================================= */
 .guide-hero {
   background:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px,
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--grain-light),
+    radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     var(--ink);
   border-bottom: 3px solid var(--paper);
   padding: clamp(3rem, 7vw, 6rem) 0;
@@ -821,7 +809,7 @@ em { font-style: normal; }
   gap: clamp(2rem, 5vw, 4.5rem); align-items: start;
 }
 .guide-hero__title {
-  font-size: clamp(3rem, 8vw, 6.75rem); font-weight: 900; line-height: .95;
+  font-size: clamp(3rem, 8vw, 6.75rem); font-weight: 900; line-height: 1.18;
   margin-bottom: 1.5rem;
 }
 .guide-hero__lede { font-size: 1.2rem; color: var(--grey-300); max-width: 38rem; margin-bottom: 1.5rem; }
@@ -847,8 +835,8 @@ em { font-style: normal; }
 .guide-chapter { padding: clamp(4rem, 8vw, 7rem) 0; --focus: var(--teal); }
 .guide-chapter--i, .guide-chapter--iii {
   background:
-    linear-gradient(rgba(11,11,12,.05) 1px, transparent 1px) 0 0 / 32px 32px,
-    linear-gradient(90deg, rgba(11,11,12,.05) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--grain-dark),
+    radial-gradient(90% 70% at 15% 0%, rgba(255,255,255,.55), transparent 70%),
     var(--paper);
   color: var(--ink);
   --focus: var(--teal-deep);
@@ -857,8 +845,8 @@ em { font-style: normal; }
 .guide-chapter--iv { background: var(--char); }
 .guide-chapter--v {
   background:
-    linear-gradient(rgba(224,87,77,.07) 1px, transparent 1px) 0 0 / 32px 32px,
-    linear-gradient(90deg, rgba(224,87,77,.07) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--grain-light),
+    radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     #150c0c;
   color: var(--paper);
   --focus: var(--nether);
@@ -956,8 +944,8 @@ em { font-style: normal; }
 
 .guide-end {
   background:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px) 0 0 / 24px 24px,
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--grain-light),
+    radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     var(--char);
   border-top: 3px solid var(--paper);
   padding: clamp(4rem, 8vw, 6rem) 0;
@@ -981,11 +969,13 @@ em { font-style: normal; }
 /* ===== 16 Responsive =================================================== */
 @media (max-width: 1080px) {
   .pillar--one { grid-template-columns: 1fr; }
-  .island-diagram { max-width: 18rem; }
+  .island-map { max-width: 22rem; }
 }
 
 @media (max-width: 900px) {
-  .masthead__inner { flex-wrap: wrap; gap: .25rem 1rem; padding-top: .4rem; padding-bottom: 0; }
+  .masthead__inner { flex-wrap: wrap; gap: .7rem 1rem; padding-top: .7rem; padding-bottom: 0; }
+  .masthead__inner > .wordmark, .masthead__cta { align-self: center; }
+  .masthead__cta { margin-bottom: 4px; } /* room for the button's offset shadow above the divider */
   .masthead__cta { margin-left: auto; }
   .masthead__nav {
     order: 3; flex: 1 0 100%; margin: 0 calc(var(--gutter) * -1);
