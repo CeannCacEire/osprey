@@ -504,7 +504,7 @@ em { font-style: normal; }
 }
 .core-card__mark {
   position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
-  width: 15rem; opacity: .18; image-rendering: pixelated;
+  width: 15rem; height: auto; aspect-ratio: 389 / 381; opacity: .18; image-rendering: pixelated;
 }
 .core-card__title { font-size: clamp(1.6rem, 3vw, 2.25rem); color: var(--teal); margin-bottom: .9rem; }
 .core-card p { color: var(--grey-300); }
