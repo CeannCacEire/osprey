@@ -1,0 +1,33 @@
+# Osprey
+
+> Osprey is an upcoming, cross-compatible Vanilla+ Minecraft server (Java, with native Bedrock compatibility) built on the Osprey Core server backend. It is set on one finite, custom 5000 × 5000 island surrounded by ocean. Osprey is pre-launch: the server is not open yet, and there is no announced launch date.
+
+Key facts, taken from the site:
+
+- Name: Osprey (a Minecraft server; not affiliated with Mojang or Microsoft)
+- Status: pre-launch. Announcements are posted in the Discord.
+- World: a custom 5000 × 5000 island, with nothing but ocean at the border. All biomes and structures are contained within it. Resources won't last forever.
+- Editions: Java, with native Bedrock compatibility
+- Server address (Java and Bedrock): play.osprey.build. Bedrock port: 19132.
+- Backend: Osprey Core, which automates features that would take several commands on other servers and builds everything natively on vanilla gameplay. There are no commands to learn; players use the Crystal item on their hotbar (right-click to open).
+- Core pillars: Finite Resources, Player Choice (players decide how to play), No Learning Curve.
+- Discord: https://discord.gg/4EnjKHUG4S
+
+## Pages
+
+- [Home](https://osprey.build/): what Osprey is, the core pillars, connection details and the news feed
+- [See Osprey in Depth](https://osprey.build/in-depth/): field guide to Osprey Core's 11 custom blocks and items
+
+## Custom blocks and items (Osprey Core)
+
+- [Crystal](https://osprey.build/in-depth/#crystal): always on your hotbar; the all-in-one interface for managing Vigil, your home, your mates and more
+- [Vigil](https://osprey.build/in-depth/#vigil): fuels Osprey; replaces XP and is used to craft and maintain many custom blocks and items
+- [Standard](https://osprey.build/in-depth/#standard): placed in the company of friends to establish a civilisation
+- [Mate Shield](https://osprey.build/in-depth/#mate-shield): dropped to a friend in your civilisation to promote them to Mate (a co-owner)
+- [Lookout](https://osprey.build/in-depth/#lookout): chat alerts about nearby players
+- [Jukebox Lookout](https://osprey.build/in-depth/#jukebox-lookout): logs nearby player activity and outputs directional redstone signals
+- [Warden](https://osprey.build/in-depth/#warden): reinforces a 16 × 16 area with toggleable permissions; mates are exempt
+- [Ledger Chest](https://osprey.build/in-depth/#ledger-chest): a chest with a full transaction history
+- [Ledger Book](https://osprey.build/in-depth/#ledger-book): dropped when a Ledger Chest is broken; holds its transaction history
+- [Shop Barrel](https://osprey.build/in-depth/#shop-barrel): sell, restock and price items safely through a shop interface
+- [Feather](https://osprey.build/in-depth/#feather): a banished player's soul, claimed with the Banishment enchantment; holds them in the Nether, extendable with Vigil

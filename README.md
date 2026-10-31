@@ -9,7 +9,8 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 ```
 /
 ├── 404.html              Not-found page (root-absolute paths)
-├── robots.txt / sitemap.xml
+├── robots.txt / sitemap.xml / llms.txt
+├── <key>.txt              IndexNow key file (do not delete)
 ├── index.html              Main page (hero, 01–05 chapters, footer)
 ├── in-depth/index.html     "See Osprey in Depth" field guide (11 entries, 5 chapters)
 ├── css/main.css            Shared stylesheet, sectioned 00–17
@@ -107,6 +108,17 @@ Backgrounds use a fine monochrome grain and soft tonal light rather than graph-p
 - `404.html` is served by GitHub Pages for any missing path. It uses root-absolute URLs and `noindex`.
 - No analytics, tracking tags or cookies are used, so no consent banner is needed. If a Google tag is added later, EEA visitors require a consent banner with Google consent mode v2.
 - Search Console: `sc-domain:osprey.build` (domain property, DNS-verified).
+
+### AI search and crawlers
+
+- `robots.txt` explicitly allows search engines, AI search/answer crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, …) **and** AI training crawlers (GPTBot, Google-Extended, ClaudeBot, CCBot, …), by the owner's choice. To opt out of training later, change the training group to `Disallow: /`; this does not affect Google AI Overviews, which use Googlebot.
+- `llms.txt` is a plain-Markdown summary of the site for AI tools, written only from facts on the pages. Keep it in sync when content changes. (Google Search ignores it; it's a low-cost extra.)
+- IndexNow (Bing, Copilot and other participating engines): the key file is `/27ae939723451080c2e392135336e842.txt`. After changing pages, notify engines with:
+
+  ```sh
+  curl -s -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json' \
+    -d '{"host":"osprey.build","key":"27ae939723451080c2e392135336e842","keyLocation":"https://osprey.build/27ae939723451080c2e392135336e842.txt","urlList":["https://osprey.build/","https://osprey.build/in-depth/"]}'
+  ```
 
 ## Outstanding questions
 

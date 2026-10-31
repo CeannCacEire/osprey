@@ -1,5 +1,34 @@
 # osprey.build
+# Every crawler is welcome: search engines, AI search/answer crawlers and
+# AI training crawlers alike. The named groups below make that explicit.
+# (A crawler that matches a named group follows only that group.)
+
 User-agent: *
+Allow: /
+
+# Search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+Allow: /
+
+# AI search and answer crawlers
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+Allow: /
+
+# AI training crawlers (allowed by choice of the site owner)
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: ClaudeBot
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
 Allow: /
 
 Sitemap: https://osprey.build/sitemap.xml
