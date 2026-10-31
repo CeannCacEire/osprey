@@ -231,7 +231,7 @@
       .catch(function (err) {
         if (window.console) console.warn("[Osprey news] feed unavailable:", err && err.message ? err.message : err);
         list.textContent = "";
-        setState("error", "Dispatches could not be loaded right now. Announcements are always posted in the Discord.", true);
+        setState("error", "The news feed could not be loaded right now. Announcements are always posted in the Discord.", true);
       })
       .then(function () { if (timer) clearTimeout(timer); });
   }
