@@ -34,6 +34,6 @@ window.OSPREY_CONFIG = Object.freeze({
        (mixed content), so the bay shows the map as online with a button
        that opens it in a new tab. Switch this to the https:// address once
        the map is served over HTTPS and the embed turns on automatically. */
-  LIVE_WORLD_EMBED_URL: "http://104.204.216.32:9981/",
+  LIVE_WORLD_EMBED_URL: "https://map.osprey.build/",
   LIVE_WORLD_EMBED_TITLE: "Falcon live world map"
 });

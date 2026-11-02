@@ -595,7 +595,7 @@ em { font-style: normal; }
   background: var(--ink);
   box-shadow: 14px 14px 0 #050506;
 }
-.bay__bar, .bay__legend {
+.bay__bar {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem 1.5rem;
   padding: .75rem 1rem .7rem;
   font-size: .8125rem; text-transform: uppercase; letter-spacing: .14em;
@@ -633,10 +633,6 @@ em { font-style: normal; }
 .bay__line { font-family: var(--f-head); font-weight: 800; text-transform: uppercase; font-size: clamp(1.4rem, 3.4vw, 2.6rem); line-height: 1.05; margin-bottom: .75rem; max-width: 22ch; }
 .bay__sub { color: var(--grey-300); max-width: 34rem; margin: 0; }
 .bay__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--ink); }
-.bay__legend { border-top: 3px solid var(--grey-300); background: var(--char-2); justify-content: flex-start; }
-.bay__legend-title { margin: 0; color: var(--grey-400); }
-.bay__legend ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; }
-.bay__legend li { border: 1px dashed var(--grey-600); padding: .2rem .55rem .15rem; color: var(--grey-300); }
 .bay[data-state="link"] .bay__led,
 .bay[data-state="live"] .bay__led { background: var(--teal); box-shadow: 0 0 0 2px var(--ink), 0 0 0 3px var(--teal); }
 .bay[data-state="link"] .bay__screen { background: linear-gradient(rgba(11,11,12,.78), rgba(11,11,12,.86)), url("../assets/world/island-map-900.webp") center / cover no-repeat, var(--ink); }
