@@ -637,7 +637,11 @@ em { font-style: normal; }
 .bay__legend-title { margin: 0; color: var(--grey-400); }
 .bay__legend ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; }
 .bay__legend li { border: 1px dashed var(--grey-600); padding: .2rem .55rem .15rem; color: var(--grey-300); }
+.bay[data-state="link"] .bay__led,
 .bay[data-state="live"] .bay__led { background: var(--teal); box-shadow: 0 0 0 2px var(--ink), 0 0 0 3px var(--teal); }
+.bay[data-state="link"] .bay__screen { background: linear-gradient(rgba(11,11,12,.78), rgba(11,11,12,.86)), url("../assets/world/island-map-900.webp") center / cover no-repeat, var(--ink); }
+.bay[data-state="link"] .bay__emblem { display: none; }
+.bay__cta { margin-top: 1.5rem; }
 
 /* ===== 11 Dispatches noticeboard ======================================= */
 .board {

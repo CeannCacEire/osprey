@@ -84,34 +84,55 @@
   });
 
   /* ---------- Live World bay --------------------------------------------
-     Only acts when OSPREY_CONFIG.LIVE_WORLD_EMBED_URL is a real https URL.
-     Until then the static placeholder in the HTML stays as-is and nothing
-     is loaded. */
+     https URL  -> sandboxed iframe embed.
+     http URL   -> "map online" state with a button that opens it in a new
+                   tab (an http page can't be framed inside the https site).
+     empty      -> static "coming soon" placeholder stays as-is. */
   function mountLiveWorld() {
     var bay = document.querySelector("[data-live-world]");
     if (!bay) return;
     var raw = (cfg.LIVE_WORLD_EMBED_URL || "").trim();
     if (!raw) return;
-    var href;
-    try {
-      var u = new URL(raw);
-      if (u.protocol !== "https:") return;
-      href = u.href;
-    } catch (e) { return; }
+    var u;
+    try { u = new URL(raw); } catch (e) { return; }
+    if (u.protocol !== "https:" && u.protocol !== "http:") return;
 
     var screen = bay.querySelector("[data-live-world-screen]");
     var placeholder = bay.querySelector("[data-live-world-placeholder]");
-    var frame = document.createElement("iframe");
-    frame.src = href;
-    frame.title = cfg.LIVE_WORLD_EMBED_TITLE || "Osprey Core live world dashboard";
-    frame.loading = "lazy";
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    /* Adjust sandbox permissions to what the real dashboard needs. */
-    frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
-    frame.className = "bay__frame";
-    if (placeholder) placeholder.hidden = true;
-    screen.appendChild(frame);
-    bay.setAttribute("data-state", "live");
+    var status = bay.querySelector("[data-live-world-status]");
+    var canFrame = u.protocol === "https:" || location.protocol === "http:";
+
+    if (canFrame) {
+      var frame = document.createElement("iframe");
+      frame.src = u.href;
+      frame.title = cfg.LIVE_WORLD_EMBED_TITLE || "Falcon live world map";
+      frame.loading = "lazy";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
+      frame.className = "bay__frame";
+      if (placeholder) placeholder.hidden = true;
+      screen.appendChild(frame);
+      bay.setAttribute("data-state", "live");
+      if (status) status.lastChild.textContent = "Live map";
+      return;
+    }
+
+    /* Link-out mode */
+    bay.setAttribute("data-state", "link");
+    if (status) status.lastChild.textContent = "Live map online";
+    if (placeholder) {
+      var line = placeholder.querySelector(".bay__line");
+      var sub = placeholder.querySelector(".bay__sub");
+      if (line) line.textContent = "The live map is online.";
+      if (sub) sub.textContent = "Explore the island, its bases and who's on, in real time.";
+      var a = document.createElement("a");
+      a.className = "btn btn--outline btn--lg bay__cta";
+      a.href = u.href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.innerHTML = 'Open the live map<span class="visually-hidden"> (opens in a new tab)</span>';
+      placeholder.appendChild(a);
+    }
   }
   mountLiveWorld();
 

@@ -1,6 +1,6 @@
 # Osprey website
 
-Static two-page site for **Osprey**, an upcoming cross-compatible Vanilla+ Minecraft server built on Osprey Core. It's hosted on GitHub Pages at **https://osprey.build**.
+Static two-page site for **Osprey**, an upcoming cross-compatible Vanilla+ Minecraft server built on Falcon. It's hosted on GitHub Pages at **https://osprey.build**.
 
 The design is an "Osprey field manual": oversized poster type, numbered chapters, Minecraft-style inventory slots, item plates and a dispatch noticeboard. The palette is black, charcoal, grey and off-white, with teal (Vigil), lavender (Crystal) and a Nether red reserved for Banishment. **No yellow or gold is used anywhere**, and the artwork was recoloured to match (see "Processed artwork" below).
 
@@ -131,7 +131,7 @@ Backgrounds use a fine monochrome grain and soft tonal light rather than graph-p
      - "Ospreys" → "Osprey's"
      - "wont" → "won't"
      - "Its" → "It's"
-     - "Osprey-core"/"Osprey-Core" → "Osprey Core"
+     - "Osprey-core"/"Osprey-Core" → "Osprey Core" (since renamed to "Falcon", Nov 2026)
    - British spelling ("civilisation", "monopolise") is used throughout to match `items.txt`.
    - The meaning of every sentence is unchanged.
 5. **Core Pillars.** The supplied `Core-Pillars.txt` has three pillars: Finite Resources, Player Choice and No Learning Curve. All three are used, with only the light edits listed above (for example, "you would require several commands to utilize" became "would require several commands to use"). The 11 field guide entries use the text of `items.txt` exactly.

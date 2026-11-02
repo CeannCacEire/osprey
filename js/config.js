@@ -26,16 +26,14 @@ window.OSPREY_CONFIG = Object.freeze({
   NEWS_LIMIT: 5,
   NEWS_TIMEOUT_MS: 10000,
 
-  /* Live World / Osprey Core dashboard embed.
+  /* Live World / Falcon live map (squaremap).
      -----------------------------------------------------------------------
-     Leave this as "" until the real dashboard exists. While it is empty, the
-     Live World bay shows its "coming soon" placeholder and NO iframe loads.
-     When the dashboard is live, set the full https:// URL of its embeddable
-     page, e.g. LIVE_WORLD_EMBED_URL: "https://<real-dashboard-host>/embed".
-     (Placeholder shown only as a pattern; the real host is not known yet.)
-     main.js then swaps the placeholder for a sandboxed, lazy-loaded iframe.
-     If the dashboard uses a different technology (script widget, canvas app),
-     replace mountLiveWorld() in main.js instead. See README.md. */
-  LIVE_WORLD_EMBED_URL: "",
-  LIVE_WORLD_EMBED_TITLE: "Osprey Core live world dashboard"
+     - "" : the bay shows its "coming soon" placeholder and nothing loads.
+     - an https:// URL : main.js embeds it as a sandboxed, lazy-loaded iframe.
+     - an http:// URL  : browsers block http pages inside the https site
+       (mixed content), so the bay shows the map as online with a button
+       that opens it in a new tab. Switch this to the https:// address once
+       the map is served over HTTPS and the embed turns on automatically. */
+  LIVE_WORLD_EMBED_URL: "http://104.204.216.32:9981/",
+  LIVE_WORLD_EMBED_TITLE: "Falcon live world map"
 });
