@@ -17,9 +17,9 @@ hero:
 ## Getting started
 
 - [What is Osprey](/wiki/getting-started/what-is-osprey/): the server, the island and the idea behind it.
-- [Core Pillars](/wiki/getting-started/core-pillars/): Finite Resources, Player Choice and No Learning Curve.
-- [Falcon](/wiki/getting-started/falcon/): the backend that runs everything from your hotbar.
-- [How to join](/wiki/getting-started/how-to-join/): server addresses for Java and Bedrock.
+- [Core Pillars](/wiki/getting-started/core-pillars/): finite resources, player choice and no learning curve.
+- [Falcon](/wiki/getting-started/falcon/): the custom plugin that runs everything on the server,
+- [How to join](/wiki/getting-started/how-to-join/): server addresses for Java and Bedrock, and suggested mods. 
 
 ## Items and blocks
 
@@ -27,6 +27,6 @@ hero:
 - Civilisation: [Standard](/wiki/items/standard/), [Mate Shield](/wiki/items/mate-shield/)
 - Awareness and protection: [Lookout](/wiki/items/lookout/), [Jukebox Lookout](/wiki/items/jukebox-lookout/), [Warden](/wiki/items/warden/)
 - Transactions and trade: [Ledger Chest](/wiki/items/ledger-chest/), [Ledger Book](/wiki/items/ledger-book/), [Shop Barrel](/wiki/items/shop-barrel/)
-- Banishment: [Feather](/wiki/items/feather/)
+- Banishment: [Feather](/wiki/items/feather/), Nether Mechanics, and more
 
 Questions, or spotted something out of date? Ask in the [Osprey Discord](https://discord.gg/4EnjKHUG4S).
