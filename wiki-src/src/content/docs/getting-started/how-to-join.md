@@ -11,7 +11,7 @@ Osprey has not launched yet. Keep these details for launch day and follow the [D
 
 ## Java Edition
 
-- Server address: `play.osprey.build`
+- Server address: `osprey.build`
 
 ## Bedrock Edition
 

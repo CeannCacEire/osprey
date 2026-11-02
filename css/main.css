@@ -330,6 +330,7 @@ em { font-style: normal; }
   padding: .2rem .6rem; color: var(--paper);
 }
 .hero__address a { color: var(--teal); }
+.hero__addr { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; }
 
 .hero__art { position: relative; align-self: stretch; min-height: 34rem; }
 .hero__emblem {

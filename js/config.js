@@ -13,7 +13,7 @@ window.OSPREY_CONFIG = Object.freeze({
 
   /* Server connection details. No Java port is published (the default applies). */
   SERVER: Object.freeze({
-    JAVA_ADDRESS: "play.osprey.build",
+    JAVA_ADDRESS: "osprey.build",
     BEDROCK_ADDRESS: "play.osprey.build",
     BEDROCK_PORT: "19132"
   }),

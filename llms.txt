@@ -8,7 +8,7 @@ Key facts, taken from the site:
 - Status: pre-launch. Announcements are posted in the Discord.
 - World: a custom 5000 × 5000 island, with nothing but ocean at the border. All biomes and structures are contained within it. Resources won't last forever.
 - Editions: Java, with native Bedrock compatibility
-- Server address (Java and Bedrock): play.osprey.build. Bedrock port: 19132.
+- Server address: Java osprey.build; Bedrock play.osprey.build, port 19132.
 - Backend: Falcon, which automates features that would take several commands on other servers and builds everything natively on vanilla gameplay. There are no commands to learn; players use the Crystal item on their hotbar (right-click to open).
 - Core pillars: Finite Resources, Player Choice (players decide how to play), No Learning Curve.
 - Discord: https://discord.gg/4EnjKHUG4S
