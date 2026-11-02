@@ -17,6 +17,7 @@ Key facts, taken from the site:
 
 - [Home](https://osprey.build/): what Osprey is, the core pillars, connection details and the news feed
 - [See Osprey in Depth](https://osprey.build/in-depth/): field guide to Falcon's 11 custom blocks and items
+- [Osprey Wiki](https://osprey.build/wiki/): the official wiki, maintained by the Osprey admins (getting started, Falcon, and a page for every custom block and item)
 
 ## Custom blocks and items (Falcon)
 

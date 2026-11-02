@@ -1,0 +1,162 @@
+/* Osprey wiki theme for Starlight.
+   Same palette as the main site: black / charcoal / grey / off-white with
+   teal (Vigil), lavender (Crystal) and a Nether red. No yellow or gold anywhere,
+   so Starlight's orange (used by "caution" asides and badges) is remapped too.
+   Fonts are loaded from the main site's /fonts/ folder. */
+
+@font-face {
+  font-family: "Osprey Wordmark";
+  src: url("/fonts/cadass-script-demo.ttf") format("truetype");
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: "Cinzel";
+  src: url("/fonts/cinzel-variable.woff2") format("woff2-variations"),
+       url("/fonts/cinzel-variable.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel";
+  src: url("/fonts/geist-pixel-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---- Dark theme (default) ---------------------------------------------- */
+:root {
+  --sl-font: "Geist Pixel", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sl-font-mono: "Geist Pixel", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --osprey-heading: "Cinzel", "Trajan Pro", Georgia, serif;
+
+  --sl-color-accent-low: #0f2f31;
+  --sl-color-accent: #2bd0cf;
+  --sl-color-accent-high: #c9f4f3;
+
+  --sl-color-white: #f7f7f5;
+  --sl-color-gray-1: #ebebea;
+  --sl-color-gray-2: #c6c6c6;
+  --sl-color-gray-3: #8d9096;
+  --sl-color-gray-4: #55585e;
+  --sl-color-gray-5: #2e3034;
+  --sl-color-gray-6: #17181a;
+  --sl-color-black: #0b0b0c;
+
+  --sl-color-orange-low: #3a1714;
+  --sl-color-orange: #e0574d;
+  --sl-color-orange-high: #f6c9c5;
+  --sl-color-red-low: #3a1714;
+  --sl-color-red: #e0574d;
+  --sl-color-red-high: #f6c9c5;
+  --sl-color-purple-low: #23214a;
+  --sl-color-purple: #a7a3ff;
+  --sl-color-purple-high: #e2e0ff;
+  --sl-color-blue-low: #0f2f31;
+  --sl-color-blue: #2bd0cf;
+  --sl-color-blue-high: #c9f4f3;
+  --sl-color-green-low: #0f2f31;
+  --sl-color-green: #2bd0cf;
+  --sl-color-green-high: #c9f4f3;
+}
+
+/* ---- Light theme -------------------------------------------------------- */
+:root[data-theme="light"] {
+  --sl-color-accent-low: #d5efee;
+  --sl-color-accent: #0d6b72;
+  --sl-color-accent-high: #083f43;
+
+  --sl-color-white: #0b0b0c;
+  --sl-color-gray-1: #17181a;
+  --sl-color-gray-2: #2e3034;
+  --sl-color-gray-3: #55585e;
+  --sl-color-gray-4: #8d9096;
+  --sl-color-gray-5: #c6c6c6;
+  --sl-color-gray-6: #e2e2e0;
+  --sl-color-gray-7: #ebebea;
+  --sl-color-black: #f7f7f5;
+
+  --sl-color-orange-low: #f6dcd9;
+  --sl-color-orange: #9e2a22;
+  --sl-color-orange-high: #5a1813;
+  --sl-color-red-low: #f6dcd9;
+  --sl-color-red: #9e2a22;
+  --sl-color-red-high: #5a1813;
+  --sl-color-purple-low: #e2e0ff;
+  --sl-color-purple: #4d47b8;
+  --sl-color-purple-high: #2b277a;
+  --sl-color-blue-low: #d5efee;
+  --sl-color-blue: #0d6b72;
+  --sl-color-blue-high: #083f43;
+  --sl-color-green-low: #d5efee;
+  --sl-color-green: #0d6b72;
+  --sl-color-green-high: #083f43;
+}
+
+/* ---- Site title: wordmark + tag ---------------------------------------- */
+.osprey-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  color: var(--sl-color-white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.osprey-wordmark {
+  font-family: "Osprey Wordmark", "Brush Script MT", "Segoe Script", cursive;
+  font-size: 1.9rem;
+  line-height: 1;
+  text-transform: none;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.osprey-tag {
+  font-family: var(--osprey-heading);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+  border: 1px solid var(--sl-color-gray-4);
+  padding: 0.15rem 0.45rem 0.1rem;
+}
+
+/* ---- Typography -------------------------------------------------------- */
+h1, h2, h3, h4,
+.sl-markdown-content :is(h1, h2, h3, h4),
+.hero h1,
+.sidebar-content summary .group-label {
+  font-family: var(--osprey-heading);
+  letter-spacing: 0.02em;
+}
+#_top { font-family: var(--osprey-heading); text-transform: uppercase; letter-spacing: 0.04em; }
+.sl-markdown-content h2 { text-transform: uppercase; letter-spacing: 0.06em; }
+.sl-markdown-content { line-height: 1.75; }
+.sidebar-content .large { font-family: var(--osprey-heading); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }
+
+/* Square corners, like the main site's inventory slots */
+:root { --sl-nav-pad-x: 1.5rem; }
+.sl-markdown-content img { border-radius: 0; }
+.sl-link-button, button, input, .card, starlight-tabs, .expressive-code { border-radius: 0 !important; }
+
+/* Item art: pixel-perfect, framed like an inventory slot */
+.sl-markdown-content img[src*="/assets/items/"],
+.sl-markdown-content img[src*="/wiki/images/"] {
+  image-rendering: pixelated;
+  background: var(--sl-color-gray-6);
+  border: 2px solid var(--sl-color-gray-5);
+  padding: 0.75rem;
+  max-width: 160px;
+}
+
+/* Plain code blocks (syntax highlighting is off, so no stray colours) */
+.sl-markdown-content pre {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  padding: 1rem;
+  overflow-x: auto;
+}
+.sl-markdown-content code { font-family: var(--sl-font-mono); }
+
+/* Splash hero */
+.hero h1 { text-transform: uppercase; letter-spacing: 0.06em; }

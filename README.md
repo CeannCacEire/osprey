@@ -28,15 +28,27 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 └── .nojekyll               Serve files as-is on GitHub Pages
 ```
 
-Both pages use relative paths only (`css/…` on the home page, `../css/…` on `/in-depth/`), so each page works when opened directly at `https://osprey.build/` or `https://osprey.build/in-depth/`. There's no SPA routing and no build step.
+Both pages use relative paths only (`css/…` on the home page, `../css/…` on `/in-depth/`), so each page works when opened directly at `https://osprey.build/` or `https://osprey.build/in-depth/`. There's no SPA routing. The main pages need no build step; only the wiki is built.
 
 ## Deploying on GitHub Pages
 
 1. Push the repository contents to the `main` branch of `CeannCacEire/osprey`.
-2. In **Settings → Pages**, the source stays as "Deploy from a branch → `main` / root" and the custom domain stays as `osprey.build` (kept in `CNAME`). No DNS changes are needed.
-3. Pages republishes automatically within a minute or two.
+2. **Settings → Pages** uses **GitHub Actions** as the source (`.github/workflows/pages.yml`). The workflow copies the static site and builds the wiki into `/wiki/`. The custom domain stays as `osprey.build` (kept in `CNAME`).
+3. Each push republishes automatically within a minute or two (see the **Actions** tab).
 
 To preview locally, run `python3 -m http.server 8000` in the repo root, then open `http://localhost:8000/`. Opening the HTML straight from disk (`file://`) works for layout, but browsers may block the font files and the News feed there.
+
+## Wiki (osprey.build/wiki)
+
+The wiki is an [Astro Starlight](https://starlight.astro.build/) site in `wiki-src/`, edited by admins through [Sveltia CMS](https://sveltiacms.app/).
+
+- **Pages:** `wiki-src/src/content/docs/` (Markdown). `getting-started/` and `items/` each become a sidebar group, ordered by `sidebar.order`.
+- **Admin editor:** https://osprey.build/wiki/admin/ → "Sign In with GitHub". Only GitHub accounts with write access to this repo can save. Add admins in **Settings → Collaborators**.
+- **Login service:** the `sveltia-cms-auth` Cloudflare Worker (`https://sveltia-cms-auth.genocchi.workers.dev`), backed by a GitHub OAuth app. Its URL is `backend.base_url` in `wiki-src/public/admin/config.yml`.
+- **Uploads:** images added in the editor go to `wiki-src/public/images/uploads/` and are served from `/wiki/images/uploads/`.
+- **Publishing:** every save is a commit to `main`. `.github/workflows/pages.yml` then builds the wiki and deploys the whole site, so changes go live in a minute or two.
+- **Local preview:** `cd wiki-src && npm ci && npm run dev` (Node 22.12+).
+- The wiki uses the main site's `/fonts/` and `/assets/` paths, so fonts and item art only show when it's served alongside the main site.
 
 ## Font roles
 

@@ -1,0 +1,95 @@
+# Sveltia CMS configuration for the Osprey wiki (https://osprey.build/wiki/admin/).
+# Docs: https://sveltiacms.app/en/docs
+backend:
+  name: github
+  repo: CeannCacEire/osprey
+  branch: main
+  # Cloudflare Worker that handles "Sign in with GitHub" (sveltia-cms-auth).
+  base_url: https://sveltia-cms-auth.genocchi.workers.dev
+  commit_messages:
+    create: "Wiki: create {{collection}} “{{slug}}”"
+    update: "Wiki: update {{collection}} “{{slug}}”"
+    delete: "Wiki: delete {{collection}} “{{slug}}”"
+    uploadMedia: "Wiki: upload “{{path}}”"
+    deleteMedia: "Wiki: delete “{{path}}”"
+
+site_url: https://osprey.build/wiki/
+display_url: https://osprey.build/wiki/
+logo:
+  src: /assets/brand/osprey-mark-light.png
+
+# Images uploaded in the editor are stored here and served from /wiki/images/uploads/.
+media_folder: wiki-src/public/images/uploads
+public_folder: /wiki/images/uploads
+
+output:
+  omit_empty_optional_fields: true
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: home
+    label: Home page
+    files:
+      - name: index
+        label: Wiki home page
+        file: wiki-src/src/content/docs/index.md
+        preview_path: ""
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: string, hint: "One sentence. Shown in search results." }
+          - { label: Template, name: template, widget: hidden, default: splash }
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Tagline, name: tagline, widget: text }
+              - label: Buttons
+                name: actions
+                widget: list
+                fields:
+                  - { label: Text, name: text, widget: string }
+                  - { label: Link, name: link, widget: string }
+                  - { label: Icon, name: icon, widget: string, required: false }
+                  - { label: Style, name: variant, widget: select, options: [primary, secondary, minimal], default: primary }
+          - { label: Body, name: body, widget: markdown }
+
+  - name: getting-started
+    label: Getting started
+    label_singular: Getting started page
+    description: Pages listed under "Getting started" in the wiki sidebar.
+    folder: wiki-src/src/content/docs/getting-started
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "getting-started/{{slug}}/"
+    sortable_fields: [title, sidebar.order]
+    fields: &page_fields
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string, required: false, hint: "One sentence. Shown in search results." }
+      - label: Sidebar
+        name: sidebar
+        widget: object
+        required: false
+        fields:
+          - { label: Order, name: order, widget: number, value_type: int, required: false, hint: "Position in the sidebar. Lower numbers come first." }
+          - { label: Sidebar label, name: label, widget: string, required: false, hint: "Optional. Leave blank to use the title." }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: items
+    label: Items and blocks
+    label_singular: Item or block
+    description: Pages listed under "Items and blocks" in the wiki sidebar.
+    folder: wiki-src/src/content/docs/items
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "items/{{slug}}/"
+    sortable_fields: [title, sidebar.order]
+    fields: *page_fields
