@@ -22,6 +22,7 @@ export default defineConfig({
       customCss: ["./src/styles/osprey.css"],
       components: {
         SiteTitle: "./src/components/SiteTitle.astro",
+        Head: "./src/components/Head.astro",
       },
       head: [
         { tag: "meta", attrs: { property: "og:image", content: "https://osprey.build/assets/brand/og-image.png" } },

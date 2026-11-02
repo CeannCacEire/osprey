@@ -32,3 +32,24 @@ Key facts, taken from the site:
 - [Ledger Book](https://osprey.build/in-depth/#ledger-book): dropped when a Ledger Chest is broken; holds its transaction history
 - [Shop Barrel](https://osprey.build/in-depth/#shop-barrel): sell, restock and price items safely through a shop interface
 - [Feather](https://osprey.build/in-depth/#feather): a banished player's soul, claimed with the Banishment enchantment; holds them in the Nether, extendable with Vigil
+
+## Osprey Wiki
+
+The official wiki, maintained by the Osprey admins. Pages may be updated more often than the field guide.
+
+- [Osprey Wiki home](https://osprey.build/wiki/): index of every wiki page
+- [What is Osprey](https://osprey.build/wiki/getting-started/what-is-osprey/): the server, the 5000 × 5000 island and the idea behind it
+- [Core Pillars](https://osprey.build/wiki/getting-started/core-pillars/): Finite Resources, Player Choice and No Learning Curve
+- [Falcon](https://osprey.build/wiki/getting-started/falcon/): the server backend; everything runs from the Crystal, with no commands to learn
+- [How to join](https://osprey.build/wiki/getting-started/how-to-join/): Java osprey.build; Bedrock play.osprey.build, port 19132 (pre-launch, coming soon)
+- [Crystal](https://osprey.build/wiki/items/crystal/): the all-in-one hotbar interface for Vigil, your home, your mates and more
+- [Vigil](https://osprey.build/wiki/items/vigil/): fuels Osprey; replaces XP and is used to craft and maintain custom blocks and items
+- [Standard](https://osprey.build/wiki/items/standard/): placed in the company of friends to establish a civilisation
+- [Mate Shield](https://osprey.build/wiki/items/mate-shield/): dropped to a friend in your civilisation to promote them to Mate (a co-owner)
+- [Lookout](https://osprey.build/wiki/items/lookout/): chat alerts about nearby players, loitering and trespassing
+- [Jukebox Lookout](https://osprey.build/wiki/items/jukebox-lookout/): logs nearby player activity and outputs directional redstone signals
+- [Warden](https://osprey.build/wiki/items/warden/): reinforces a 16 × 16 area with toggleable permissions; mates are exempt; Wardens can be stacked
+- [Ledger Chest](https://osprey.build/wiki/items/ledger-chest/): a chest with a full transaction history (shift-click to view)
+- [Ledger Book](https://osprey.build/wiki/items/ledger-book/): dropped when a Ledger Chest is broken; holds its full transaction history
+- [Shop Barrel](https://osprey.build/wiki/items/shop-barrel/): sell, restock and price items safely through a shop interface
+- [Feather](https://osprey.build/wiki/items/feather/): a banished player's soul, claimed with the Banishment enchantment; holds them in the Nether, extendable with Vigil

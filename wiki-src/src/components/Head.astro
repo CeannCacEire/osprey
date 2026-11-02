@@ -1,0 +1,54 @@
+---
+// Starlight's default <head>, plus JSON-LD structured data for every wiki page:
+// - every page: WebPage (part of the osprey.build WebSite) + BreadcrumbList
+// - the wiki home is also marked as a CollectionPage
+// Data comes only from each page's own title and description.
+import Default from "@astrojs/starlight/components/Head.astro";
+
+const route = Astro.locals.starlightRoute;
+const { entry } = route;
+const site = "https://osprey.build";
+const url = new URL(Astro.url.pathname, site).href;
+const title = entry.data.title;
+const description = entry.data.description;
+const isHome = route.id === "" || route.id === "index";
+
+const crumbs = [
+  { name: "Osprey", item: `${site}/` },
+  { name: "Wiki", item: `${site}/wiki/` },
+];
+if (!isHome) crumbs.push({ name: title, item: url });
+const breadcrumb = {
+  "@type": "BreadcrumbList",
+  itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: c.item })),
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": `${site}/#website`,
+  name: "Osprey",
+  url: `${site}/`,
+};
+
+const page: Record<string, unknown> = {
+  "@type": isHome ? ["WebPage", "CollectionPage"] : "WebPage",
+  "@id": `${url}#webpage`,
+  url,
+  name: isHome ? "Osprey Wiki" : `${title} | Osprey Wiki`,
+  headline: title,
+  inLanguage: "en",
+  isPartOf: { "@id": `${site}/#website` },
+  breadcrumb: { "@id": `${url}#breadcrumb` },
+  image: `${site}/assets/brand/og-image.png`,
+  publisher: { "@id": `${site}/#org` },
+};
+if (description) page.description = description;
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [website, page, { ...breadcrumb, "@id": `${url}#breadcrumb` }],
+};
+const json = JSON.stringify(graph).replace(/</g, "\\u003c");
+---
+<Default />
+<script type="application/ld+json" is:inline set:html={json} />
