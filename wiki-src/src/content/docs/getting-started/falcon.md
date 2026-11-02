@@ -1,12 +1,10 @@
 ---
 title: Falcon
-description: Falcon is Osprey's server backend. Everything runs from the Crystal on your hotbar, with no commands to learn.
+description: Falcon is Osprey's server custom coded core. Everything runs in the backend, and it controls all functions of Osprey.
 sidebar:
   order: 3
 ---
 
-Falcon is the server backend. It automates features that would take several commands elsewhere, and builds everything natively on vanilla gameplay.
+Falcon is an all in one solution to the problems that plague 99% of modern Minecraft servers. Falcon is an anticheat, player tracking system, detection, online panel, custom item/enchantment framework, lag preventer, Discord Integration, and runs everything else on Osprey. 
 
-You run it all from the [Crystal](/wiki/items/crystal/) on your hotbar: right-click to open it. There are no commands to learn.
-
-Falcon's custom blocks and items are listed under [Items and blocks](/wiki/items/crystal/).
+It works by logging every single packet on the server, and using magic, it can determine more things about you than you know about yourself! Currently it's workings are top secret, but it may be open sourced one day!
