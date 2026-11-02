@@ -16,7 +16,10 @@ Osprey has not launched yet. Keep these details for launch day and follow the [D
 ## Bedrock Edition
 
 - Server address: `play.osprey.build`
-- Port: `19132`
+
+Port: `19132`
+
+Eventually there will be guides on how to connect via different platforms here. 
 
 ## Discord
 
