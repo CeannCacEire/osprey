@@ -61,6 +61,14 @@ osprey-ads-watcher (cron */15) ────────────────�
 7. On Subreddits, record each community's rules, then add watchers. Subreddits
    without rules are always blocked.
 
+## Current deployment
+
+- Cloudflare account `ec21f61d9175d6ecdc6a91a0ec6a6452`, D1 `osprey-ads` (`c6afcd01-7376-4150-b695-7ecc9b8f805a`),
+  queues `osprey-ads-submissions` and `osprey-ads-submissions-dlq`.
+- GitHub secrets already set: `CLOUDFLARE_ACCOUNT_ID`, `TOKEN_ENC_KEY`, `ADMIN_SETUP_TOKEN`.
+  Add `CLOUDFLARE_API_TOKEN` to let the workflow redeploy on every push. Keep `TOKEN_ENC_KEY`
+  unchanged: rotating it makes the stored Reddit refresh token unreadable (reconnect Reddit if you do).
+
 ## Local development
 
 ```

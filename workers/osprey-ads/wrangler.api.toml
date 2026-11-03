@@ -13,7 +13,7 @@ REDDIT_USERNAME = ""                                          # your Reddit user
 [[d1_databases]]
 binding = "DB"
 database_name = "osprey-ads"
-database_id = "00000000-0000-0000-0000-000000000000"          # filled in by .github/workflows/ads-workers.yml
+database_id = "c6afcd01-7376-4150-b695-7ecc9b8f805a"
 migrations_dir = "migrations"
 
 [[queues.producers]]
