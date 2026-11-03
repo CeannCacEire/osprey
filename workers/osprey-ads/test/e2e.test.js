@@ -14,6 +14,7 @@ function mockReddit(url, init = {}) {
   const u = new URL(url);
   const h = { "content-type": "application/json", "x-ratelimit-remaining": rateHeaders.remaining, "x-ratelimit-used": rateHeaders.used, "x-ratelimit-reset": rateHeaders.reset };
   const ok = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: h });
+  if (u.hostname === "mock.reddit" && u.pathname === "/token") lastTokenAuth = init.headers.Authorization;
   if (u.hostname === "mock.reddit" && u.pathname === "/token") return ok({ access_token: "AT" + Date.now(), refresh_token: "RT1", expires_in: 3600, scope: "identity read submit" });
   if (u.hostname !== "mock.oauth") return realFetch(url, init);
   redditCalls.push({ method: init.method, path: u.pathname, body: init.body ? Object.fromEntries(new URLSearchParams(String(init.body))) : null, ua: init.headers["User-Agent"] });
@@ -28,7 +29,7 @@ function mockReddit(url, init = {}) {
   return ok({ error: "unmocked " + u.pathname }, 404);
 }
 
-let token;
+let token, lastTokenAuth;
 async function call(method, path, body, auth = true) {
   const res = await api.fetch(new Request("https://api.test" + path, {
     method, headers: { "Content-Type": "application/json", Origin: "https://osprey.build", ...(auth && token ? { Authorization: "Bearer " + token } : {}) },
@@ -221,4 +222,43 @@ test("hand-off mode: approval required, hash checked, permalink recorded", async
   const dash = await call("GET", "/api/dashboard");
   assert.equal(dash.status, 200);
   assert.ok(dash.data.cooldowns.length >= 3);
+});
+
+test("reddit app credentials entered on the dashboard: encrypted, write-only, used by every Worker", async () => {
+  const bare = { ...env }; delete bare.REDDIT_CLIENT_ID; delete bare.REDDIT_CLIENT_SECRET; delete bare.REDDIT_USERNAME;
+  const call2 = async (method, path, body) => {
+    const res = await api.fetch(new Request("https://api.test" + path, { method, headers: { "Content-Type": "application/json", Origin: "https://osprey.build", Authorization: "Bearer " + token }, body: body ? JSON.stringify(body) : undefined }), bare);
+    return { status: res.status, data: await res.json().catch(() => null) };
+  };
+  // With Worker secrets present, the dashboard can't override them.
+  assert.equal((await call("PUT", "/api/reddit/app", { client_id: "abcdefghij1234", client_secret: "s".repeat(30), username: "osprey_admin" })).status, 409);
+  assert.equal((await call2("GET", "/api/reddit/status")).data.configured, false);
+  assert.equal((await call2("POST", "/api/reddit/connect")).status, 409);
+  assert.equal((await call2("PUT", "/api/reddit/app", { client_id: "bad id", client_secret: "x", username: "u" })).status, 400);
+  const secret = "SeCrEt_" + "z".repeat(24);
+  const saved = await call2("PUT", "/api/reddit/app", { client_id: "AppId_1234567890", client_secret: secret, username: "u/osprey_admin" });
+  assert.equal(saved.status, 200);
+  assert.ok(!JSON.stringify(saved.data).includes(secret) && !JSON.stringify(saved.data).includes("AppId_1234567890"));
+  const row = await env.DB.prepare("SELECT * FROM reddit_app").first();
+  assert.equal(row.username, "osprey_admin"); assert.ok(!row.client_secret_enc.includes(secret));
+  const st = (await call2("GET", "/api/reddit/status")).data;
+  assert.equal(st.configured, true); assert.equal(st.app.source, "dashboard"); assert.equal(st.app.client_id_hint, "AppI");
+  assert.ok(!JSON.stringify(st).includes(secret));
+  const audit = await env.DB.prepare("SELECT * FROM audit_log WHERE action = 'reddit_app.saved'").all();
+  assert.ok(audit.results.length && !JSON.stringify(audit.results).includes(secret));
+  // OAuth uses the saved app.
+  const c = await call2("POST", "/api/reddit/connect");
+  const u = new URL(c.data.url); assert.equal(u.searchParams.get("client_id"), "AppId_1234567890");
+  const cb = await api.fetch(new Request(`https://api.test/api/reddit/callback?state=${u.searchParams.get("state")}&code=abc`), bare);
+  assert.match(cb.headers.get("location"), /reddit=connected/);
+  assert.equal(lastTokenAuth, "Basic " + btoa("AppId_1234567890:" + secret));
+  assert.match(redditCalls.at(-1).ua, /by \/u\/osprey_admin/);
+  // Watcher and submitter load the same app (withRedditApp).
+  const { withRedditApp } = await import("../src/lib/reddit.js");
+  const e2 = await withRedditApp(bare);
+  assert.equal(e2.REDDIT_CLIENT_SECRET, secret); assert.equal(e2.DB, bare.DB);
+  // A different client ID disconnects the account (its tokens belong to the old app).
+  assert.ok(await env.DB.prepare("SELECT 1 FROM reddit_accounts").first());
+  assert.equal((await call2("PUT", "/api/reddit/app", { client_id: "OtherApp_123456", client_secret: secret, username: "osprey_admin" })).status, 200);
+  assert.equal(await env.DB.prepare("SELECT 1 FROM reddit_accounts").first(), null);
 });

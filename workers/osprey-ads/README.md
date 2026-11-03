@@ -49,8 +49,10 @@ osprey-ads-watcher (cron */15) ────────────────�
 2. **Reddit app** (only if your account has approved Data API access): create a
    "web app" at <https://www.reddit.com/prefs/apps> with redirect URI
    `https://osprey-ads-api.genocchi.workers.dev/api/reddit/callback`.
-   Add secrets `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET`, and a repository
-   **variable** `REDDIT_USERNAME` (used in the User-Agent).
+   Enter the client ID, secret and username in the dashboard's "Reddit account" panel
+   (stored in D1 table `reddit_app`, secret encrypted with `TOKEN_ENC_KEY`). Alternatively
+   set GitHub secrets `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET` and variable
+   `REDDIT_USERNAME`; Worker secrets take precedence over the dashboard values.
 3. **Encryption key**: `openssl rand -base64 32` → secret `TOKEN_ENC_KEY`.
 4. **First admin**: pick a long random value → secret `ADMIN_SETUP_TOKEN`.
 5. Run the "Deploy /ads workers" workflow (Actions tab). It finds or creates the D1

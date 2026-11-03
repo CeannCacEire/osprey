@@ -56,20 +56,48 @@ function opportunities(d, tpls, rerender) {
   return h("section", { class: "panel" }, h("div", { class: "panel__head" }, h("h2", { text: "Recent opportunities" }), h("a", { href: "/ads/subreddits/#watchers", class: "small", text: `${d.watchers.filter((w) => w.enabled).length} watcher(s)` })), list, h("hr", { class: "divider" }), add);
 }
 
+function appForm(d, rerender, onCancel) {
+  const app = d.reddit.app || {};
+  const id = h("input", { name: "client_id", autocomplete: "off", spellcheck: false, required: true, placeholder: "the string under the app's name" });
+  const secret = h("input", { name: "client_secret", type: "password", autocomplete: "off", required: true, placeholder: "shown next to “secret”" });
+  const user = h("input", { name: "username", autocomplete: "off", spellcheck: false, required: true, value: app.username || "", placeholder: "without u/" });
+  const save = h("button", { class: "btn btn--primary", type: "submit", text: "Save app" });
+  const form = h("form", { class: "stack", onsubmit: async (e) => {
+    e.preventDefault(); save.disabled = true;
+    try {
+      const r = await api("/api/reddit/app", { method: "PUT", body: { client_id: id.value, client_secret: secret.value, username: user.value } });
+      secret.value = ""; toast(`Saved the Reddit app for u/${r.username}.`); rerender();
+    } catch (x) { fail(x); save.disabled = false; }
+  } },
+    h("p", { class: "muted small", text: "From reddit.com/prefs/apps, a “web app” owned by the account Osprey posts as. The secret is encrypted on save and never shown again." }),
+    h("div", { class: "alert alert--info small" }, h("span", { text: "The app's redirect URI must be exactly: " }), h("code", { class: "hash", text: app.redirect_uri || "https://osprey-ads-api.genocchi.workers.dev/api/reddit/callback" })),
+    h("label", {}, "Client ID", id), h("label", {}, "Client secret", secret), h("label", {}, "Reddit username", user),
+    h("div", { class: "row row--end" }, onCancel ? h("button", { class: "btn btn--ghost", type: "button", text: "Cancel", onclick: onCancel }) : null, save));
+  return form;
+}
+
 function redditPanel(d, rerender) {
-  const r = d.reddit;
+  const r = d.reddit, app = r.app || {};
+  const panel = h("section", { class: "panel" }, h("div", { class: "panel__head" }, h("h2", { text: "Reddit account" })));
+  const appLine = r.configured ? h("div", { class: "row small muted" },
+    h("span", { text: `App ${app.client_id_hint ? app.client_id_hint + "…" : ""} · User-Agent by u/${app.username || "unknown"}` + (app.source === "worker" ? " · set as Worker secrets" : "") }),
+    app.source === "dashboard" ? h("button", { class: "btn btn--sm btn--ghost", type: "button", text: "Change app", onclick: async () => {
+      if (r.connected && !(await ask({ title: "Change the Reddit app?", message: "Saving a different client ID disconnects the current Reddit account; you'll connect again with the new app." }))) return;
+      panel.replaceChildren(panel.firstChild, appForm(d, rerender, rerender));
+    } }) : null) : null;
   let body;
-  if (!r.configured) body = h("div", { class: "alert alert--info" }, h("span", { text: "The Reddit app credentials aren't set on the Worker yet (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, TOKEN_ENC_KEY). See workers/osprey-ads/README.md." }));
+  if (!r.configured) body = appForm(d, rerender);
   else if (!r.connected) body = h("div", { class: "stack" }, h("p", { class: "muted small", text: "Connect the Reddit account Osprey posts as. Scopes requested: identity, read, submit." }),
-    h("button", { class: "btn btn--primary", text: "Connect Reddit", onclick: async () => { try { location.href = (await api("/api/reddit/connect", { method: "POST" })).url; } catch (x) { fail(x); } } }));
+    h("button", { class: "btn btn--primary", text: "Connect Reddit", onclick: async () => { try { location.href = (await api("/api/reddit/connect", { method: "POST" })).url; } catch (x) { fail(x); } } }), appLine);
   else body = h("div", { class: "stack" },
     h("div", { class: "row" }, chip("connected", "green"), h("strong", { text: "u/" + (r.account.username || "unknown") }), h("span", { class: "muted small", text: "since " + when(r.account.connected_at) })),
-    h("div", { class: "muted small", text: "Scopes: " + (r.account.scopes || "") }),
+    h("div", { class: "muted small", text: "Scopes: " + (r.account.scopes || "") }), appLine,
     h("div", { class: "row" }, h("button", { class: "btn btn--sm btn--danger", text: "Disconnect", onclick: async () => {
       if (!(await ask({ title: "Disconnect Reddit?", message: "Queued submissions will fail until you reconnect.", confirmLabel: "Disconnect", danger: true }))) return;
       try { await api("/api/reddit/disconnect", { method: "POST" }); rerender(); } catch (x) { fail(x); }
     } })));
-  return h("section", { class: "panel" }, h("div", { class: "panel__head" }, h("h2", { text: "Reddit account" })), body);
+  panel.append(body);
+  return panel;
 }
 
 function controls(d, rerender) {

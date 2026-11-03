@@ -26,6 +26,47 @@ export const redirectUri = (env) => env.REDDIT_REDIRECT_URI || `${env.API_ORIGIN
 export const userAgent = (env) =>
   `web:build.osprey.ads:v1.0 (by /u/${env.REDDIT_USERNAME || "unknown"})`;
 
+/**
+ * Fill in the Reddit app credentials saved from the dashboard (D1 reddit_app) when the
+ * Worker has no REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET secrets. Returns a new env object.
+ */
+export async function withRedditApp(env) {
+  if (!env.DB || (env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET && env.REDDIT_USERNAME)) return env;
+  let row = null;
+  try { row = await env.DB.prepare("SELECT client_id, client_secret_enc, username FROM reddit_app WHERE id = 1").first(); } catch { return env; }
+  if (!row) return env;
+  const out = Object.assign(Object.create(Object.getPrototypeOf(env)), env);
+  if (!(env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET) && env.TOKEN_ENC_KEY) {
+    try { out.REDDIT_CLIENT_ID = row.client_id; out.REDDIT_CLIENT_SECRET = await decrypt(env, row.client_secret_enc); } catch { /* wrong key: stay unconfigured */ }
+  }
+  if (!env.REDDIT_USERNAME && row.username) out.REDDIT_USERNAME = row.username;
+  if (!(env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET)) out.REDDIT_APP_SOURCE = "dashboard";
+  return out;
+}
+
+export async function saveRedditApp(env, db, { client_id, client_secret, username }, adminId) {
+  if (!env.TOKEN_ENC_KEY) throw new HttpError(500, "TOKEN_ENC_KEY isn't set on the Worker.");
+  const id = String(client_id || "").trim(), secret = String(client_secret || "").trim();
+  const user = String(username || "").trim().replace(/^\/?u\//i, "");
+  if (!/^[A-Za-z0-9_-]{10,40}$/.test(id)) throw new HttpError(400, "That doesn't look like a Reddit client ID (the string under the app name).");
+  if (!/^[A-Za-z0-9_-]{20,60}$/.test(secret)) throw new HttpError(400, "That doesn't look like a Reddit client secret.");
+  if (!/^[A-Za-z0-9_-]{3,20}$/.test(user)) throw new HttpError(400, "Enter the Reddit username that owns the app, without u/.");
+  await db.prepare(`INSERT INTO reddit_app (id, client_id, client_secret_enc, username, updated_by, updated_at) VALUES (1, ?, ?, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET client_id=excluded.client_id, client_secret_enc=excluded.client_secret_enc,
+        username=excluded.username, updated_by=excluded.updated_by, updated_at=excluded.updated_at`)
+    .bind(id, await encrypt(env, secret), user, adminId, now()).run();
+  return { client_id: id, username: user };
+}
+
+export async function redditAppInfo(env, db) {
+  const row = await db.prepare("SELECT client_id, username, updated_at FROM reddit_app WHERE id = 1").first().catch(() => null);
+  const fromSecrets = Boolean(env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET);
+  return { source: env.REDDIT_APP_SOURCE || (fromSecrets ? "worker" : row ? "dashboard" : null),
+    client_id_hint: (fromSecrets ? env.REDDIT_CLIENT_ID : row?.client_id || "").slice(0, 4) || null,
+    username: env.REDDIT_USERNAME || row?.username || null, updated_at: row?.updated_at || null,
+    redirect_uri: redirectUri(env) };
+}
+
 export function isConfigured(env) {
   return Boolean(env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET && env.TOKEN_ENC_KEY);
 }

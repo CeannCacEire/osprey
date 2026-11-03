@@ -109,7 +109,7 @@ route("GET", "/api/dashboard", async ({ env }) => {
   const used = await db.prepare("SELECT COUNT(*) AS n FROM submissions WHERE status = 'submitted' AND created_at > ?").bind(t - DAY).first();
   const watchers = (await db.prepare("SELECT id, subreddit, enabled, last_scanned_at, last_error FROM watchers ORDER BY subreddit").all()).results;
   return json({
-    settings, reddit: { configured: reddit.isConfigured(env), connected: Boolean(acct), account: acct || null, rate: await reddit.getRateState(db) },
+    settings, reddit: { configured: reddit.isConfigured(env), connected: Boolean(acct), account: acct || null, rate: await reddit.getRateState(db), app: await reddit.redditAppInfo(env, db) },
     counts, pending_review: (counts.suggested || 0) + (counts.draft || 0), in_flight: (counts.queued || 0) + (counts.submitting || 0) + (counts.handoff || 0),
     opportunities, failures: failures.map(({ content_json, ...f }) => ({ ...f, title: parseJSON(content_json, {}).title || "" })),
     cooldowns, daily: { used: used.n, cap: settings.daily_cap }, watchers, server_time: t,
@@ -134,10 +134,20 @@ route("PUT", "/api/settings", async ({ env, request, admin }) => {
 /* ---- Reddit OAuth ---- */
 route("GET", "/api/reddit/status", async ({ env }) => {
   const acct = await env.DB.prepare("SELECT username, scopes, connected_at FROM reddit_accounts WHERE id = 1").first();
-  return json({ configured: reddit.isConfigured(env), connected: Boolean(acct), account: acct, scopes_requested: reddit.SCOPES, rate: await reddit.getRateState(env.DB) });
+  return json({ configured: reddit.isConfigured(env), connected: Boolean(acct), account: acct, scopes_requested: reddit.SCOPES, rate: await reddit.getRateState(env.DB), app: await reddit.redditAppInfo(env, env.DB) });
+});
+/* Reddit app credentials from the dashboard. The secret is write-only: never returned. */
+route("PUT", "/api/reddit/app", async ({ env, request, admin }) => {
+  if (env.REDDIT_APP_SOURCE !== "dashboard" && env.REDDIT_CLIENT_ID && env.REDDIT_CLIENT_SECRET) throw new HttpError(409, "The app credentials are set as Worker secrets; change them there.");
+  const prev = await env.DB.prepare("SELECT client_id FROM reddit_app WHERE id = 1").first();
+  const saved = await reddit.saveRedditApp(env, env.DB, await body(request), admin.id);
+  const changed = prev && prev.client_id !== saved.client_id;
+  if (changed) await env.DB.prepare("DELETE FROM reddit_accounts WHERE id = 1").run(); // tokens belong to the old app
+  await audit(env.DB, actorOf(admin), "reddit_app.saved", "reddit_app", saved.client_id.slice(0, 4) + "…", { username: saved.username, disconnected_old_account: Boolean(changed) });
+  return json({ ok: true, ...saved, client_id: undefined, client_id_hint: saved.client_id.slice(0, 4) });
 });
 route("POST", "/api/reddit/connect", async ({ env, admin }) => {
-  if (!reddit.isConfigured(env)) throw new HttpError(409, "Reddit app credentials aren't set on the Worker yet (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, TOKEN_ENC_KEY).");
+  if (!reddit.isConfigured(env)) throw new HttpError(409, "Add the Reddit app's client ID and secret on the dashboard first.");
   const state = randomId(24);
   await env.DB.batch([
     env.DB.prepare("DELETE FROM oauth_states WHERE expires_at < ?").bind(now()),
@@ -481,6 +491,7 @@ route("GET", "/api/audit", async ({ env, url }) => {
 /* ---------------- entry ---------------- */
 export default {
   async fetch(request, env) {
+    env = await reddit.withRedditApp(env);
     const url = new URL(request.url);
     const ch = cors(env, request);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: ch });

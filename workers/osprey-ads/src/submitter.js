@@ -2,9 +2,11 @@
    max_concurrency 1), each carrying only an approval id. */
 import { processApproval } from "./lib/submit.js";
 import { audit } from "./lib/util.js";
+import { withRedditApp } from "./lib/reddit.js";
 
 export default {
   async queue(batch, env) {
+    env = await withRedditApp(env);
     for (const msg of batch.messages) {
       const id = msg.body?.approval_id;
       if (!id) { msg.ack(); continue; }
