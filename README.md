@@ -132,6 +132,12 @@ Backgrounds use a fine monochrome grain and soft tonal light rather than graph-p
     -d '{"host":"osprey.build","key":"27ae939723451080c2e392135336e842","keyLocation":"https://osprey.build/27ae939723451080c2e392135336e842.txt","urlList":["https://osprey.build/","https://osprey.build/in-depth/"]}'
   ```
 
+## Reddit outreach console (osprey.build/ads)
+
+Internal, admin-only pages under `ads/` (not linked from the site, `noindex`, and disallowed in `robots.txt`). A watcher lists Reddit threads in subreddits you add; you write or edit a draft, and nothing is sent until you click Approve on that exact text. Pages: dashboard, approval queue, draft builder with live preview, templates, subreddit rules and watchers, and history with the audit log.
+
+The back end lives in `workers/osprey-ads/` (three Cloudflare Workers, a D1 database and a queue) and is deployed by `.github/workflows/ads-workers.yml`. See `workers/osprey-ads/README.md` for setup. Reddit now requires approval for Data API access; without it, use the console's manual hand-off mode.
+
 ## Outstanding questions
 
 1. **Cadass Script licence.** The supplied file is "Cadass Script **Demo**", which DaFont lists as free for personal use. Confirm a licence that covers a public website with the font's author before relying on it long-term.

@@ -1,0 +1,14 @@
+{
+  "name": "osprey-ads-workers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "rm -rf .wrangler/test && wrangler d1 migrations apply osprey-ads --local -c wrangler.api.toml --persist-to .wrangler/test >/dev/null && node --test test/",
+    "dev:api": "wrangler dev -c wrangler.api.toml",
+    "migrate:local": "wrangler d1 migrations apply osprey-ads --local -c wrangler.api.toml",
+    "migrate:remote": "wrangler d1 migrations apply osprey-ads --remote -c wrangler.api.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

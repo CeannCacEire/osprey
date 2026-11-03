@@ -6,6 +6,7 @@
 User-agent: *
 Allow: /
 Disallow: /wiki/admin/
+Disallow: /ads/
 
 # Search engines
 User-agent: Googlebot
@@ -14,6 +15,7 @@ User-agent: DuckDuckBot
 User-agent: Applebot
 Allow: /
 Disallow: /wiki/admin/
+Disallow: /ads/
 
 # AI search and answer crawlers
 User-agent: OAI-SearchBot
@@ -24,6 +26,7 @@ User-agent: Claude-SearchBot
 User-agent: Claude-User
 Allow: /
 Disallow: /wiki/admin/
+Disallow: /ads/
 
 # AI training crawlers (allowed by choice of the site owner)
 User-agent: GPTBot
@@ -34,6 +37,7 @@ User-agent: CCBot
 User-agent: Meta-ExternalAgent
 Allow: /
 Disallow: /wiki/admin/
+Disallow: /ads/
 
 Sitemap: https://osprey.build/sitemap.xml
 Sitemap: https://osprey.build/wiki/sitemap-index.xml

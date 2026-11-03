@@ -1,0 +1,12 @@
+# Local QA only: copy to .dev.vars, fill in, run wrangler dev with scripts/mock-reddit.mjs. Never commit .dev.vars.
+ALLOWED_ORIGINS=http://localhost:8000
+ADS_ORIGIN=http://localhost:8000
+API_ORIGIN=http://localhost:8787
+REDDIT_API_BASE=http://localhost:9999
+REDDIT_TOKEN_URL=http://localhost:9999/token
+REDDIT_CLIENT_ID=
+REDDIT_CLIENT_SECRET=
+REDDIT_USERNAME=osprey_build
+TOKEN_ENC_KEY=
+ADMIN_SETUP_TOKEN=
+REDDIT_AUTH_URL=http://localhost:9999/authorize

@@ -1,0 +1,24 @@
+# osprey-ads-api: admin API for osprey.build/ads (HTTP only; enqueues approved submissions)
+name = "osprey-ads-api"
+main = "src/api.js"
+compatibility_date = "2026-05-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://osprey.build"
+ADS_ORIGIN = "https://osprey.build"
+API_ORIGIN = "https://osprey-ads-api.genocchi.workers.dev"   # must match the Reddit app's redirect URI host
+REDDIT_USERNAME = ""                                          # your Reddit username, used in the User-Agent
+
+[[d1_databases]]
+binding = "DB"
+database_name = "osprey-ads"
+database_id = "00000000-0000-0000-0000-000000000000"          # filled in by .github/workflows/ads-workers.yml
+migrations_dir = "migrations"
+
+[[queues.producers]]
+binding = "SUBMISSIONS"
+queue = "osprey-ads-submissions"
+
+[observability]
+enabled = true

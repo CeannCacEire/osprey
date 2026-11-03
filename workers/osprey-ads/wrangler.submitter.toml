@@ -1,0 +1,25 @@
+# osprey-ads-submitter: the only Worker that writes to Reddit. Consumes approval ids one at a time.
+name = "osprey-ads-submitter"
+main = "src/submitter.js"
+compatibility_date = "2026-05-01"
+workers_dev = false
+
+[vars]
+REDDIT_USERNAME = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "osprey-ads"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[[queues.consumers]]
+queue = "osprey-ads-submissions"
+max_batch_size = 1          # one Reddit write per invocation
+max_batch_timeout = 1
+max_concurrency = 1         # never two submissions in parallel
+max_retries = 20            # deferrals (rate limit / spacing) count as retries
+dead_letter_queue = "osprey-ads-submissions-dlq"
+
+[observability]
+enabled = true

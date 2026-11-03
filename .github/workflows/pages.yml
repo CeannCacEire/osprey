@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p _site
           rsync -a ./ _site/ \
-            --exclude '.git' --exclude '.github' --exclude 'wiki-src' --exclude '_site'
+            --exclude '.git' --exclude '.github' --exclude 'wiki-src' --exclude '_site' --exclude 'workers'
           cp -r wiki-src/dist _site/wiki
 
       - uses: actions/upload-pages-artifact@v3
