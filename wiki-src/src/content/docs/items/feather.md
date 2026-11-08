@@ -13,6 +13,7 @@ When a banishing kill lands, an item called **Feather of [Player]** drops where 
 - **It's a normal item.** Put it in a chest, a vault, a shulker box or your inventory. It can be traded, sold or stolen like anything else.
 - **You can't log out with it.** If the holder disconnects, the feather drops on the ground where they stood. 
 - **The prisoner always knows where it is.** The banished player can see the feather's live coordinates at all times, whether it's in a chest, on the ground or in someone's inventory. It is updated once a minute. 
+- **Players in the Nether cannot type in Global Chat**, or leave. Effective for muting idiots or banishing looters and greifers!
 
 Because the prisoner can always see where it is, a feather can't simply be buried and forgotten. Keeping it safe means guarding it, usually inside a Warden-protected vault.
 
