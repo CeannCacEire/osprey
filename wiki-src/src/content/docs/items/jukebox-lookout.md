@@ -48,7 +48,7 @@ The jukebox records everything an outsider does in range, with the player, time 
 To read it, right-click the jukebox (members only) or open it from the Crystal, then choose Read the log. Entries show as a chest of icons, newest first, 45 to a page. Each icon tells you the action at a glance: the player's head for movement, the block for block actions, a chest for containers and a spawn egg for kills.
 To narrow it down, click the filter icon to cycle through action types, or click an entry to show only that player. Entries are kept for 30 days. Clear the log wipes it after a confirmation click.
 
-## Lever Mode
+#### Lever Mode
 
 A Jukebox Lookout can output redstone signal on its sides when an outsider does something nearby. Each side means a different action. Wire redstone to those sides to make alarms, lights, doors or traps that react to intruders on their own. 
 
@@ -110,6 +110,7 @@ Press F3 to check which way you're facing: north is the direction where your Z c
 
 • A separate lamp for each side, so you can see at a glance what kind of thing is happening.
 
+
 ### Discord alerts
 
 Lookout alerts can also go to Discord, so you hear about visitors when you're not in game.
@@ -118,8 +119,8 @@ Linking your account (every member)
 
 1. Open your Crystal, go to Discord and click Link Discord. The menu closes and chat shows a code that lasts 10 minutes, plus a link to Osprey's own Discord server.
 ![](https://media.discordapp.net/attachments/1384087503522496593/1568816962455343254/fvvk391.png?ex=6af13227&is=6aefe0a7&hm=9b3ce33e5a0721df504cfd86abb0e596c58942bbb402a25d3eec6595193e8a4f&=&format=webp&quality=lossless)
-
 2. Join Osprey's Discord if you aren't in it yet, then type /link CODE there or in a DM with the Osprey bot.
+
 ![](https://media.discordapp.net/attachments/1384087503522496593/1568817221990613013/4997jt7.png?ex=6af13264&is=6aefe0e4&hm=847ad4a70bbcf2c570544879e14c3af5a317201d28a00a5df5abe555960202bf&=&format=webp&quality=lossless)
 
 3. The bot replies to you alone, and the game tells you "Linked to Discord as …". Your Discord page in the Crystal now shows Unlink Discord and Pings: on/off.
@@ -128,11 +129,8 @@ Linking your account (every member)
 Your Hearth's alerts go to a channel in your own Discord server, so the Osprey bot has to be added there first.
 
 1. Get the invite. Open your Crystal, go to Discord and click Send Hearth alerts to Discord. The menu closes and chat shows two steps: a link to add the bot, and a code that lasts 10 minutes.
-
 2. Add the bot. Click the link. Discord opens an "Add to server" page. Pick your Hearth's server and click Authorize. Discord only lists servers where you have the Manage Server permission. The bot asks for three permissions: view channels, send messages and embed links. Keep all three.
-
 3. Choose the channel. In the channel you want, such as #raids, type /osprey-alerts CODE. Only members with the Manage Channels permission can see this command.
-
 4. Check it worked. The bot posts "Your Hearth's Warden and Lookout alerts will come to this channel", and in game you're told "Your Hearth's alerts now go to #raids in Mill server". The Discord page in your Crystal now shows the channel.
 
 _If it doesn't work_
