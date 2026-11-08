@@ -31,6 +31,8 @@ export default defineConfig({
       sidebar: [
         { label: "Getting started", items: [{ autogenerate: { directory: "getting-started" } }] },
         { label: "Items and blocks", items: [{ autogenerate: { directory: "items" } }] },
+        { label: "Points of interest", items: [{ autogenerate: { directory: "points-of-interest" } }] },
+        { label: "Enchantments", items: [{ autogenerate: { directory: "enchantments" } }] },
         { label: "Back to osprey.build", link: "https://osprey.build/", attrs: { class: "sl-back-home" } },
       ],
       lastUpdated: false,

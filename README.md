@@ -42,7 +42,7 @@ To preview locally, run `python3 -m http.server 8000` in the repo root, then ope
 
 The wiki is an [Astro Starlight](https://starlight.astro.build/) site in `wiki-src/`, edited by admins through [Sveltia CMS](https://sveltiacms.app/).
 
-- **Pages:** `wiki-src/src/content/docs/` (Markdown). `getting-started/` and `items/` each become a sidebar group, ordered by `sidebar.order`.
+- **Pages:** `wiki-src/src/content/docs/` (Markdown). `getting-started/`, `items/`, `points-of-interest/` and `enchantments/` each become a sidebar group, ordered by `sidebar.order`.
 - **Admin editor:** https://osprey.build/wiki/admin/ → "Sign In with GitHub". Only GitHub accounts with write access to this repo can save. Add admins in **Settings → Collaborators**.
 - **Login service:** the `sveltia-cms-auth` Cloudflare Worker (`https://sveltia-cms-auth.genocchi.workers.dev`), backed by a GitHub OAuth app. Its URL is `backend.base_url` in `wiki-src/public/admin/config.yml`.
 - **Uploads:** images added in the editor go to `wiki-src/public/images/uploads/` and are served from `/wiki/images/uploads/`.

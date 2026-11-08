@@ -93,3 +93,31 @@ collections:
     preview_path: "items/{{slug}}/"
     sortable_fields: [title, sidebar.order]
     fields: *page_fields
+
+  - name: points-of-interest
+    label: Points of interest
+    label_singular: Point of interest
+    description: Pages listed under "Points of interest" in the wiki sidebar.
+    folder: wiki-src/src/content/docs/points-of-interest
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "points-of-interest/{{slug}}/"
+    sortable_fields: [title, sidebar.order]
+    fields: *page_fields
+
+  - name: enchantments
+    label: Enchantments
+    label_singular: Enchantment
+    description: Pages listed under "Enchantments" in the wiki sidebar.
+    folder: wiki-src/src/content/docs/enchantments
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "enchantments/{{slug}}/"
+    sortable_fields: [title, sidebar.order]
+    fields: *page_fields
