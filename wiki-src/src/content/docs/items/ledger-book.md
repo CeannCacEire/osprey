@@ -8,17 +8,24 @@ sidebar:
 ![Ledger Book](/assets/items/ledger-book.png)
 
 # Overview
+
 The Ledger Book is what's left when a Ledger Chest is broken: a written book holding that chest's latest 100 transactions, showing who put in or took out what, and when. It's evidence you can carry, store, trade or show to someone. It cannot be destroyed.
 
 ## Getting one
-The only way to get a Ledger Book is to break a Ledger Chest. Whoever breaks it gets the Book, whether they own the chest or not. It can't be crafted.
-• Title: "Ledger of [name]" if the chest was named in an anvil, otherwise "Ledger Book".
-• Author: Ledger.
+
+The only way to get a Ledger Book is to break a Ledger Chest. Whoever breaks it gets the Book, whether they own the chest or not. It can't be crafted. Here's the format so you know it's legit:
+
+
+• **Title**: "Ledger of [name]" if the chest was named in an anvil, otherwise "Ledger Book".
+
+• **Author**: Ledger.
+
 The chest's own log is deleted when it breaks, so the Book is the only record left of what happened in it.
 
 ![](https://media.discordapp.net/attachments/1384087503522496593/1568823105428914186/r26m3hn.png?ex=6af137df&is=6aefe65f&hm=d686416d304b0b2b2b8e735a7d1ef894ebadc59df17cd83982669b3bc7e16fd9&=&format=webp&quality=lossless)
 
 ## Record
+
 Open it like any written book. It works the same on Java and Bedrock.
 
 It holds the chest's newest 100 entries, set out oldest first with a few to a page. Each line gives the time, who, what they did, how many and the item:
@@ -40,6 +47,7 @@ Only items going in or out are recorded. Opening the chest and looking leaves no
 ![](https://media.discordapp.net/attachments/1384087503522496593/1568823904753950841/4d4b6xv.png?ex=6af1389e&is=6aefe71e&hm=6bd9fcf995930de38a4094eaf0a0dfb127f9a0a35662d19cb3f7b5434b311f32&=&format=webp&quality=lossless)
 
 ## Evidence
+
 A Ledger Book can be stored anywhere, like any other item. It's also protected so the evidence can't be destroyed or forged:
 
 • **It can't be destroyed**. Lava, fire, cactus, explosions and lightning don't harm it when it's on the ground.
