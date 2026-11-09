@@ -73,15 +73,21 @@ If the roll fails, it's a normal death. Either way, their items drop as usual an
 See the Feather for everything about holding, feeding, guarding and stealing Feathers.
 
 # Life in exile
+ 
+
+
 ### Arriving
+
 A banished player wakes up at a random safe spot in the Nether, on solid ground and away from lava, within 1,000 blocks of the Nether's 0, 0. The spot is picked while they're still on the death screen, so they never pass through their normal spawn and can't reach their own Feather on the way.
 
 They arrive with nothing, since their items dropped where they died. Their Vigil bar is kept.
 
 ### What they can do
+
 An Banished plays normally. They can mine, build, fight, trade and keep earning Vigil, and other players can still come and go through the Nether around them.
 
 ### What they can't do
+
 | Way out | What happens |
 | :--- | :--- |
 | **Walking into a Nether portal** | Refused, with a message |
@@ -89,17 +95,20 @@ An Banished plays normally. They can mine, build, fight, trade and keep earning 
 | **Ender pearls, chorus fruit, or any other teleport to another world** | Refused |
 | **Dying** | They respawn in the Nether. A respawn anchor they've set there still works. |
 | **Logging out and back in** | If they're anywhere but the Nether, they're sent back |
-| **Picking up their own Feather** | Refused. If it's somehow in their inventory when they log in, it drops.|
+| **Picking up their own Feather** | Refused. If it's somehow in their inventory when they log in, it drops. |
 
 **Chat is limited too**. Exiles can't talk in Global. Their messages go to their Hearth's chat, and they can still read Global. An exile with no Hearth can't be heard by anyone until they're free.
 
 ### Finding their Feather
+
 The Feather menu in an exile's Crystal shows where their Feather is: the exact coordinates and world, and whether it's carried by a player, sitting in a chest or lying on the ground. It never shows who holds it. While the menu is open, a carried Feather's position updates every few seconds. That location is what their Hearth needs for a rescue.
 
 ### Going free
+
 The only way out is the Feather's fuel running out. After that, the next time the exile uses a portal, respawns, logs in or opens their Crystal, they're told "Your Feather has burned out. You're free to leave the Nether." and can leave like anyone else.
 
 ## Tips for the Banished
+
 • Set a respawn anchor early. Then dying brings you back to your own base in the Nether.
 
 • Check your Crystal often and pass the Feather's coordinates to your Hearth. A Feather on the move is being carried, and a carried Feather can be taken. Obviously this doesn't work if you don't have friends.
