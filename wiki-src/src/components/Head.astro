@@ -12,6 +12,19 @@ const url = new URL(Astro.url.pathname, site).href;
 const title = entry.data.title;
 const description = entry.data.description;
 const isHome = route.id === "" || route.id === "index";
+const isNotFound = Astro.url.pathname.replace(/\/$/, "").endsWith("/404");
+// Preserve authored descriptions. Only missing descriptions receive a topic-specific fallback.
+const effectiveDescription = description || `${title}: documentation in the official Osprey Minecraft server wiki.`;
+for (const element of route.head) {
+  if (element.tag === "title" && isHome) element.content = "Osprey Wiki";
+  if (element.tag === "meta" && element.attrs
+    && (element.attrs.name === "description" || element.attrs.property === "og:description")) {
+    element.attrs.content = effectiveDescription;
+  }
+  if (isHome && element.tag === "meta" && element.attrs?.property === "og:type") {
+    element.attrs.content = "website";
+  }
+}
 
 const crumbs = [
   { name: "Osprey", item: `${site}/` },
@@ -42,13 +55,24 @@ const page: Record<string, unknown> = {
   image: `${site}/assets/brand/og-image.png`,
   publisher: { "@id": `${site}/#org` },
 };
-if (description) page.description = description;
+page.description = effectiveDescription;
+
+const organization = {
+  "@type": "Organization",
+  "@id": `${site}/#org`,
+  name: "Osprey",
+  url: `${site}/`,
+  logo: `${site}/assets/brand/osprey-mark-light.png`,
+};
 
 const graph = {
   "@context": "https://schema.org",
-  "@graph": [website, page, { ...breadcrumb, "@id": `${url}#breadcrumb` }],
+  "@graph": [organization, website, page, { ...breadcrumb, "@id": `${url}#breadcrumb` }],
 };
 const json = JSON.stringify(graph).replace(/</g, "\\u003c");
 ---
 <Default />
-<script type="application/ld+json" is:inline set:html={json} />
+<meta name="robots" content={isNotFound ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+<link rel="alternate" type="text/plain" href="/wiki/llms.txt" title="Osprey Wiki page directory" />
+<link rel="alternate" type="text/plain" href="/wiki/llms-full.txt" title="Osprey Wiki article text" />
+{!isNotFound && <script type="application/ld+json" is:inline set:html={json} />}

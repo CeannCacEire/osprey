@@ -24,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Page-level sitemap lastmod dates must use the article's real history.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -43,6 +46,10 @@ jobs:
           rsync -a ./ _site/ \
             --exclude '.git' --exclude '.github' --exclude 'wiki-src' --exclude '_site' --exclude 'workers'
           cp -r wiki-src/dist _site/wiki
+          # Keep the root AI directory current with every CMS edit, without
+          # maintaining a second, potentially outdated summary of gameplay rules.
+          printf '\n\n' >> _site/llms.txt
+          cat wiki-src/dist/llms.txt >> _site/llms.txt
 
       - uses: actions/upload-pages-artifact@v3
         with:

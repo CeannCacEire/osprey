@@ -1,0 +1,35 @@
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+import { categories, pagePath, publishedPages } from "../utils/discovery";
+
+const isHome = ["", "index"].includes(Astro.locals.starlightRoute.id);
+const pages = isHome ? await publishedPages() : [];
+---
+{isHome && (
+  <nav aria-label="All wiki pages" class="wiki-directory">
+    <h2>All wiki pages</h2>
+    <div class="wiki-directory-grid">
+      {categories.map(([key, label]) => {
+        const entries = pages.filter((page) => page.id.startsWith(`${key}/`));
+        return entries.length > 0 && (
+          <section>
+            <h3>{label}</h3>
+            <ul>
+              {entries.map((entry) => <li><a href={pagePath(entry.id)}>{entry.data.title}</a></li>)}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+  </nav>
+)}
+<Default />
+<style>
+  .wiki-directory { margin-block: 2rem; border-top: 1px solid var(--sl-color-hairline); padding-top: 1.5rem; }
+  .wiki-directory h2 { font-size: var(--sl-text-h2); margin-bottom: 1rem; }
+  .wiki-directory h3 { font-size: var(--sl-text-h4); }
+  .wiki-directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; }
+  .wiki-directory ul { padding-inline-start: 1.25rem; }
+  .wiki-directory li { margin-block: .35rem; }
+  .wiki-directory a { color: var(--sl-color-text-accent); }
+</style>

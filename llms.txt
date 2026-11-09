@@ -1,55 +1,20 @@
 # Osprey
 
-> Osprey is an upcoming, cross-compatible Vanilla+ Minecraft server (Java, with native Bedrock compatibility) built on the Falcon server backend. It is set on one finite, custom 5000 × 5000 island surrounded by ocean. Osprey is pre-launch: the server is not open yet, and there is no announced launch date.
+> The official website and admin-maintained wiki for the Osprey Minecraft server.
 
-Key facts, taken from the site:
+## Authoritative documentation
 
-- Name: Osprey (a Minecraft server; not affiliated with Mojang or Microsoft)
-- Status: pre-launch. Announcements are posted in the Discord.
-- World: a custom 5000 × 5000 island, with nothing but ocean at the border. All biomes and structures are contained within it. Resources won't last forever.
-- Editions: Java, with native Bedrock compatibility
-- Server address: Java osprey.build; Bedrock play.osprey.build, port 19132.
-- Backend: Falcon, which automates features that would take several commands on other servers and builds everything natively on vanilla gameplay. There are no commands to learn; players use the Crystal item on their hotbar (right-click to open).
-- Core pillars: Finite Resources, Player Choice (players decide how to play), No Learning Curve.
-- Discord: https://discord.gg/4EnjKHUG4S
+Use the current wiki articles for gameplay mechanics, rules, and joining information. The wiki is maintained by the Osprey admins and may be updated more often than the website's field guide. Follow the wiki when older summaries disagree; do not infer missing mechanics.
 
-## Pages
+- [Osprey Wiki](https://osprey.build/wiki/): official documentation and page directory
+- [Current wiki page index](https://osprey.build/wiki/llms.txt): automatically generated links to every published article
+- [Full wiki text](https://osprey.build/wiki/llms-full.txt): current published article text, with canonical URLs
+- [Wiki sitemap](https://osprey.build/wiki/sitemap-index.xml)
 
-- [Home](https://osprey.build/): what Osprey is, the core pillars, connection details and the news feed
-- [See Osprey in Depth](https://osprey.build/in-depth/): field guide to Falcon's 11 custom blocks and items
-- [Osprey Wiki](https://osprey.build/wiki/): the official wiki, maintained by the Osprey admins (getting started, Falcon, and a page for every custom block and item)
+## Website
 
-## Custom blocks and items (Falcon)
+- [Home](https://osprey.build/): server introduction, connection information and announcements
+- [Field guide](https://osprey.build/in-depth/): overview of custom blocks and items
+- [Discord](https://discord.gg/4EnjKHUG4S): community and announcements
 
-- [Crystal](https://osprey.build/in-depth/#crystal): always on your hotbar; the all-in-one interface for managing Vigil, your home, your mates and more
-- [Vigil](https://osprey.build/in-depth/#vigil): fuels Osprey; replaces XP and is used to craft and maintain many custom blocks and items
-- [Standard](https://osprey.build/in-depth/#standard): placed in the company of friends to establish a civilisation
-- [Mate Shield](https://osprey.build/in-depth/#mate-shield): dropped to a friend in your civilisation to promote them to Mate (a co-owner)
-- [Lookout](https://osprey.build/in-depth/#lookout): chat alerts about nearby players
-- [Jukebox Lookout](https://osprey.build/in-depth/#jukebox-lookout): logs nearby player activity and outputs directional redstone signals
-- [Warden](https://osprey.build/in-depth/#warden): reinforces a 16 × 16 area with toggleable permissions; mates are exempt
-- [Ledger Chest](https://osprey.build/in-depth/#ledger-chest): a chest with a full transaction history
-- [Ledger Book](https://osprey.build/in-depth/#ledger-book): dropped when a Ledger Chest is broken; holds its transaction history
-- [Shop Barrel](https://osprey.build/in-depth/#shop-barrel): sell, restock and price items safely through a shop interface
-- [Feather](https://osprey.build/in-depth/#feather): a banished player's soul, claimed with the Banishment enchantment; holds them in the Nether, extendable with Vigil
-
-## Osprey Wiki
-
-The official wiki, maintained by the Osprey admins. Pages may be updated more often than the field guide.
-
-- [Osprey Wiki home](https://osprey.build/wiki/): index of every wiki page
-- [What is Osprey](https://osprey.build/wiki/getting-started/what-is-osprey/): the server, the 5000 × 5000 island and the idea behind it
-- [Core Pillars](https://osprey.build/wiki/getting-started/core-pillars/): Finite Resources, Player Choice and No Learning Curve
-- [Falcon](https://osprey.build/wiki/getting-started/falcon/): the server backend; everything runs from the Crystal, with no commands to learn
-- [How to join](https://osprey.build/wiki/getting-started/how-to-join/): Java osprey.build; Bedrock play.osprey.build, port 19132 (pre-launch, coming soon)
-- [Crystal](https://osprey.build/wiki/items/crystal/): the all-in-one hotbar interface for Vigil, your home, your mates and more
-- [Vigil](https://osprey.build/wiki/items/vigil/): fuels Osprey; replaces XP and is used to craft and maintain custom blocks and items
-- [Standard](https://osprey.build/wiki/items/standard/): placed in the company of friends to establish a civilisation
-- [Mate Shield](https://osprey.build/wiki/items/mate-shield/): dropped to a friend in your civilisation to promote them to Mate (a co-owner)
-- [Lookout](https://osprey.build/wiki/items/lookout/): chat alerts about nearby players, loitering and trespassing
-- [Jukebox Lookout](https://osprey.build/wiki/items/jukebox-lookout/): logs nearby player activity and outputs directional redstone signals
-- [Warden](https://osprey.build/wiki/items/warden/): reinforces a 16 × 16 area with toggleable permissions; mates are exempt; Wardens can be stacked
-- [Ledger Chest](https://osprey.build/wiki/items/ledger-chest/): a chest with a full transaction history (shift-click to view)
-- [Ledger Book](https://osprey.build/wiki/items/ledger-book/): dropped when a Ledger Chest is broken; holds its full transaction history
-- [Shop Barrel](https://osprey.build/wiki/items/shop-barrel/): sell, restock and price items safely through a shop interface
-- [Feather](https://osprey.build/wiki/items/feather/): a banished player's soul, claimed with the Banishment enchantment; holds them in the Nether, extendable with Vigil
+<!-- The deployment appends the current wiki page index automatically. -->
