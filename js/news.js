@@ -9,8 +9,11 @@
      createTextNode. innerHTML is never used with feed data.
    - Links are recognised by a restricted pattern, parsed with URL(), and
      kept only if they are http(s). Anything else stays plain text.
-   - The only formatting supported is **bold** (Discord markdown), built as
-     <strong> elements, not markup strings.
+   - Discord markdown (headings, -# subtext, lists, quotes, code, bold,
+     italic, underline, strikethrough, spoilers, masked links) is parsed
+     into real elements built with createElement, never markup strings.
+   - Long bodies are collapsed to a preview with a "Read more" toggle, and
+     only the latest VISIBLE posts show until "Show older" is pressed.
    - "Read on Discord" appears only when the post URL is on discord.com.
    ========================================================================= */
 (function () {
@@ -24,9 +27,7 @@
   var status = root.querySelector("[data-news-status]");
   var DISCORD = cfg.DISCORD_URL || "https://discord.gg/4EnjKHUG4S";
   var LIMIT = cfg.NEWS_LIMIT || 5;
-  /* Mobile condensing: matches the 720px breakpoint in css/main.css. */
-  var MOBILE = window.matchMedia ? window.matchMedia("(max-width: 720px)") : null;
-  var MOBILE_VISIBLE = 3;
+  var VISIBLE = cfg.NEWS_VISIBLE || 3; /* posts shown before "Show older" */
 
   /* ---------- helpers ---------- */
   function el(tag, cls, text) {
@@ -65,47 +66,205 @@
       .replace(/<(https?:\/\/[^\s>]+)>/g, "$1"); /* <url> = suppressed embed */
   }
 
-  /* Append text with restricted links into parent. */
-  var URL_RE = /https?:\/\/[^\s<>"'`]+/g;
-  function appendLinked(parent, text) {
-    var last = 0, m;
-    URL_RE.lastIndex = 0;
-    while ((m = URL_RE.exec(text))) {
-      var raw = m[0].replace(/[).,!?:;]+$/, ""); /* trailing punctuation */
-      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
-      var href = safeHttpUrl(raw);
-      if (href) {
-        var a = el("a", "dispatch__link", raw);
-        a.href = href;
-        a.rel = "noopener noreferrer nofollow";
-        a.target = "_blank";
-        parent.appendChild(a);
-      } else {
-        parent.appendChild(document.createTextNode(raw));
-      }
-      last = m.index + raw.length;
-      URL_RE.lastIndex = last;
-    }
-    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+  /* ---------- Discord markdown: inline ---------- */
+  function makeLink(text, href, cls) {
+    var a = el("a", cls || "dispatch__link");
+    a.href = href;
+    a.rel = "noopener noreferrer nofollow";
+    a.target = "_blank";
+    appendInline(a, text, true);
+    return a;
   }
 
-  /* Append text, supporting **bold** only, then links inside each run. */
-  function appendFormatted(parent, text) {
-    var parts = text.split(/\*\*(.+?)\*\*/g);
-    for (var i = 0; i < parts.length; i++) {
-      if (!parts[i]) continue;
-      if (i % 2 === 1) {
-        var b = el("strong");
-        appendLinked(b, parts[i]);
-        parent.appendChild(b);
-      } else {
-        appendLinked(parent, parts[i]);
+  /* Ordered by priority when two patterns start at the same index. */
+  var INLINE = [
+    { re: /`([^`\n]+)`/, build: function (m) { return el("code", "dispatch__code", m[1]); } },
+    { link: true, re: /\[([^\]\n]+)\]\(<?(https?:\/\/[^\s)>]+)>?\)/, build: function (m) {
+        var href = safeHttpUrl(m[2]);
+        if (!href) return document.createTextNode(m[1]);
+        return makeLink(m[1], href);
+      } },
+    { re: /\|\|([\s\S]+?)\|\|/, build: function (m, inLink) {
+        var sp = el("span", "dispatch__spoiler");
+        sp.title = "Spoiler: click to reveal";
+        sp.tabIndex = 0;
+        sp.setAttribute("role", "button");
+        sp.setAttribute("aria-label", "Spoiler, activate to reveal");
+        var reveal = function () { sp.classList.add("is-revealed"); sp.removeAttribute("role"); sp.removeAttribute("aria-label"); sp.removeAttribute("tabindex"); };
+        sp.addEventListener("click", reveal);
+        sp.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); reveal(); } });
+        appendInline(sp, m[1], inLink);
+        return sp;
+      } },
+    { re: /\*\*\*([\s\S]+?)\*\*\*/, build: function (m, inLink) {
+        var b = el("strong"), i = el("em");
+        appendInline(i, m[1], inLink); b.appendChild(i); return b;
+      } },
+    { re: /\*\*([\s\S]+?)\*\*/, wrap: "strong" },
+    { re: /__([\s\S]+?)__/, wrap: "u" },
+    { re: /~~([\s\S]+?)~~/, wrap: "s" },
+    { re: /\*(?!\s)([^*\n]+?)\*/, wrap: "em" },
+    { re: /\b_([^_\n]+?)_\b/, wrap: "em" },
+    { re: /https?:\/\/[^\s<>"'`]+/, url: true }
+  ];
+
+  function appendInline(parent, text, inLink) {
+    while (text) {
+      var best = null, bestRule = null;
+      for (var r = 0; r < INLINE.length; r++) {
+        var rule = INLINE[r];
+        if (inLink && (rule.url || rule.link)) continue; /* no links inside links */
+        var m = rule.re.exec(text);
+        if (m && (!best || m.index < best.index)) { best = m; bestRule = rule; }
       }
+      if (!best) { parent.appendChild(document.createTextNode(text)); return; }
+      if (best.index > 0) parent.appendChild(document.createTextNode(text.slice(0, best.index)));
+
+      var consumed = best[0].length;
+      if (bestRule.url) {
+        var raw = best[0].replace(/[).,!?:;]+$/, "");
+        consumed = raw.length;
+        var href = safeHttpUrl(raw);
+        parent.appendChild(href ? makeLink(raw, href) : document.createTextNode(raw));
+      } else if (bestRule.wrap) {
+        var w = el(bestRule.wrap);
+        appendInline(w, best[1], inLink);
+        parent.appendChild(w);
+      } else {
+        parent.appendChild(bestRule.build(best, inLink));
+      }
+      text = text.slice(best.index + consumed);
     }
+  }
+
+  /* Inline text that keeps single line breaks as <br>, like Discord. */
+  function appendLines(parent, lines) {
+    for (var i = 0; i < lines.length; i++) {
+      if (i) parent.appendChild(el("br"));
+      appendInline(parent, lines[i]);
+    }
+  }
+
+  /* ---------- Discord markdown: blocks ---------- */
+  var RE_FENCE = /^```(\w*)\s*$/;
+  var RE_HEAD = /^(#{1,3})\s+(.+)$/;
+  var RE_SUB = /^-#\s+(.+)$/;
+  var RE_QUOTE_ALL = /^>>>\s?(.*)$/;
+  var RE_QUOTE = /^>\s?(.*)$/;
+  var RE_UL = /^(\s*)[-*]\s+(.+)$/;
+  var RE_OL = /^(\s*)(\d{1,3})[.)]\s+(.+)$/;
+
+  function renderBlocks(parent, text) {
+    var lines = text.split("\n");
+    var i = 0, para = [];
+
+    function flush() {
+      if (!para.length) return;
+      var p = el("p", "dispatch__p");
+      appendLines(p, para);
+      parent.appendChild(p);
+      para = [];
+    }
+
+    while (i < lines.length) {
+      var line = lines[i], m;
+
+      if (!line.trim()) { flush(); i++; continue; }
+
+      if ((m = RE_FENCE.exec(line.trim())) || /^```/.test(line.trim())) {
+        flush();
+        var code = [], firstRest = line.trim().replace(/^```\w*/, "");
+        var closedSameLine = /```$/.test(firstRest);
+        if (closedSameLine) { code.push(firstRest.replace(/```$/, "")); i++; }
+        else {
+          if (firstRest && !m) code.push(firstRest);
+          i++;
+          while (i < lines.length && !/^\s*```/.test(lines[i])) { code.push(lines[i]); i++; }
+          i++; /* closing fence */
+        }
+        var pre = el("pre", "dispatch__pre");
+        pre.appendChild(el("code", null, code.join("\n")));
+        parent.appendChild(pre);
+        continue;
+      }
+
+      if ((m = RE_HEAD.exec(line))) {
+        flush();
+        var h = el("h" + (m[1].length + 3), "dispatch__h dispatch__h--" + m[1].length);
+        appendInline(h, m[2]);
+        parent.appendChild(h);
+        i++; continue;
+      }
+
+      if ((m = RE_SUB.exec(line))) {
+        flush();
+        var sub = el("p", "dispatch__subtext");
+        appendInline(sub, m[1]);
+        parent.appendChild(sub);
+        i++; continue;
+      }
+
+      if ((m = RE_QUOTE_ALL.exec(line))) {
+        flush();
+        var bqAll = el("blockquote", "dispatch__quote");
+        renderBlocks(bqAll, [m[1]].concat(lines.slice(i + 1)).join("\n"));
+        parent.appendChild(bqAll);
+        return;
+      }
+
+      if (RE_QUOTE.test(line)) {
+        flush();
+        var q = [];
+        while (i < lines.length && (m = RE_QUOTE.exec(lines[i]))) { q.push(m[1]); i++; }
+        var bq = el("blockquote", "dispatch__quote");
+        renderBlocks(bq, q.join("\n"));
+        parent.appendChild(bq);
+        continue;
+      }
+
+      if (RE_UL.test(line) || RE_OL.test(line)) {
+        flush();
+        i = renderList(parent, lines, i);
+        continue;
+      }
+
+      para.push(line);
+      i++;
+    }
+    flush();
+  }
+
+  /* Lists, with nesting by indentation. Returns the next unread line index. */
+  function renderList(parent, lines, i) {
+    var stack = [];
+    while (i < lines.length) {
+      var line = lines[i], m, ordered, indent, content;
+      if ((m = RE_UL.exec(line))) { ordered = false; indent = m[1].length; content = m[2]; }
+      else if ((m = RE_OL.exec(line))) { ordered = true; indent = m[1].length; content = m[3]; }
+      else break;
+
+      while (stack.length && indent < stack[stack.length - 1].indent) stack.pop();
+      var top = stack[stack.length - 1];
+      if (!top || indent > top.indent || top.ordered !== ordered) {
+        if (top && indent === top.indent) stack.pop();
+        var listEl = el(ordered ? "ol" : "ul", "dispatch__list");
+        if (ordered && Number(m[2]) > 1) listEl.start = Number(m[2]);
+        var host = stack.length ? stack[stack.length - 1].list.lastChild : null;
+        (host || parent).appendChild(listEl);
+        stack.push({ list: listEl, indent: indent, ordered: ordered });
+      }
+      var li = el("li");
+      appendInline(li, content);
+      stack[stack.length - 1].list.appendChild(li);
+      i++;
+    }
+    return i;
   }
 
   function stripMd(s) {
-    return s.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#{1,3}\s+/, "").replace(/^>\s?/, "").trim();
+    return s.replace(/^#{1,3}\s+/, "").replace(/^>\s?/, "")
+      .replace(/\*\*(.+?)\*\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/\*(.+?)\*/g, "$1")
+      .replace(/~~(.+?)~~/g, "$1").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").trim();
   }
 
   function formatDate(raw) {
@@ -167,12 +326,12 @@
     }
 
     if (body) {
-      var p = el("p", "dispatch__body");
+      var p = el("div", "dispatch__body");
       p.id = "dispatch-body-" + (idx + 1);
-      appendFormatted(p, body);
+      renderBlocks(p, body);
       art.appendChild(p);
 
-      /* Mobile only (CSS hides it on wider screens): collapse long bodies. */
+      /* Collapse long bodies; updateCollapse() reveals this only if needed. */
       var more = el("button", "dispatch__more", "Read more");
       more.type = "button";
       more.hidden = true;
@@ -222,15 +381,15 @@
       if (li) { list.appendChild(li); shown++; }
     }
 
-    if (shown > MOBILE_VISIBLE) {
-      var older = el("button", "btn btn--ghost dispatches__older", "Show " + (shown - MOBILE_VISIBLE) + " older dispatch" + (shown - MOBILE_VISIBLE === 1 ? "" : "es"));
+    if (shown > VISIBLE) {
+      var older = el("button", "btn btn--ghost dispatches__older", "Show " + (shown - VISIBLE) + " older dispatch" + (shown - VISIBLE === 1 ? "" : "es"));
       older.type = "button";
       older.setAttribute("aria-expanded", "false");
       older.addEventListener("click", function () {
         list.classList.add("is-all");
         older.setAttribute("aria-expanded", "true");
         older.hidden = true;
-        var next = list.children[MOBILE_VISIBLE];
+        var next = list.children[VISIBLE];
         var btn = next && next.querySelector("a, button");
         if (btn) btn.focus({ preventScroll: true });
       });
@@ -247,25 +406,23 @@
 
   /* Show "Read more" only where the collapsed body actually overflows. */
   function updateCollapse() {
-    var mobile = MOBILE ? MOBILE.matches : false;
     var cards = list.querySelectorAll(".dispatch__card");
     for (var i = 0; i < cards.length; i++) {
       var card = cards[i];
       var body = card.querySelector(".dispatch__body");
       var btn = card.querySelector(".dispatch__more");
-      if (!body || !btn) continue;
-      if (!mobile) { btn.hidden = true; card.classList.remove("is-clamped"); continue; }
-      if (card.classList.contains("is-open")) { btn.hidden = false; continue; }
+      if (!body || !btn || card.classList.contains("is-open")) continue;
       card.classList.add("is-clamped");
       var overflows = body.scrollHeight > body.clientHeight + 2;
       btn.hidden = !overflows;
       if (!overflows) card.classList.remove("is-clamped");
     }
   }
-  if (MOBILE) {
-    if (MOBILE.addEventListener) MOBILE.addEventListener("change", updateCollapse);
-    else if (MOBILE.addListener) MOBILE.addListener(updateCollapse);
-  }
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateCollapse, 150);
+  });
 
   function load() {
     if (!cfg.NEWS_ENDPOINT || !window.fetch) {
