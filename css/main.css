@@ -711,6 +711,7 @@ em { font-style: normal; }
 }
 .dispatch__read::after { content: " \2192"; font-family: var(--f-body); }
 .dispatch__read:hover { color: var(--teal-deep); }
+.dispatch__more, .dispatches__older { display: none; }
 
 /* ===== 12 Join tickets ================================================== */
 .tickets {
@@ -1035,6 +1036,27 @@ em { font-style: normal; }
   .guide-chapter__no { grid-row: auto; font-size: 4.5rem; margin-bottom: .5rem; }
   .dispatch:nth-child(n) .dispatch__card { transform: none; }
   .dispatch:first-child .dispatch__card { padding: 1.6rem 1.25rem 1.25rem; }
+  /* Condensed news feed on phones */
+  .board { padding: 1rem; outline-offset: 4px; }
+  .dispatches { gap: 1.25rem; }
+  .dispatch__card, .dispatch:first-child .dispatch__card { padding: 1.25rem 1rem 1rem; box-shadow: 4px 4px 0 var(--ink); }
+  .dispatch:first-child .dispatch__card { box-shadow: 6px 6px 0 var(--teal-deep); }
+  .dispatch__meta { font-size: .75rem; padding-bottom: .45rem; margin-bottom: .7rem; }
+  .dispatch__title { font-size: 1.2rem; margin-bottom: .5rem; }
+  .dispatch__body { font-size: 1rem; line-height: 1.5; margin-bottom: .75rem; }
+  .dispatch__card.is-clamped:not(.is-open) .dispatch__body {
+    max-height: calc(1.5em * 5); overflow: hidden;
+    -webkit-mask-image: linear-gradient(#000 55%, transparent);
+            mask-image: linear-gradient(#000 55%, transparent);
+  }
+  .dispatch__more:not([hidden]) {
+    display: inline-block; margin: 0 0 .85rem; padding: .35rem 0;
+    background: none; border: 0; border-bottom: 2px solid currentColor; color: var(--teal-deep);
+    font-family: var(--f-head); font-weight: 800; text-transform: uppercase; letter-spacing: .1em; font-size: .8rem;
+    cursor: pointer;
+  }
+  .dispatches:not(.is-all) .dispatch:nth-child(n+4) { display: none; }
+  .dispatches__older:not([hidden]) { display: flex; width: 100%; justify-content: center; margin-top: 1.25rem; }
   .hero__actions .btn { flex: 1 1 100%; }
   .ticket { padding-left: 3.75rem; }
   .ticket::before { left: 2.6rem; }

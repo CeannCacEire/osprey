@@ -24,6 +24,9 @@
   var status = root.querySelector("[data-news-status]");
   var DISCORD = cfg.DISCORD_URL || "https://discord.gg/4EnjKHUG4S";
   var LIMIT = cfg.NEWS_LIMIT || 5;
+  /* Mobile condensing: matches the 720px breakpoint in css/main.css. */
+  var MOBILE = window.matchMedia ? window.matchMedia("(max-width: 720px)") : null;
+  var MOBILE_VISIBLE = 3;
 
   /* ---------- helpers ---------- */
   function el(tag, cls, text) {
@@ -150,6 +153,10 @@
     }
     art.appendChild(head);
 
+    /* Drop Discord mention-only lines (e.g. "@everyone") so they never become the headline. */
+    content = content.replace(/^(?:\s*@(?:everyone|here)\s*\n)+/i, "").trim();
+    if (!content) return null;
+
     /* First line becomes a heading only for multi-line posts with a short first line. */
     var lines = content.split("\n");
     var first = stripMd(lines[0] || "");
@@ -161,8 +168,23 @@
 
     if (body) {
       var p = el("p", "dispatch__body");
+      p.id = "dispatch-body-" + (idx + 1);
       appendFormatted(p, body);
       art.appendChild(p);
+
+      /* Mobile only (CSS hides it on wider screens): collapse long bodies. */
+      var more = el("button", "dispatch__more", "Read more");
+      more.type = "button";
+      more.hidden = true;
+      more.setAttribute("aria-expanded", "false");
+      more.setAttribute("aria-controls", p.id);
+      more.addEventListener("click", function () {
+        var open = art.classList.toggle("is-open");
+        more.setAttribute("aria-expanded", open ? "true" : "false");
+        more.textContent = open ? "Show less" : "Read more";
+        if (!open && art.getBoundingClientRect().top < 0) art.scrollIntoView({ block: "start" });
+      });
+      art.appendChild(more);
     }
 
     var foot = el("footer", "dispatch__foot");
@@ -200,11 +222,49 @@
       if (li) { list.appendChild(li); shown++; }
     }
 
+    if (shown > MOBILE_VISIBLE) {
+      var older = el("button", "btn btn--ghost dispatches__older", "Show " + (shown - MOBILE_VISIBLE) + " older dispatch" + (shown - MOBILE_VISIBLE === 1 ? "" : "es"));
+      older.type = "button";
+      older.setAttribute("aria-expanded", "false");
+      older.addEventListener("click", function () {
+        list.classList.add("is-all");
+        older.setAttribute("aria-expanded", "true");
+        older.hidden = true;
+        var next = list.children[MOBILE_VISIBLE];
+        var btn = next && next.querySelector("a, button");
+        if (btn) btn.focus({ preventScroll: true });
+      });
+      list.parentNode.insertBefore(older, list.nextSibling);
+    }
+    updateCollapse();
+
     if (!shown) {
       setState("empty", "No dispatches posted yet. Announcements will appear here as they are posted in the Discord.", true);
     } else {
       setState("ready", "");
     }
+  }
+
+  /* Show "Read more" only where the collapsed body actually overflows. */
+  function updateCollapse() {
+    var mobile = MOBILE ? MOBILE.matches : false;
+    var cards = list.querySelectorAll(".dispatch__card");
+    for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
+      var body = card.querySelector(".dispatch__body");
+      var btn = card.querySelector(".dispatch__more");
+      if (!body || !btn) continue;
+      if (!mobile) { btn.hidden = true; card.classList.remove("is-clamped"); continue; }
+      if (card.classList.contains("is-open")) { btn.hidden = false; continue; }
+      card.classList.add("is-clamped");
+      var overflows = body.scrollHeight > body.clientHeight + 2;
+      btn.hidden = !overflows;
+      if (!overflows) card.classList.remove("is-clamped");
+    }
+  }
+  if (MOBILE) {
+    if (MOBILE.addEventListener) MOBILE.addEventListener("change", updateCollapse);
+    else if (MOBILE.addListener) MOBILE.addListener(updateCollapse);
   }
 
   function load() {
