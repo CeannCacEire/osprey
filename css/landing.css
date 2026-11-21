@@ -111,3 +111,58 @@
 @media (prefers-reduced-motion: reduce) {
   .btn--solid:hover { transform: none; }
 }
+
+/* ----- Screenshot carousel ----- */
+.shots {
+  position: relative;
+  width: min(100%, 52rem);
+  margin: calc(clamp(3rem, 9vh, 6rem) * -.35) 0;
+  border: 3px solid var(--paper);
+  background: var(--char);
+  box-shadow: 8px 8px 0 var(--lav);
+  --focus: var(--teal);
+}
+.shots__track {
+  list-style: none; margin: 0; padding: 0;
+  position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+}
+.shots__slide {
+  position: absolute; inset: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .8s ease, visibility 0s linear .8s;
+}
+.shots__slide.is-active { opacity: 1; visibility: visible; transition: opacity .8s ease; }
+/* Without JS, only the first screenshot shows. */
+.shots__slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shots__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  font-size: 2rem; line-height: 1; padding-bottom: .2rem;
+  background: rgba(11, 11, 12, .7); color: var(--paper);
+  border: 2px solid var(--paper); cursor: pointer;
+  opacity: .85;
+}
+.shots__nav:hover, .shots__nav:focus-visible { opacity: 1; background: var(--paper); color: var(--ink); }
+.shots__nav--prev { left: .75rem; }
+.shots__nav--next { right: .75rem; }
+.shots__dots {
+  position: absolute; left: 0; right: 0; bottom: .7rem;
+  display: flex; justify-content: center; gap: .45rem;
+}
+.shots__dot {
+  width: .7rem; height: .7rem; padding: 0;
+  background: rgba(11, 11, 12, .6); border: 2px solid var(--paper);
+  cursor: pointer;
+}
+.shots__dot[aria-current="true"] { background: var(--teal); border-color: var(--teal); }
+@media (max-width: 520px) {
+  .shots { box-shadow: 5px 5px 0 var(--lav); }
+  .shots__nav { width: 2.25rem; height: 2.25rem; font-size: 1.6rem; }
+  .shots__nav--prev { left: .4rem; }
+  .shots__nav--next { right: .4rem; }
+  .shots__dot { width: .55rem; height: .55rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shots__slide, .shots__slide.is-active { transition: none; }
+}

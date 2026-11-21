@@ -64,4 +64,72 @@
       });
     });
   });
+
+  /* ---------- Screenshot carousel ---------- */
+  (function () {
+    var root = document.querySelector(".shots");
+    if (!root) return;
+    var slides = root.querySelectorAll(".shots__slide");
+    if (slides.length < 2) return;
+    var dotsWrap = root.querySelector("[data-shots-dots]");
+    var prev = root.querySelector("[data-shots-prev]");
+    var next = root.querySelector("[data-shots-next]");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var DELAY = 5000;
+    var index = 0, timer = null, paused = false, dots = [];
+
+    slides.forEach(function (_, i) {
+      var d = document.createElement("button");
+      d.type = "button"; d.className = "shots__dot";
+      d.setAttribute("aria-label", "Show screenshot " + (i + 1));
+      d.addEventListener("click", function () { go(i); restart(); });
+      dotsWrap.appendChild(d); dots.push(d);
+    });
+
+    function go(i) {
+      index = (i + slides.length) % slides.length;
+      slides.forEach(function (s, n) {
+        var on = n === index;
+        s.classList.toggle("is-active", on);
+        if (on) s.removeAttribute("aria-hidden"); else s.setAttribute("aria-hidden", "true");
+      });
+      dots.forEach(function (d, n) {
+        if (n === index) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+      });
+      /* Warm the next image so the fade never shows a blank frame. */
+      var upcoming = slides[(index + 1) % slides.length].querySelector("img");
+      if (upcoming && upcoming.loading === "lazy") upcoming.loading = "eager";
+    }
+    function stop() { clearInterval(timer); timer = null; }
+    function start() {
+      if (reduce || paused || document.hidden || timer) return;
+      timer = setInterval(function () { go(index + 1); }, DELAY);
+    }
+    function restart() { stop(); start(); }
+
+    prev.addEventListener("click", function () { go(index - 1); restart(); });
+    next.addEventListener("click", function () { go(index + 1); restart(); });
+    root.addEventListener("mouseenter", function () { paused = true; stop(); });
+    root.addEventListener("mouseleave", function () { paused = false; start(); });
+    root.addEventListener("focusin", function () { paused = true; stop(); });
+    root.addEventListener("focusout", function (e) {
+      if (!root.contains(e.relatedTarget)) { paused = false; start(); }
+    });
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { go(index - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight") { go(index + 1); e.preventDefault(); }
+    });
+    /* Swipe on touch screens. */
+    var x0 = null;
+    root.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) { go(index + (dx < 0 ? 1 : -1)); restart(); }
+    }, { passive: true });
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
+
+    prev.hidden = next.hidden = dotsWrap.hidden = false;
+    go(0); start();
+  })();
 })();
