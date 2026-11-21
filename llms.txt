@@ -13,8 +13,9 @@ Use the current wiki articles for gameplay mechanics, rules, and joining informa
 
 ## Website
 
-- [Home](https://osprey.build/): server introduction, connection information and announcements
+- [Landing page](https://osprey.build/): short introduction, launch date, Discord and server addresses
+- [Full website](https://osprey.build/home/): server introduction, connection information and announcements
 - [Field guide](https://osprey.build/in-depth/): overview of custom blocks and items
-- [Discord](https://discord.gg/4EnjKHUG4S): community and announcements
+- [Discord](https://discord.gg/osprey): community and announcements
 
 <!-- The deployment appends the current wiki page index automatically. -->

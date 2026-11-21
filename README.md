@@ -1,6 +1,6 @@
 # Osprey website
 
-Static two-page site for **Osprey**, an upcoming cross-compatible Vanilla+ Minecraft server built on Falcon. It's hosted on GitHub Pages at **https://osprey.build**.
+Static site for **Osprey**, an upcoming cross-compatible Vanilla+ Minecraft server built on Falcon. It's hosted on GitHub Pages at **https://osprey.build**.
 
 The design is an "Osprey field manual": oversized poster type, numbered chapters, Minecraft-style inventory slots, item plates and a dispatch noticeboard. The palette is black, charcoal, grey and off-white, with teal (Vigil), lavender (Crystal) and a Nether red reserved for Banishment. **No yellow or gold is used anywhere**, and the artwork was recoloured to match (see "Processed artwork" below).
 
@@ -11,9 +11,12 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 ├── 404.html              Not-found page (root-absolute paths)
 ├── robots.txt / sitemap.xml / llms.txt
 ├── <key>.txt              IndexNow key file (do not delete)
-├── index.html              Main page (hero, 01–05 chapters, footer)
+├── index.html              Landing page for new players (wordmark, launch line, Discord, "What is Osprey?" pop-up, addresses)
+├── home/index.html         Full website (hero, 01–05 chapters, footer)
 ├── in-depth/index.html     "See Osprey in Depth" field guide (11 entries, 5 chapters)
 ├── css/main.css            Shared stylesheet, sectioned 00–17
+├── css/landing.css         Landing page styles only
+├── js/landing.js           Landing page: "What is Osprey?" dialog (#what-is-osprey) and copy buttons
 ├── js/config.js            Central config: Discord URL, server details, News endpoint, Live World embed URL
 ├── js/main.js              Copy buttons, Live World mount point, reveal-on-scroll, footer year
 ├── js/news.js              Dispatches (News) feed: fetch, safe rendering, loading/empty/error states
@@ -28,7 +31,7 @@ The design is an "Osprey field manual": oversized poster type, numbered chapters
 └── .nojekyll               Serve files as-is on GitHub Pages
 ```
 
-Both pages use relative paths only (`css/…` on the home page, `../css/…` on `/in-depth/`), so each page works when opened directly at `https://osprey.build/` or `https://osprey.build/in-depth/`. There's no SPA routing. The main pages need no build step; only the wiki is built.
+Every page uses relative paths only (`css/…` on the landing page, `../css/…` on `/home/` and `/in-depth/`), so each page works when opened directly. The landing page links to the full website (`/home/`), the wiki and News (`/home/#news`). The "What is Osprey?" pop-up opens from `https://osprey.build/#what-is-osprey`. There's no SPA routing. The main pages need no build step; only the wiki is built.
 
 ## Deploying on GitHub Pages
 

@@ -1,0 +1,113 @@
+/* =========================================================================
+   OSPREY · Landing page (index.html only)
+   Builds on css/main.css tokens. Same palette rule: no yellow or gold.
+   ========================================================================= */
+.page-landing {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background:
+    var(--grain-light),
+    radial-gradient(ellipse at 50% 38%, #1d1f22 0%, var(--ink) 62%);
+}
+.landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(3rem, 9vh, 6rem);
+  padding: clamp(3rem, 10vh, 6rem) var(--gutter) 2rem;
+  text-align: center;
+}
+.landing__hero { display: flex; flex-direction: column; align-items: center; }
+.landing__title { margin: 0; }
+.wordmark--landing {
+  display: block;
+  font-size: clamp(5rem, 20vw, 13rem);
+  line-height: 1;
+  padding: .08em .1em 0;
+  color: var(--white);
+}
+.landing__subtitle {
+  max-width: 34ch;
+  margin: 1.25rem 0 2.5rem;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  letter-spacing: .04em;
+  color: var(--grey-300);
+}
+.landing__actions {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem;
+}
+.landing__actions .btn--solid { flex-direction: column; gap: .2rem; }
+.landing__btn-sub {
+  font-family: var(--f-body); font-weight: 400;
+  font-size: .78rem; letter-spacing: .06em; text-transform: none;
+  color: var(--grey-800);
+}
+
+/* ----- Server addresses ----- */
+.landing__ips {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 1.25rem;
+}
+.ip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem .8rem;
+  padding: .7rem 1rem;
+  border: 2px solid var(--grey-800);
+  background: rgba(11, 11, 12, .55);
+}
+.ip__value { font-size: 1.05rem; color: var(--white); }
+.ip__port { display: inline-flex; align-items: center; gap: .45rem; color: var(--grey-300); }
+.ip__copy {
+  font-family: var(--f-head); font-weight: 800; font-size: .72rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  background: transparent; color: var(--grey-300);
+  border: 2px solid var(--grey-600);
+  padding: .3rem .6rem .25rem; cursor: pointer;
+}
+.ip__copy:hover { color: var(--paper); border-color: var(--paper); }
+.ip__copy[data-state="ok"] { color: var(--teal); border-color: var(--teal); }
+
+/* ----- Footer ----- */
+.landing__footer { padding: 1.5rem var(--gutter) 2rem; border-top: 1px solid var(--grey-800); }
+.landing__footer ul {
+  list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem;
+}
+
+/* ----- "What is Osprey?" dialog ----- */
+.about-dialog {
+  width: min(36rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 3px solid var(--paper);
+  background: var(--char);
+  color: var(--paper);
+  box-shadow: 8px 8px 0 var(--lav);
+}
+.about-dialog::backdrop { background: rgba(11, 11, 12, .82); }
+.about-dialog__inner { position: relative; padding: clamp(1.75rem, 5vw, 2.75rem); --focus: var(--teal); }
+.about-dialog__close {
+  position: absolute; top: .5rem; right: .6rem;
+  width: 2.5rem; height: 2.5rem;
+  font-size: 1.8rem; line-height: 1;
+  background: transparent; color: var(--grey-300); border: 0; cursor: pointer;
+}
+.about-dialog__close:hover { color: var(--paper); }
+.about-dialog__title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin: 0 0 1.25rem; padding-right: 2rem; }
+.about-dialog__title .wordmark--inline { font-size: 1.3em; color: var(--lav); vertical-align: -.05em; }
+.about-dialog__text { font-size: 1.05rem; line-height: 1.8; color: var(--grey-300); margin-bottom: 1.75rem; }
+/* Geist Pixel has no bold weight, so key words use Cinzel's real 800 weight. */
+.about-dialog__text strong {
+  font-family: var(--f-head); font-weight: 800; font-size: .95em;
+  letter-spacing: .02em; color: var(--white); white-space: nowrap;
+}
+.about-dialog__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+@media (max-width: 520px) {
+  .landing__actions, .about-dialog__actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .landing__actions { max-width: 22rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn--solid:hover { transform: none; }
+}

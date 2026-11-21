@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <!-- ===== SEO ===== -->
-  <title>OSPREY - An Upcoming Experimental Vanilla Minecraft Server.</title>
-  <meta name="description" content="Osprey is an upcoming Vanilla+ Minecraft server for Java and Bedrock, set on one finite 5000×5000 island and run by Falcon. Pre-launch: join the Discord.">
+  <title>Osprey - A cross-platform CIVSMP Minecraft server</title>
+  <meta name="description" content="Osprey is a cross-platform CIVSMP Minecraft server for Java and Bedrock, launching on December 5th. Join the Discord at discord.gg/osprey.">
   <meta name="theme-color" content="#0b0b0c">
-  <meta name="color-scheme" content="dark light">
+  <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://osprey.build/">
 
   <!-- ===== Open Graph / Twitter ===== -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Osprey">
   <meta property="og:locale" content="en_IE">
-  <meta property="og:title" content="OSPREY - An Upcoming Experimental Vanilla Minecraft Server.">
-  <meta property="og:description" content="One finite island. Resources won't last forever. A cross-compatible Vanilla+ server built on Falcon. Pre-launch.">
+  <meta property="og:title" content="Osprey - A cross-platform CIVSMP Minecraft server">
+  <meta property="og:description" content="A cross-platform CIVSMP server launching on December 5th.">
   <meta property="og:url" content="https://osprey.build/">
   <meta property="og:image" content="https://osprey.build/assets/brand/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -25,7 +25,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://osprey.build/assets/brand/og-image.png">
   <meta name="twitter:image:alt" content="The Osprey wordmark and pixel osprey emblem on black, with the line A player-led civilization.">
-  <!-- ===== Structured data (facts only: no ratings, player counts or dates) ===== -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,9 +35,7 @@
       "name": "Osprey",
       "url": "https://osprey.build/",
       "inLanguage": "en-IE",
-      "publisher": {
-        "@id": "https://osprey.build/#org"
-      }
+      "publisher": { "@id": "https://osprey.build/#org" }
     },
     {
       "@type": "Organization",
@@ -46,27 +43,19 @@
       "name": "Osprey",
       "url": "https://osprey.build/",
       "logo": "https://osprey.build/assets/brand/osprey-mark-dark.png",
-      "sameAs": [
-        "https://discord.gg/4EnjKHUG4S"
-      ]
+      "sameAs": ["https://discord.gg/osprey"]
     },
     {
       "@type": "WebPage",
       "@id": "https://osprey.build/#webpage",
       "url": "https://osprey.build/",
-      "name": "Osprey – an upcoming Vanilla+ Minecraft server",
-      "isPartOf": {
-        "@id": "https://osprey.build/#website"
-      },
-      "about": {
-        "@id": "https://osprey.build/#org"
-      },
-      "primaryImageOfPage": "https://osprey.build/assets/brand/og-image.png"
+      "name": "Osprey - A cross-platform CIVSMP Minecraft server",
+      "isPartOf": { "@id": "https://osprey.build/#website" },
+      "about": { "@id": "https://osprey.build/#org" }
     }
   ]
 }
   </script>
-
 
   <!-- ===== Icons ===== -->
   <link rel="icon" href="assets/brand/favicon.png" type="image/png">
@@ -77,329 +66,65 @@
   <link rel="preload" href="fonts/cinzel-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/geist-pixel-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
 </head>
 
-<body class="page-home">
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- =====================================================================
-       MASTHEAD (shared pattern with in-depth/index.html)
-       ===================================================================== -->
-  <header class="masthead">
-    <div class="masthead__inner">
-      <a class="wordmark wordmark--nav" href="./" aria-label="Osprey home">Osprey</a>
-      <nav class="masthead__nav" aria-label="Main">
-        <ul>
-          <li><a href="#about">What is Osprey</a></li>
-          <li><a href="#pillars">Pillars</a></li>
-          <li><a href="#live-world">Live World</a></li>
-          <li><a href="#news">News Feed</a></li>
-          <li><a href="#join">Join</a></li>
-          <li><a href="in-depth/">In Depth</a></li>
-          <li><a href="wiki/">Wiki</a></li>
-        </ul>
-      </nav>
-      <a class="btn btn--solid btn--sm masthead__cta" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
-    </div>
-  </header>
-
-  <main id="main">
-
-    <!-- ===================================================================
-         HERO: oversized poster
-         =================================================================== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <p class="kicker"><span class="kicker__tag">Field Manual</span> Minecraft server · Java + Bedrock</p>
-          <h1 id="hero-title" class="hero__title">
-            <span class="wordmark wordmark--hero">Osprey</span>
-          </h1>
-          <p class="hero__tagline">A player-led civilization</p>
-          <p class="hero__lede">A cross-compatible Vanilla+ server built on Falcon. Resources won't last forever.</p>
-
-          <p class="status-chip"><span class="status-chip__dot" aria-hidden="true"></span>Pre-launch · the server is not open yet</p>
-
-          <div class="hero__actions">
-            <a class="btn btn--solid btn--lg" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Join Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
-            <a class="btn btn--outline btn--lg" href="in-depth/">See Osprey in Depth</a>
-          </div>
-          <p class="hero__address">
-            <span class="hero__addr"><span class="label">Java</span> <code>osprey.build</code></span>
-            <span class="hero__addr"><span class="label">Bedrock</span> <code>play.osprey.build</code></span>
-            <a href="#join">Connection details</a>
-          </p>
-        </div>
-
-        <div class="hero__art" aria-hidden="true">
-          <img class="hero__emblem" src="assets/brand/osprey-mark-light.png" alt="" width="389" height="381">
-          <div class="hero__standard">
-            <picture><source srcset="assets/items/standard-still.png" media="(prefers-reduced-motion: reduce)"><img src="assets/items/standard.webp" alt="" width="180" height="400"></picture>
-          </div>
-          <div class="hero__crystal">
-            <span class="slot slot--xl"><picture><source srcset="assets/items/crystal-still.png" media="(prefers-reduced-motion: reduce)"><img src="assets/items/crystal.webp" alt="" width="160" height="160"></picture></span>
-            <span class="hero__crystal-tag">Crystal · always on your hotbar</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hotbar: links into the field guide. Names are always visible. -->
-      <nav class="hotbar" aria-label="Field guide items">
-        <ol class="hotbar__row">
-          <li><a class="hotbar__slot is-selected" href="in-depth/#crystal"><span class="slot"><img src="assets/items/crystal-still.png" alt="" width="160" height="160"></span><span class="hotbar__name">Crystal</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#vigil"><span class="slot"><img class="px" src="assets/items/vigil.png" alt="" width="160" height="160"></span><span class="hotbar__name">Vigil</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#standard"><span class="slot slot--tall"><img src="assets/items/standard-still.png" alt="" width="180" height="400"></span><span class="hotbar__name">Standard</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#lookout"><span class="slot"><img src="assets/items/lookout.png" alt="" width="160" height="160"></span><span class="hotbar__name">Lookout</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#jukebox-lookout"><span class="slot"><img src="assets/items/jukebox-lookout.png" alt="" width="160" height="160"></span><span class="hotbar__name">Jukebox Lookout</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#warden"><span class="slot"><img src="assets/items/warden.png" alt="" width="160" height="160"></span><span class="hotbar__name">Warden</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#ledger-chest"><span class="slot"><img src="assets/items/ledger-chest-still.png" alt="" width="160" height="160"></span><span class="hotbar__name">Ledger Chest</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#shop-barrel"><span class="slot"><img src="assets/items/shop-barrel.png" alt="" width="160" height="160"></span><span class="hotbar__name">Shop Barrel</span></a></li>
-          <li><a class="hotbar__slot" href="in-depth/#feather"><span class="slot"><img class="px" src="assets/items/feather.png" alt="" width="160" height="160"></span><span class="hotbar__name">Feather</span></a></li>
-        </ol>
-      </nav>
-    </section>
-
-    <!-- ===================================================================
-         01 · WHAT IS OSPREY (paper)
-         =================================================================== -->
-    <section id="about" class="chapter chapter--paper" aria-labelledby="about-title">
-      <div class="chapter__inner about">
-        <header class="chapter__head" data-reveal>
-          <span class="chapter__no" aria-hidden="true">01</span>
-          <p class="chapter__label">Chapter 01 · Orientation</p>
-          <h2 id="about-title" class="chapter__title">What is Osprey</h2>
-        </header>
-
-        <div class="about__body" data-reveal>
-          <p class="about__lede">Osprey is a cross-compatible Vanilla+ server built upon the revolutionary Falcon infrastructure.</p>
-          <p>Osprey is a vanilla+ Civilization server based upon a 5000x5000 island that aims to solve all the issues plaguing many other servers. As a player-Led server, Griefing, looting, aggressive admin oversight, and excessive commands are all completely solved. No claims, no stupid wands, no rollbacks, no scripts, no commands - And yet, thanks to Falcon, our proprietary backend software, You can build, trade, fight, dominate, without any second thought. All systems are built directly upon vanilla making Osprey fully cross-compatible with bedrock clients without any compromise.
-
-Gather your friends, Build a kingdom, and reign supreme on Osprey!</p>
-          <blockquote class="about__quote">
-            <p>Resources won't last forever.</p>
-          </blockquote>
-        </div>
-
-        <aside class="spec" aria-labelledby="spec-title" data-reveal>
-          <h3 id="spec-title" class="spec__title">Details</h3>
-          <dl class="spec__list">
-            <div><dt>World</dt><dd>Custom 5000 × 5000 island</dd></div>
-            <div><dt>Border</dt><dd>Nothing but ocean</dd></div>
-            <div><dt>Contents</dt><dd>All biomes and structures, contained within</dd></div>
-            <div><dt>Editions</dt><dd>Java, with native Bedrock compatibility</dd></div>
-            <div><dt>Backend</dt><dd>Falcon</dd></div>
-            <div><dt>Status</dt><dd>Pre-launch</dd></div>
-          </dl>
-        </aside>
-
-        <div class="core-card" data-reveal>
-          <img class="core-card__mark" src="assets/brand/osprey-mark-light.png" alt="" width="389" height="381">
-          <h3 class="core-card__title">Falcon</h3>
-          <p>The server backend. It automates features that would take several commands elsewhere, and builds everything natively on vanilla gameplay. You run it all from the Crystal on your hotbar: right-click to open it, no commands to learn.</p>
-          <a class="arrow-link" href="in-depth/#crystal">Read the Crystal entry</a>
-        </div>
+<body class="page-landing">
+  <main id="main" class="landing">
+    <section class="landing__hero" aria-labelledby="landing-title">
+      <h1 id="landing-title" class="landing__title"><span class="wordmark wordmark--landing">Osprey</span></h1>
+      <p class="landing__subtitle">A cross-platform CIVSMP server launching on December 5th</p>
+      <div class="landing__actions">
+        <a class="btn btn--solid btn--lg" href="https://discord.gg/osprey" rel="noopener" target="_blank">Join Discord<span class="landing__btn-sub">discord.gg/osprey</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a class="btn btn--outline btn--lg" href="#what-is-osprey" data-open-about aria-haspopup="dialog">What is Osprey?</a>
       </div>
     </section>
 
-    <!-- ===================================================================
-         02 · CORE PILLARS (dark)
-         =================================================================== -->
-    <section id="pillars" class="chapter chapter--ink" aria-labelledby="pillars-title">
-      <div class="chapter__inner">
-        <header class="chapter__head chapter__head--wide" data-reveal>
-          <span class="chapter__no" aria-hidden="true">02</span>
-          <p class="chapter__label">Chapter 02 · Doctrine</p>
-          <h2 id="pillars-title" class="chapter__title">Core Pillars</h2>
-        </header>
-
-        <ol class="pillars">
-          <li class="pillar pillar--one" data-reveal>
-            <div class="pillar__text">
-              <p class="pillar__no" aria-hidden="true">I</p>
-              <h3 class="pillar__title">Finite Resources</h3>
-              <p>Osprey is based on a beautiful, custom 5000×5000 island surrounded by nothing but ocean. All biomes and structures are contained within.</p>
-            </div>
-            <figure class="island-map">
-              <img src="assets/world/island-map-640.webp" srcset="assets/world/island-map-320.webp 320w, assets/world/island-map-480.webp 480w, assets/world/island-map-640.webp 640w, assets/world/island-map-900.webp 900w" sizes="(max-width: 900px) min(22rem, 80vw), 19rem" alt="Top-down map of the Osprey island, surrounded by ocean and smaller islets." width="640" height="640" loading="lazy" decoding="async">
-              <figcaption>The island · 5000 × 5000</figcaption>
-            </figure>
-          </li>
-
-          <li class="pillar pillar--two" data-reveal>
-            <p class="pillar__no" aria-hidden="true">II</p>
-            <h3 class="pillar__title">Player Choice</h3>
-            <p class="pillar__strong">Power is in your hands.</p>
-            <ul class="choices" aria-label="Some of the choices">
-              <li>Want to monopolise a resource?</li>
-              <li>Wage war?</li>
-              <li>Banish bad actors?</li>
-              <li>Become rich?</li>
-              <li>Live alone?</li>
-              <li>Live in kingdoms?</li>
-              <li>Live peacefully?</li>
-              <li>Live violently?</li>
-            </ul>
-            <p>On Osprey, you decide how to play.</p>
-            <p class="pillar__warn">It's better to make friends than enemies.</p>
-          </li>
-
-          <li class="pillar pillar--three" data-reveal>
-            <p class="pillar__no" aria-hidden="true">III</p>
-            <h3 class="pillar__title">No Learning Curve</h3>
-            <p>Falcon is our server backend and automates many features that, on many other servers, would require several commands to use. On Osprey, everything is built natively upon vanilla gameplay.</p>
-            <p class="stamp">This also ensures<br><strong>native Bedrock compatibility</strong></p>
-          </li>
-        </ol>
+    <section class="landing__ips" aria-label="Server addresses">
+      <div class="ip">
+        <span class="label">Java</span>
+        <code id="ip-java" class="ip__value">osprey.build</code>
+        <button class="ip__copy" type="button" hidden data-copy="osprey.build" aria-describedby="ip-java">Copy<span class="visually-hidden"> Java address</span></button>
       </div>
-    </section>
-
-    <!-- ===================================================================
-         03 · LIVE WORLD (mandatory future dashboard bay)
-         ---------------------------------------------------------------------
-         Reusable container. The [data-live-world-screen] box reserves its
-         size with CSS aspect-ratio, so swapping in the real embed causes no
-         layout shift. The placeholder [data-live-world-placeholder] is
-         separate and is hidden automatically by js/main.js once
-         OSPREY_CONFIG.LIVE_WORLD_EMBED_URL is set in js/config.js.
-         No iframe is loaded until then.
-         =================================================================== -->
-    <section id="live-world" class="chapter chapter--charcoal" aria-labelledby="live-title">
-      <div class="chapter__inner">
-        <header class="chapter__head chapter__head--wide" data-reveal>
-          <span class="chapter__no" aria-hidden="true">03</span>
-          <p class="chapter__label">Chapter 03 · Falcon dashboard</p>
-          <h2 id="live-title" class="chapter__title">Live World</h2>
-        </header>
-
-        <div class="bay" data-live-world data-state="placeholder">
-          <div class="bay__bar">
-            <span class="bay__label">Falcon · dashboard bay</span>
-            <span class="bay__status" data-live-world-status><span class="bay__led" aria-hidden="true"></span>Awaiting activation</span>
-          </div>
-
-          <div class="bay__screen" data-live-world-screen>
-            <span class="bay__corner bay__corner--tl" aria-hidden="true"></span>
-            <span class="bay__corner bay__corner--tr" aria-hidden="true"></span>
-            <span class="bay__corner bay__corner--bl" aria-hidden="true"></span>
-            <span class="bay__corner bay__corner--br" aria-hidden="true"></span>
-
-            <div class="bay__placeholder" data-live-world-placeholder>
-              <img class="bay__emblem" src="assets/brand/osprey-mark-light.png" alt="" width="389" height="381">
-              <p class="bay__title">Live World</p>
-              <p class="bay__line">Falcon dashboard coming soon.</p>
-              <p class="bay__sub">Explore the map, bases, and player activity here once the server is live.</p>
-            </div>
-          </div>
-
-        </div>
+      <div class="ip">
+        <span class="label">Bedrock</span>
+        <code id="ip-bedrock" class="ip__value">play.osprey.build</code>
+        <span class="ip__port"><span class="label">Port</span> <code>19132</code></span>
+        <button class="ip__copy" type="button" hidden data-copy="play.osprey.build" aria-describedby="ip-bedrock">Copy<span class="visually-hidden"> Bedrock address</span></button>
       </div>
-    </section>
-
-    <!-- ===================================================================
-         04 · DISPATCHES (News noticeboard, paper)
-         Rendered by js/news.js from OSPREY_CONFIG.NEWS_ENDPOINT.
-         =================================================================== -->
-    <section id="news" class="chapter chapter--paper" aria-labelledby="news-title">
-      <div class="chapter__inner">
-        <header class="chapter__head chapter__head--wide" data-reveal>
-          <span class="chapter__no" aria-hidden="true">04</span>
-          <p class="chapter__label">Chapter 04 · Noticeboard</p>
-          <h2 id="news-title" class="chapter__title">News Feed</h2>
-          <p class="chapter__intro">The latest announcements from the Osprey Discord.</p>
-        </header>
-
-        <div class="board" data-news data-state="loading" aria-busy="true">
-          <div class="news-status" data-news-status role="status" aria-live="polite">
-            <p class="news-status__msg">Loading dispatches…</p>
-          </div>
-          <ol class="dispatches" data-news-list aria-label="Latest dispatches"></ol>
-          <noscript>
-            <div class="news-status">
-              <p class="news-status__msg">The news feed needs JavaScript to load. Every announcement is also posted in the Discord.</p>
-              <a class="btn btn--ghost" href="https://discord.gg/4EnjKHUG4S">Open the Discord announcements</a>
-            </div>
-          </noscript>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         05 · JOIN (connection tickets, dark)
-         =================================================================== -->
-    <section id="join" class="chapter chapter--ink" aria-labelledby="join-title">
-      <div class="chapter__inner">
-        <header class="chapter__head chapter__head--wide" data-reveal>
-          <span class="chapter__no" aria-hidden="true">05</span>
-          <p class="chapter__label">Chapter 05 · Connection details</p>
-          <h2 id="join-title" class="chapter__title">Join</h2>
-          <p class="chapter__intro">Osprey has not launched yet. Keep these details for launch day and follow the Discord for opening announcements.</p>
-        </header>
-
-        <div class="tickets">
-          <article class="ticket" aria-labelledby="java-title" data-reveal>
-            <p class="ticket__edition">Edition A</p>
-            <h3 id="java-title" class="ticket__title">Java</h3>
-            <div class="ticket__row">
-              <span class="label">Server address</span>
-              <code id="java-address" class="ticket__value">osprey.build</code>
-              <button class="copy" type="button" hidden data-copy="osprey.build" data-copy-label="Java address" aria-describedby="java-address">
-                <span class="copy__verb">Copy</span><span class="visually-hidden"> Java address</span> <span class="copy__state" aria-hidden="true"></span>
-              </button>
-            </div>
-          </article>
-
-          <article class="ticket ticket--bedrock" aria-labelledby="bedrock-title" data-reveal>
-            <p class="ticket__edition">Edition B</p>
-            <h3 id="bedrock-title" class="ticket__title">Bedrock</h3>
-            <div class="ticket__row">
-              <span class="label">Server address</span>
-              <code id="bedrock-address" class="ticket__value">play.osprey.build</code>
-              <button class="copy" type="button" hidden data-copy="play.osprey.build" data-copy-label="Bedrock address" aria-describedby="bedrock-address">
-                <span class="copy__verb">Copy</span><span class="visually-hidden"> Bedrock address</span> <span class="copy__state" aria-hidden="true"></span>
-              </button>
-            </div>
-            <div class="ticket__row">
-              <span class="label">Port</span>
-              <code id="bedrock-port" class="ticket__value">19132</code>
-              <button class="copy" type="button" hidden data-copy="19132" data-copy-label="Bedrock port" aria-describedby="bedrock-port">
-                <span class="copy__verb">Copy</span><span class="visually-hidden"> Bedrock port</span> <span class="copy__state" aria-hidden="true"></span>
-              </button>
-            </div>
-          </article>
-
-          <aside class="ticket ticket--discord" aria-labelledby="discord-title" data-reveal>
-            <p class="ticket__edition">News</p>
-            <h3 id="discord-title" class="ticket__title">Discord</h3>
-            <p>Announcements, updates and the community all live in the Discord until the island opens.</p>
-            <a class="btn btn--light" href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Join Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
-          </aside>
-        </div>
-        <p class="visually-hidden" data-copy-live role="status" aria-live="polite"></p>
-      </div>
+      <p class="visually-hidden" data-copy-live role="status" aria-live="polite"></p>
     </section>
   </main>
 
-  <!-- =====================================================================
-       FOOTER (shared pattern)
-       ===================================================================== -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <a class="wordmark wordmark--footer" href="./" aria-label="Osprey home">Osprey</a>
-      <nav class="footer__nav" aria-label="Footer">
-        <ul>
-          <li><a href="./">Home</a></li>
-          <li><a href="in-depth/">See Osprey in Depth</a></li>
-          <li><a href="wiki/">Wiki</a></li>
-          <li><a href="#join">Join</a></li>
-          <li><a href="https://discord.gg/4EnjKHUG4S" rel="noopener" target="_blank">Discord<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-        </ul>
-      </nav>
-      <p class="footer__note">© <span data-year>2026</span> Osprey. A Minecraft server. Not affiliated with Mojang or Microsoft.</p>
-    </div>
+  <footer class="landing__footer">
+    <nav aria-label="Footer">
+      <ul>
+        <li><a class="btn btn--ghost-dark btn--sm" href="home/">Full Website</a></li>
+        <li><a class="btn btn--ghost-dark btn--sm" href="wiki/">Wiki</a></li>
+        <li><a class="btn btn--ghost-dark btn--sm" href="home/#news">News</a></li>
+      </ul>
+    </nav>
   </footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/news.js" defer></script>
+  <!-- ===== "What is Osprey?" pop-up ===== -->
+  <dialog id="what-is-osprey" class="about-dialog" aria-labelledby="about-title">
+    <div class="about-dialog__inner">
+      <button class="about-dialog__close" type="button" data-close-about aria-label="Close">&times;</button>
+      <h2 id="about-title" class="about-dialog__title">What is <span class="wordmark wordmark--inline">Osprey</span>?</h2>
+      <p class="about-dialog__text">
+        Osprey is a <strong>CIVSMP</strong> server.
+        No <strong>admin intervention</strong>.
+        No <strong>pay to win</strong>.
+        No <strong>tightly controlled lore</strong>.
+        In Osprey, <strong>players have full control</strong> through <strong>self-governance</strong>.
+      </p>
+      <div class="about-dialog__actions">
+        <a class="btn btn--solid" href="https://discord.gg/osprey" rel="noopener" target="_blank">Join the Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a class="btn btn--outline" href="https://osprey.build/wiki/getting-started/what-is-osprey/">Learn more</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/landing.js" defer></script>
 </body>
 </html>
