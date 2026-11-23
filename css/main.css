@@ -389,12 +389,12 @@ em { font-style: normal; }
 .hotbar__slot:focus-visible { outline-offset: -3px; }
 
 /* ===== 07 Chapters ====================================================== */
-.chapter {
+.site-section {
   position: relative;
   padding: clamp(5rem, 10vw, 8.5rem) 0;
   --focus: var(--teal);
 }
-.chapter--paper {
+.site-section--paper {
   --line: var(--ink);
   background:
     var(--grain-dark),
@@ -403,19 +403,19 @@ em { font-style: normal; }
   color: var(--ink);
   --focus: var(--teal-deep);
 }
-.chapter--ink { background: var(--ink); color: var(--paper); }
-.chapter--charcoal {
+.site-section--ink { background: var(--ink); color: var(--paper); }
+.site-section--charcoal {
   background:
     var(--grain-light),
     radial-gradient(80% 60% at 85% 0%, rgba(255,255,255,.04), transparent 70%),
     var(--char);
   color: var(--paper);
 }
-.chapter--paper + .chapter, .chapter + .chapter--paper { border-top: 3px solid var(--ink); }
+.site-section--paper + .site-section, .site-section + .site-section--paper { border-top: 3px solid var(--ink); }
 
-.chapter__inner { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
-.chapter__head { position: relative; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.chapter__no {
+.site-section__inner { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
+.site-section__head { position: relative; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.site-section__no {
   position: absolute; right: 0; top: -.32em;
   font-family: var(--f-head); font-weight: 900;
   font-size: clamp(7rem, 20vw, 17rem); line-height: 1;
@@ -424,20 +424,20 @@ em { font-style: normal; }
   opacity: .22;
   pointer-events: none; user-select: none;
 }
-.chapter__label {
+.site-section__label {
   display: inline-flex; align-items: center; gap: .6rem;
   font-size: .8125rem; text-transform: uppercase; letter-spacing: .16em;
   margin-bottom: .9rem;
   opacity: .85;
 }
-.chapter__label::before { content: ""; width: .7rem; height: .7rem; background: currentColor; }
-.chapter__title {
+.site-section__label::before { content: ""; width: .7rem; height: .7rem; background: currentColor; }
+.site-section__title {
   font-size: clamp(2.6rem, 7.2vw, 6.25rem);
   font-weight: 900; line-height: .92; letter-spacing: .005em;
   max-width: 14ch;
   position: relative;
 }
-.chapter__intro { max-width: 44rem; margin: 1.25rem 0 0; font-size: 1.15rem; opacity: .85; }
+.site-section__intro { max-width: 44rem; margin: 1.25rem 0 0; font-size: 1.15rem; opacity: .85; }
 
 /* ===== 08 What is Osprey ================================================ */
 .about {
@@ -446,8 +446,8 @@ em { font-style: normal; }
   gap: 2rem clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
 }
-.about .chapter__head { grid-column: 1 / 8; grid-row: 1; margin-bottom: 0; }
-.about .chapter__no { right: auto; left: 78%; }
+.about .site-section__head { grid-column: 1 / 8; grid-row: 1; margin-bottom: 0; }
+.about .site-section__no { right: auto; left: 78%; }
 .about__body { grid-column: 1 / 8; grid-row: 2; }
 .about__lede {
   font-family: var(--f-head); font-weight: 700;
@@ -907,7 +907,7 @@ em { font-style: normal; }
   font-size: clamp(5rem, 13vw, 10rem); line-height: .8;
   color: var(--numeral, var(--teal));
 }
-.guide-chapter__head .chapter__label { margin-bottom: .5rem; }
+.guide-chapter__head .site-section__label { margin-bottom: .5rem; }
 .guide-chapter__title { font-size: clamp(2.1rem, 5.5vw, 4.5rem); font-weight: 900; line-height: .95; }
 .guide-chapter__desc { margin: .9rem 0 0; opacity: .8; }
 .guide-chapter--v .guide-chapter__title { color: var(--nether); }
@@ -1013,7 +1013,7 @@ em { font-style: normal; }
   .island-map { max-width: 22rem; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .masthead__inner { flex-wrap: wrap; gap: .7rem 1rem; padding-top: .7rem; padding-bottom: 0; }
   .masthead__inner > .wordmark, .masthead__cta { align-self: center; }
   .masthead__cta { margin-bottom: 4px; } /* room for the button's offset shadow above the divider */
@@ -1026,14 +1026,16 @@ em { font-style: normal; }
   .masthead__nav::-webkit-scrollbar { display: none; }
   .masthead__nav ul { padding: 0 calc(var(--gutter) - .7rem); }
   html { scroll-padding-top: 7.5rem; }
+}
 
+@media (max-width: 900px) {
   .hero__grid { grid-template-columns: 1fr; }
   .hero__copy { padding-bottom: 0; }
   .hero__grid { position: relative; }
   .hero__art { position: absolute; top: -1.5rem; right: 0; width: 55%; height: 20rem; min-height: 0; z-index: 0; pointer-events: none; }
   .hero__emblem { width: 100%; right: -20%; top: 0; }
   .hero__standard { right: 2%; top: 5.6rem; width: 3.4rem; opacity: .85; }
-  .chapter__no { font-size: 5.75rem; top: -.5em; }
+  .site-section__no { font-size: 5.75rem; top: -.5em; }
   .hero__crystal { display: none; }
   .hotbar { padding: 0; }
   .hotbar__row {
@@ -1044,8 +1046,8 @@ em { font-style: normal; }
   .hotbar__row li { flex: 0 0 5.6rem; scroll-snap-align: start; }
 
   .about { grid-template-columns: 1fr; }
-  .about .chapter__head, .about__body, .spec, .core-card { grid-column: 1 / -1; grid-row: auto; }
-  .about .chapter__no { left: auto; right: 0; }
+  .about .site-section__head, .about__body, .spec, .core-card { grid-column: 1 / -1; grid-row: auto; }
+  .about .site-section__no { left: auto; right: 0; }
   .spec { transform: none; margin-top: 1rem; }
   .about__quote { margin-left: 0; transform: rotate(-1deg); }
   .core-card { padding-right: clamp(1.5rem, 4vw, 3rem); }

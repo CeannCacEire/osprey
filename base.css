@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Osprey;
+  src: url("./assets/osprey-wordmark.ttf") format("truetype");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: Manrope;
+  src: url("./assets/manrope.woff2") format("woff2");
+  font-style: normal; font-weight: 400 800; font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel";
+  src: url("./assets/geist-pixel.woff2") format("woff2");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "Mojangles Labels";
+  src: url("./assets/mojangles-labels-bold.woff") format("woff");
+  font-style: normal; font-weight: 700; font-display: swap;
+  unicode-range: U+0020, U+0032, U+0041, U+0043-0044, U+0049, U+004D, U+004F-0050, U+0052-0053, U+0061-007A;
+}
+:root {
+  color-scheme: dark;
+  --page: oklch(17.8% .008 254);
+  --ink: oklch(97% .004 250);
+  --secondary: oklch(80% .018 248);
+  --muted: oklch(73% .015 248);
+  --blue: oklch(87% .064 237);
+  --line: oklch(97% .01 245 / .15);
+  --xs: clamp(.75rem, .73rem + .12vw, .81rem);
+  --sm: clamp(.875rem, .84rem + .14vw, .97rem);
+  --base: clamp(1rem, .96rem + .2vw, 1.125rem);
+  --display: clamp(5.35rem, 3rem + 9.3vw, 10.5rem);
+  --s1: .25rem; --s2: .5rem; --s3: .75rem; --s4: 1rem;
+  --s5: 1.25rem; --s6: 1.5rem; --s8: 2rem; --s10: 2.5rem;
+  --s12: 3rem; --s16: 4rem; --s20: 5rem; --s24: 6rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; min-width: 0; font: 500 var(--base)/1.6 Manrope, sans-serif; background: var(--page); color: var(--ink); }
+h1,h2,p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; }
+img { display: block; max-width: 100%; }
+.skip { position: absolute; z-index: 3; top: var(--s3); left: var(--s3); padding: var(--s2) var(--s4); background: var(--page); transform: translateY(-200%); }
+.skip:focus { transform: translateY(0); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }

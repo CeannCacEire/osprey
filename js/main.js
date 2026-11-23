@@ -105,7 +105,7 @@
     if (canFrame) {
       var frame = document.createElement("iframe");
       frame.src = u.href;
-      frame.title = cfg.LIVE_WORLD_EMBED_TITLE || "Falcon live world map";
+      frame.title = cfg.LIVE_WORLD_EMBED_TITLE || "Osprey live world map";
       frame.loading = "lazy";
       frame.referrerPolicy = "strict-origin-when-cross-origin";
       frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");

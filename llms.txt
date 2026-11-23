@@ -4,7 +4,7 @@
 
 ## Authoritative documentation
 
-Use the current wiki articles for gameplay mechanics, rules, and joining information. The wiki is maintained by the Osprey admins and may be updated more often than the website's field guide. Follow the wiki when older summaries disagree; do not infer missing mechanics.
+Use the current wiki articles for gameplay mechanics, rules, and joining information. The wiki is maintained by the Osprey admins. Follow the wiki when older summaries disagree; do not infer missing mechanics.
 
 - [Osprey Wiki](https://osprey.build/wiki/): official documentation and page directory
 - [Current wiki page index](https://osprey.build/wiki/llms.txt): automatically generated links to every published article
@@ -13,9 +13,8 @@ Use the current wiki articles for gameplay mechanics, rules, and joining informa
 
 ## Website
 
-- [Landing page](https://osprey.build/): short introduction, launch date, Discord and server addresses
+- [Landing page](https://osprey.build/): short introduction, map, Discord and server addresses
 - [Full website](https://osprey.build/home/): server introduction, connection information and announcements
-- [Field guide](https://osprey.build/in-depth/): overview of custom blocks and items
 - [Discord](https://discord.gg/osprey): community and announcements
 
 <!-- The deployment appends the current wiki page index automatically. -->

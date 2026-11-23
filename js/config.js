@@ -24,6 +24,8 @@ window.OSPREY_CONFIG = Object.freeze({
      (local preview, file://) the feed shows its error state. That is expected. */
   NEWS_ENDPOINT: "https://osprey-news.genocchi.workers.dev/api/news",
   NEWS_LIMIT: 5,
+  NEWS_VISIBLE: 5,
+  NEWS_SNAPSHOT: "/home/news-snapshot.json",
   NEWS_TIMEOUT_MS: 10000,
 
   /* Live World / Falcon live map (squaremap).
@@ -35,5 +37,5 @@ window.OSPREY_CONFIG = Object.freeze({
        that opens it in a new tab. Switch this to the https:// address once
        the map is served over HTTPS and the embed turns on automatically. */
   LIVE_WORLD_EMBED_URL: "https://map.osprey.build/",
-  LIVE_WORLD_EMBED_TITLE: "Falcon live world map"
+  LIVE_WORLD_EMBED_TITLE: "Osprey live world map"
 });

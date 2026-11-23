@@ -2,167 +2,103 @@
 <html lang="en-IE">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-  <!-- ===== SEO ===== -->
-  <title>Osprey - A cross-platform CIVSMP Minecraft server</title>
-  <meta name="description" content="Osprey is a cross-platform CIVSMP Minecraft server for Java and Bedrock, launching on December 5th. Join the Discord at discord.gg/osprey.">
-  <meta name="theme-color" content="#0b0b0c">
-  <meta name="color-scheme" content="dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://osprey.build/">
-
-  <!-- ===== Open Graph / Twitter ===== -->
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Osprey">
   <meta property="og:locale" content="en_IE">
-  <meta property="og:title" content="Osprey - A cross-platform CIVSMP Minecraft server">
-  <meta property="og:description" content="A cross-platform CIVSMP server launching on December 5th.">
+  <meta property="og:title" content="Osprey | Player-run Minecraft CivSMP">
+  <meta property="og:description" content="A player-run Minecraft CivSMP for Java and Bedrock.">
   <meta property="og:url" content="https://osprey.build/">
   <meta property="og:image" content="https://osprey.build/assets/brand/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Osprey wordmark and pixel osprey emblem on black, with the line A player-led civilization.">
+  <meta property="og:image:alt" content="The Osprey wordmark and pixel osprey emblem on black.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://osprey.build/assets/brand/og-image.png">
-  <meta name="twitter:image:alt" content="The Osprey wordmark and pixel osprey emblem on black, with the line A player-led civilization.">
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://osprey.build/#website",
-      "name": "Osprey",
-      "url": "https://osprey.build/",
-      "inLanguage": "en-IE",
-      "publisher": { "@id": "https://osprey.build/#org" }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://osprey.build/#org",
-      "name": "Osprey",
-      "url": "https://osprey.build/",
-      "logo": "https://osprey.build/assets/brand/osprey-mark-dark.png",
-      "sameAs": ["https://discord.gg/osprey"]
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://osprey.build/#webpage",
-      "url": "https://osprey.build/",
-      "name": "Osprey - A cross-platform CIVSMP Minecraft server",
-      "isPartOf": { "@id": "https://osprey.build/#website" },
-      "about": { "@id": "https://osprey.build/#org" }
-    }
-  ]
-}
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","@id":"https://osprey.build/#website","url":"https://osprey.build/","name":"Osprey","inLanguage":"en-IE","publisher":{"@id":"https://osprey.build/#org"}},
+    {"@type":"Organization","@id":"https://osprey.build/#org","name":"Osprey","url":"https://osprey.build/","logo":"https://osprey.build/assets/brand/osprey-mark-dark.png","sameAs":["https://discord.gg/osprey","https://www.patreon.com/cw/osprey_build"]},
+    {"@type":"WebPage","@id":"https://osprey.build/#webpage","name":"Osprey | Player-run Minecraft CivSMP","url":"https://osprey.build/","isPartOf":{"@id":"https://osprey.build/#website"},"about":{"@id":"https://osprey.build/#org"}}
+  ]}
   </script>
-
-  <!-- ===== Icons ===== -->
-  <link rel="icon" href="assets/brand/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-
-  <!-- ===== Fonts and styles ===== -->
-  <link rel="preload" href="fonts/cadass-script-demo.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="fonts/cinzel-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/geist-pixel-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/main.css?v=2">
-  <link rel="stylesheet" href="css/landing.css?v=2">
+  <meta name="theme-color" content="#101216">
+  <meta name="description" content="Osprey is a player-run Minecraft CivSMP server for Java and Bedrock. Players govern themselves, no commands are needed, and there’s no pay-to-win.">
+  <title>Osprey | Player-run Minecraft CivSMP</title>
+  <link rel="icon" href="./assets/favicon.png">
+  <link rel="preload" href="./assets/osprey-wordmark.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./landing.js" defer></script>
 </head>
-
-<body class="page-landing">
-  <main id="main" class="landing">
-    <section class="landing__hero" aria-labelledby="landing-title">
-      <h1 id="landing-title" class="landing__title"><span class="wordmark wordmark--landing">Osprey</span></h1>
-      <p class="landing__subtitle">A cross-platform CIVSMP server launching on December 5th</p>
-      <div class="landing__actions">
-        <a class="btn btn--solid btn--lg" href="https://discord.gg/osprey" rel="noopener" target="_blank">Join Discord<span class="landing__btn-sub">discord.gg/osprey</span><span class="visually-hidden"> (opens in a new tab)</span></a>
-        <a class="btn btn--outline btn--lg" href="#what-is-osprey" data-open-about aria-haspopup="dialog">What is Osprey?</a>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main">
+    <section class="hero" aria-labelledby="osprey">
+      <picture class="hero-photo" aria-hidden="true">
+        <source media="(max-width: 640px)" srcset="./assets/osprey-world-mobile.webp">
+        <img src="./assets/osprey-world.webp" width="1536" height="864" alt="" fetchpriority="high">
+      </picture>
+      <div class="hero-content wrap">
+        <h1 id="osprey" class="wordmark">Osprey</h1>
+        <div class="address-wrap">
+          <button class="address" type="button" aria-label="Copy server address: osprey.build" title="Copy server address">
+            <span data-ip>osprey.build</span>
+            <svg class="copy-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
+            </svg>
+            <svg class="check-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
+          </button>
+          <span class="copy-status" role="status"></span>
+        </div>
+        <p class="intro">a player-run minecraft CivSMP server</p>
+        <p class="edition">Java &amp; Bedrock <span aria-hidden="true">·</span> Launches December 5</p>
+        <div class="actions" aria-label="Explore and join">
+          <a class="action map" href="https://map.osprey.build/" target="_blank" rel="noopener noreferrer" aria-label="Map (opens in a new tab)">
+            <span class="action-photo" aria-hidden="true"></span>
+            <span class="action-label">MAP</span>
+            <img class="map-art" src="./assets/explorer-clovis.webp" width="200" height="420" alt="">
+          </a>
+          <a class="action discord" href="https://discord.gg/osprey" target="_blank" rel="noopener noreferrer" aria-label="Discord (opens in a new tab)" aria-describedby="discord-members">
+            <span class="action-photo" aria-hidden="true"></span>
+            <span class="action-copy">
+              <span class="action-label">DISCORD</span>
+              <span class="action-note" id="discord-members" title="Approximate Discord member count">346 members</span>
+            </span>
+            <img class="discord-art" src="./assets/community.webp" width="460" height="328" alt="">
+          </a>
+        </div>
+        <a class="next-link" href="./home/index.html" aria-label="Learn more">
+          <span>Learn more</span> <span class="next-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
 
-    <section class="shots" aria-roledescription="carousel" aria-label="Screenshots from Osprey">
-      <ul class="shots__track" aria-live="off">
-        <li class="shots__slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 10">
-          <img src="assets/screenshots/osprey-01.webp" width="960" height="540" alt="Stone hall with OSPREY lettering on its roof, beside the water at sunset" fetchpriority="high" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="2 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-02.webp" width="960" height="540" alt="Hillside town with an Irish flag, cherry trees and waterfalls" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="3 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-03.webp" width="960" height="540" alt="Builds beneath a glowing amethyst canopy" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="4 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-04.webp" width="960" height="540" alt="Council chamber with a red carpet and players seated in the gallery" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="5 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-05.webp" width="960" height="540" alt="Players gathered on the steps of a grand columned temple" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="6 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-06.webp" width="960" height="540" alt="Player climbing a giant statue above a misty landscape" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="7 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-07.webp" width="960" height="540" alt="City skyline with towers, a domed church and rising smoke" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="8 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-08.webp" width="960" height="540" alt="BlackStone poster: a market chart, gold blocks and a loaded inventory" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="9 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-09.webp" width="960" height="540" alt="BlackStone poster: a laser-eyed figure pulling strings over the world" loading="lazy" decoding="async">
-        </li>
-        <li class="shots__slide" role="group" aria-roledescription="slide" aria-label="10 of 10" aria-hidden="true">
-          <img src="assets/screenshots/osprey-10.webp" width="960" height="540" alt="Oasis poster: “The many must lose in order that the few may win”" loading="lazy" decoding="async">
-        </li>
-      </ul>
-      <button class="shots__nav shots__nav--prev" type="button" hidden data-shots-prev aria-label="Previous screenshot">&lsaquo;</button>
-      <button class="shots__nav shots__nav--next" type="button" hidden data-shots-next aria-label="Next screenshot">&rsaquo;</button>
-      <div class="shots__dots" hidden data-shots-dots></div>
-    </section>
-
-    <section class="landing__ips" aria-label="Server addresses">
-      <div class="ip">
-        <span class="label">Java</span>
-        <code id="ip-java" class="ip__value">osprey.build</code>
-        <button class="ip__copy" type="button" hidden data-copy="osprey.build" aria-describedby="ip-java">Copy<span class="visually-hidden"> Java address</span></button>
-      </div>
-      <div class="ip">
-        <span class="label">Bedrock</span>
-        <code id="ip-bedrock" class="ip__value">play.osprey.build</code>
-        <span class="ip__port"><span class="label">Port</span> <code>19132</code></span>
-        <button class="ip__copy" type="button" hidden data-copy="play.osprey.build" aria-describedby="ip-bedrock">Copy<span class="visually-hidden"> Bedrock address</span></button>
-      </div>
-      <p class="visually-hidden" data-copy-live role="status" aria-live="polite"></p>
+    <section class="principles wrap" aria-label="What makes Osprey different">
+      <article>
+        <img class="principle-art" src="./assets/brawnzac-lodestone.webp" width="176" height="348" alt="">
+        <div><h2>players make the rules</h2><p>build a <strong>hearth</strong> and settle disputes among yourselves. admins will only ban cheaters, and it’s recommended to follow the nation’s rules or face <strong>banishment</strong></p></div>
+      </article>
+      <article>
+        <img class="principle-art" src="./assets/wato-chair.webp?v=joined-leg" width="484" height="292" alt="">
+        <div><h2>no learning curve</h2><p>osprey has <strong>zero commands</strong>. any added features are embedded into the <strong>minecraft</strong> you know already</p></div>
+      </article>
+      <article>
+        <img class="principle-art" src="./assets/joegurt08-sword.webp" width="362" height="406" alt="">
+        <div><h2>no p2w</h2><p>loot is earned. all donations help support the server costs, and donors get <strong>queue priority</strong> when the server is full</p></div>
+      </article>
     </section>
   </main>
-
-  <footer class="landing__footer">
-    <nav aria-label="Footer">
-      <ul>
-        <li><a class="btn btn--ghost-dark btn--sm" href="home/">Full Website</a></li>
-        <li><a class="btn btn--ghost-dark btn--sm" href="wiki/">Wiki</a></li>
-        <li><a class="btn btn--ghost-dark btn--sm" href="home/#news">News</a></li>
-      </ul>
+  <footer class="wrap site-footer">
+    <p>Bedrock <span class="bedrock-address">play.osprey.build</span> <span class="port">· 19132</span></p>
+    <nav aria-label="More from Osprey">
+      <a href="./home/index.html">Full site</a>
+      <a href="https://osprey.build/wiki/" target="_blank" rel="noopener noreferrer">Wiki</a>
+      <a href="https://www.patreon.com/cw/osprey_build" target="_blank" rel="noopener noreferrer">Patreon</a>
+      <a href="./home/index.html#news">News</a>
     </nav>
   </footer>
-
-  <!-- ===== "What is Osprey?" pop-up ===== -->
-  <dialog id="what-is-osprey" class="about-dialog" aria-labelledby="about-title">
-    <div class="about-dialog__inner">
-      <button class="about-dialog__close" type="button" data-close-about aria-label="Close">&times;</button>
-      <h2 id="about-title" class="about-dialog__title">What is <span class="wordmark wordmark--inline">Osprey</span>?</h2>
-      <p class="about-dialog__text">
-        Osprey is a <strong>CIVSMP</strong> server.
-        No <strong>admin intervention</strong>.
-        No <strong>pay to win</strong>.
-        No <strong>tightly controlled lore</strong>.
-        In Osprey, <strong>players have full control</strong> through <strong>self-governance</strong>.
-      </p>
-      <div class="about-dialog__actions">
-        <a class="btn btn--solid" href="https://discord.gg/osprey" rel="noopener" target="_blank">Join the Discord<span class="visually-hidden"> (opens in a new tab)</span></a>
-        <a class="btn btn--outline" href="https://osprey.build/wiki/getting-started/what-is-osprey/">Learn more</a>
-      </div>
-    </div>
-  </dialog>
-
-  <script src="js/landing.js?v=2" defer></script>
 </body>
 </html>

@@ -285,7 +285,7 @@
     if (!message) return;
     status.appendChild(el("p", "news-status__msg", message));
     if (withDiscord) {
-      var a = el("a", "btn btn--ghost", "Open the Discord announcements");
+      var a = el("a", "news-status__link", "View the latest on Discord");
       a.href = DISCORD;
       a.rel = "noopener";
       a.target = "_blank";
@@ -303,7 +303,7 @@
     li.appendChild(art);
 
     var head = el("header", "dispatch__meta");
-    head.appendChild(el("span", "dispatch__no", "Dispatch " + String(idx + 1).padStart(2, "0")));
+    head.appendChild(el("span", "dispatch__no", "Osprey Discord"));
     var d = formatDate(post.date);
     if (d) {
       var t = el("time", "dispatch__date", d.text);
@@ -396,6 +396,25 @@
       list.parentNode.insertBefore(older, list.nextSibling);
     }
     updateCollapse();
+    var tools=document.querySelector('.news-tools');
+    tools.hidden=shown<2;
+    function sync() {
+      var left=list.scrollLeft, max=list.scrollWidth-list.clientWidth;
+      tools.querySelector('[data-news-prev]').disabled=left<2;
+      tools.querySelector('[data-news-next]').disabled=left>=max-2;
+    }
+    function step(dir) {
+      var cards=Array.from(list.children);
+      var left=list.getBoundingClientRect().left;
+      var offsets=cards.map(c=>c.getBoundingClientRect().left-left);
+      var dx=dir>0?offsets.find(n=>n>3):offsets.reverse().find(n=>n< -3);
+      list.scrollBy({left:dx??dir*list.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+    }
+    tools.querySelector('[data-news-prev]').onclick=()=>step(-1);
+    tools.querySelector('[data-news-next]').onclick=()=>step(1);
+    list.onscroll=sync;
+    list.onkeydown=e=>{if(e.target===list&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();step(e.key==='ArrowLeft'?-1:1);}};
+    new ResizeObserver(sync).observe(list);sync();
 
     if (!shown) {
       setState("empty", "No dispatches posted yet. Announcements will appear here as they are posted in the Discord.", true);
@@ -444,7 +463,14 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       })
-      .then(render)
+      .then(data=>{render(data);root.dataset.source='live';})
+      .catch(async err=>{
+        if(!cfg.NEWS_SNAPSHOT)throw err;
+        var saved=await fetch(cfg.NEWS_SNAPSHOT);
+        if(!saved.ok)throw err;
+        var data=await saved.json();render(data);root.dataset.source='saved';
+        if(data.news.length)setState('ready','Showing saved posts.',true);
+      })
       .catch(function (err) {
         if (window.console) console.warn("[Osprey news] feed unavailable:", err && err.message ? err.message : err);
         list.textContent = "";
