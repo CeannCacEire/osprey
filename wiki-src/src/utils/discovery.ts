@@ -6,6 +6,7 @@ export const categories = [
   ["items", "Items and blocks"],
   ["points-of-interest", "Points of interest"],
   ["enchantments", "Enchantments"],
+  ["misc", "Misc"],
 ] as const;
 
 export function pagePath(id: string) {

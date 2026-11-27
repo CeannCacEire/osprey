@@ -34,6 +34,7 @@ export default defineConfig({
         { label: "Items and blocks", items: [{ autogenerate: { directory: "items" } }] },
         { label: "Points of interest", items: [{ autogenerate: { directory: "points-of-interest" } }] },
         { label: "Enchantments", items: [{ autogenerate: { directory: "enchantments" } }] },
+        { label: "Misc", items: [{ autogenerate: { directory: "misc" } }] },
         { label: "Back to osprey.build", link: "https://osprey.build/", attrs: { class: "sl-back-home" } },
       ],
       lastUpdated: false,

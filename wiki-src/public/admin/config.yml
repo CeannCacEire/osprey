@@ -121,3 +121,17 @@ collections:
     preview_path: "enchantments/{{slug}}/"
     sortable_fields: [title, sidebar.order]
     fields: *page_fields
+
+  - name: misc
+    label: Misc
+    label_singular: Misc page
+    description: Pages listed under "Misc" in the wiki sidebar.
+    folder: wiki-src/src/content/docs/misc
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "misc/{{slug}}/"
+    sortable_fields: [title, sidebar.order]
+    fields: *page_fields
